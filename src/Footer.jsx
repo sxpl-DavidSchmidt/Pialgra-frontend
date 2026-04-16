@@ -1,4 +1,4 @@
-function Footer(){
+function Footer() {
     return(
         <Footer>
             <p>&copy; Pialgra</p>
@@ -6,4 +6,4 @@ function Footer(){
     );
 }
 
-export default Footer;
+export default Footer
