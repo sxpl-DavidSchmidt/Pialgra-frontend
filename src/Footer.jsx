@@ -1,8 +1,8 @@
-function Footer() {
+function Footer(){
     return(
-        <Footer>
+        <footer>
             <p>&copy; Pialgra</p>
-        </Footer>
+        </footer>
     );
 }
 
