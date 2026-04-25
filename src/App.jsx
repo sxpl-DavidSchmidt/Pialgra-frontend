@@ -1,4 +1,5 @@
 import SubjectCard from "./SubjectCard/SubjectCard.jsx";
+import SubjectSummary from "./SubjectSummary/SubjectSummary.jsx";
 import TimeTable from "./TimeTable/TimeTable.jsx";
 
 function App() {
@@ -15,6 +16,14 @@ function App() {
       <SubjectCard
         subjectName="Computer Science"
         imageSrc="https://avatars.githubusercontent.com/u/62205605?v=4"
+      />
+
+      <SubjectSummary
+        subject={{
+          name: "Computer Science",
+          sessions: workedHours
+        }}
+      
       />
 
       <TimeTable
