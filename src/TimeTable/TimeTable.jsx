@@ -6,6 +6,7 @@ function TimeTable({
     workedHours = [],
     color = "#000000",
     cellSize = 24,
+    onlyTable = false,
     subjectName,
 }) {
     const monthDays = new Date(year, month + 1, 0).getDate();
@@ -22,37 +23,43 @@ function TimeTable({
 
     const rows = Math.ceil(paddedWorkedHours.length / 7);
 
+    const table = <div
+        className={styles.activityTable}
+        style={{
+            gridTemplateColumns: `repeat(7, ${cellSize}px)`,
+            gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
+        }}
+    >
+        {paddedWorkedHours.map((hours, index) =>
+            hours === null ? (
+                <div key={`empty-${index}`} aria-hidden="true" />
+            ) : (
+                <div
+                    key={`day-${index - firstWeekday + 1}`}
+                    className={styles.activityCell}
+                    title={`${hours} worked hour${hours === 1 ? "" : "s"}`}
+                    style={{
+                        width: cellSize,
+                        height: cellSize,
+                        backgroundColor: `rgba(${r}, ${g}, ${b}, ${maxHours > 0 ? hours / maxHours : 0
+                            })`,
+                    }}
+                />
+            )
+        )}
+    </div>
+
+    if (onlyTable) {
+        return table;
+    }
+
     return (
         <div
             className={styles.activityCard}
             style={{ maxWidth: cellSize * 7 + 20 }}
         >
             <h3>{subjectName}</h3>
-            <div
-                className={styles.activityTable}
-                style={{
-                    gridTemplateColumns: `repeat(7, ${cellSize}px)`,
-                    gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
-                }}
-            >
-                {paddedWorkedHours.map((hours, index) =>
-                    hours === null ? (
-                        <div key={`empty-${index}`} aria-hidden="true" />
-                    ) : (
-                        <div
-                            key={`day-${index - firstWeekday + 1}`}
-                            className={styles.activityCell}
-                            title={`${hours} worked hour${hours === 1 ? "" : "s"}`}
-                            style={{
-                                width: cellSize,
-                                height: cellSize,
-                                backgroundColor: `rgba(${r}, ${g}, ${b}, ${maxHours > 0 ? hours / maxHours : 0
-                                    })`,
-                            }}
-                        />
-                    )
-                )}
-            </div>
+            {table}
         </div>
     );
 }
