@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import SubjectCard from "./SubjectCard/SubjectCard.jsx";
 import TimeTable from "./TimeTable/TimeTable.jsx";
 
@@ -18,10 +17,6 @@ function App() {
         imageSrc="https://avatars.githubusercontent.com/u/62205605?v=4"
       />
 
-      <SubjectCard
-        subjectName="Data Structures"
-      />
-      
       <TimeTable
         year={year}
         month={month}
