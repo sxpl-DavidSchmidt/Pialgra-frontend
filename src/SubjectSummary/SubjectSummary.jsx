@@ -2,7 +2,7 @@ import styles from './SubjectSummary.module.css';
 import computerImage from '../assets/computer.png';
 import TimeTable from '../TimeTable/TimeTable';
 
-function SubjectSummary({ subject }) {
+export default function SubjectSummary({ subject }) {
     const name = subject?.name || "Unknown Subject";
     const sessions = subject?.sessions || [];
 
@@ -26,5 +26,3 @@ function SubjectSummary({ subject }) {
         </div>
     );
 }
-
-export default SubjectSummary;

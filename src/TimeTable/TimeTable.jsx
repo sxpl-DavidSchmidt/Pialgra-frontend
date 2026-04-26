@@ -11,7 +11,7 @@ function hexToRgb(hex) {
   };
 }
 
-function TimeTable({
+export default function TimeTable({
   year,
   month,
   workedHours = [],
@@ -83,5 +83,3 @@ function TimeTable({
     </div>
   );
 }
-
-export default TimeTable;

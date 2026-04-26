@@ -1,7 +1,6 @@
 import styles from "./SubjectCard.module.css";
-import PropTypes from "prop-types";
 
-function SubjectCard({ subjectName, imageSrc }) {
+export default function SubjectCard({ subjectName, imageSrc }) {
   return (
     <div className={styles.subjectCard}>
         <h2 className={styles.subjectName}>{subjectName}</h2>
@@ -14,10 +13,3 @@ function SubjectCard({ subjectName, imageSrc }) {
     </div>
   );
 }
-
-SubjectCard.propTypes = {
-  subjectName: PropTypes.string.isRequired,
-  imageSrc: PropTypes.string,
-};
-
-export default SubjectCard;

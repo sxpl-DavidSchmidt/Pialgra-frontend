@@ -2,7 +2,7 @@ import SubjectCard from "./SubjectCard/SubjectCard.jsx";
 import SubjectSummary from "./SubjectSummary/SubjectSummary.jsx";
 import TimeTable from "./TimeTable/TimeTable.jsx";
 
-function App() {
+export default function App() {
   const year = 2026;
   const month = 0;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -37,5 +37,3 @@ function App() {
     </>
   );
 }
-
-export default App;
