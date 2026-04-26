@@ -1,6 +1,7 @@
 import SubjectCard from "./SubjectCard/SubjectCard.jsx";
 import SubjectSummary from "./SubjectSummary/SubjectSummary.jsx";
 import TimeTable from "./TimeTable/TimeTable.jsx";
+import NavBar from "./NavBar/NavBar.jsx";
 
 export default function App() {
     const year = 2026;
@@ -13,6 +14,7 @@ export default function App() {
 
     return (
         <main>
+            <NavBar />
             <SubjectCard
                 subjectName="Computer Science"
                 imageSrc="https://avatars.githubusercontent.com/u/62205605?v=4"
