@@ -1,5 +1,4 @@
 import styles from './SubjectSummary.module.css';
-import computerImage from '../assets/computer.png';
 import TimeTable from '../TimeTable/TimeTable';
 
 export default function SubjectSummary({ subject }) {
@@ -9,7 +8,7 @@ export default function SubjectSummary({ subject }) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.titlePanel}>
-                <img alt="Subject Image" src={computerImage} />
+                <img alt="Subject Image" src="https://images.icon-icons.com/1808/PNG/512/computer_115306.png" />
                 <h2>{name}</h2>
             </div>
             <div className={styles.components}>
