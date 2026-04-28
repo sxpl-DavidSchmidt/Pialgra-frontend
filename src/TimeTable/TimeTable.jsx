@@ -22,7 +22,6 @@ export default function TimeTable({
 }) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstWeekday = new Date(year, month, 1).getDay();
-  console.log("First weekday:", new Date(year, month, 1).getDay().toLocaleString("en-US", { weekday: "long" }));
 
   const hoursForMonth = workedHours.slice(0, daysInMonth);
   const paddedHours = [...Array(firstWeekday).fill(null), ...hoursForMonth];

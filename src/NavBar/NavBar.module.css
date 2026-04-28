@@ -1,37 +1,37 @@
 .navBar {
-    background-color: #502F4C;
+  background-color: #502f4c;
 }
 
 .navBar ul {
-    display: flex;
-    list-style: none;
-    border-bottom: 1px solid rgb(187, 187, 187);
+  display: flex;
+  list-style: none;
+  border-bottom: 1px solid rgb(187, 187, 187);
 }
 
 .navBar li {
-    display: flex;
+  display: flex;
 }
 
 .navBar .homeLi {
-    margin-right: auto;
+  margin-right: auto;
 }
 
 .navBar a {
-    display: flex;
-    color: #F9F4F5;
-    text-decoration: none;
-    padding: 1em 2em;
-    transition: background-color 150ms ease;
+  display: flex;
+  color: #f9f4f5;
+  text-decoration: none;
+  padding: 1em 2em;
+  transition: background-color 150ms ease;
 }
 
 .navBar a:hover {
-    background-color: #70587C;
+  background-color: #70587c;
 }
 
 .activeLink {
-    border-bottom: 2px solid rgb(39, 39, 39);
+  border-bottom: 2px solid rgb(39, 39, 39);
 }
 
 .accentLink {
-    background-color: #8789C0;
+  background-color: #8789c0;
 }
