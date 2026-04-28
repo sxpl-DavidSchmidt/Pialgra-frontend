@@ -7,7 +7,7 @@ export default function NavBar() {
                 <li className={styles.homeLi}><a href="#" className={styles.activeLink}>Home</a></li>
                 <li><a href="#">Subjects</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#" className={styles.accentLink}>Contact</a></li>
+                <li><a href="#" className={styles.accentLink}>Login</a></li>
             </ul>
         </nav>
     );
