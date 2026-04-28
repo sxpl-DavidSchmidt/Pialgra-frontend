@@ -61,6 +61,8 @@ export default function TimeTable({
             className={styles.activityCell}
             title={`Day ${day}: ${hours} worked hour${hours === 1 ? "" : "s"}`}
             style={{
+              '--row': `${Math.floor(index / 7)}`,
+              '--col': `${index % 7}`,
               width: cellSize,
               height: cellSize,
               backgroundColor: `rgba(${r}, ${g}, ${b}, ${opacity})`,
@@ -74,11 +76,8 @@ export default function TimeTable({
   if (onlyTable) return table;
 
   return (
-    <div
-      className={styles.activityCard}
-      style={{ maxWidth: cellSize * 7 + 20 }}
-    >
-      {subjectName && <h3>{subjectName}</h3>}
+    <div className={styles.activityCard}>
+      <h3 style={{ marginBottom: `15px` }}>{subjectName}</h3>
       {table}
     </div>
   );
