@@ -1,6 +1,5 @@
 .navBar {
-    background-color: rgb(122, 199, 79);
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #502F4C;
 }
 
 .navBar ul {
@@ -18,15 +17,15 @@
 }
 
 .navBar a {
-    color: rgb(39, 39, 39);
     display: flex;
+    color: #F9F4F5;
     text-decoration: none;
     padding: 1em 2em;
     transition: background-color 150ms ease;
 }
 
 .navBar a:hover {
-    background-color: rgb(53, 93, 29);
+    background-color: #70587C;
 }
 
 .activeLink {
@@ -34,5 +33,5 @@
 }
 
 .accentLink {
-    background-color: rgb(210, 122, 15);
+    background-color: #8789C0;
 }
