@@ -12,22 +12,20 @@ function hexToRgb(hex) {
 }
 
 export default function TimeTable({
-  year,
-  month,
+  year = new Date().getFullYear(),
+  month = new Date().getMonth(),
   workedHours = [],
   color = "#000000",
-  cellSize = 24,
+  cellSize = 25,
   onlyTable = false,
   subjectName,
 }) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstWeekday = new Date(year, month, 1).getDay();
+  console.log("First weekday:", new Date(year, month, 1).getDay().toLocaleString("en-US", { weekday: "long" }));
 
   const hoursForMonth = workedHours.slice(0, daysInMonth);
-  const paddedHours = [
-    ...Array(firstWeekday).fill(null),
-    ...hoursForMonth,
-  ];
+  const paddedHours = [...Array(firstWeekday).fill(null), ...hoursForMonth];
 
   const maxHours = Math.max(...hoursForMonth, 0);
   const { r, g, b } = hexToRgb(color);
@@ -39,14 +37,22 @@ export default function TimeTable({
     return Math.min(hours / maxHours, 1);
   };
 
+  const weekdayLabels = ["", "Mo", "", "We", "", "Fr", ""];
+
   const table = (
     <div
       className={styles.activityTable}
       style={{
         gridTemplateColumns: `repeat(7, ${cellSize}px)`,
-        gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
+        gridTemplateRows: `auto repeat(${rows}, ${cellSize}px)`,
       }}
     >
+      {weekdayLabels.map((label, col) => (
+        <div key={`label-${col}`} className={styles.weekdayLabel}>
+          {label}
+        </div>
+      ))}
+
       {paddedHours.map((hours, index) => {
         if (hours === null) {
           return <div key={`empty-${index}`} aria-hidden="true" />;
@@ -59,10 +65,10 @@ export default function TimeTable({
           <div
             key={`day-${day}`}
             className={styles.activityCell}
-            title={`Day ${day}: ${hours} worked hour${hours === 1 ? "" : "s"}`}
+            title={`Day ${day}: ${hours} hour${hours === 1 ? "" : "s"}`}
             style={{
-              '--row': `${Math.floor(index / 7)}`,
-              '--col': `${index % 7}`,
+              "--row": `${Math.floor(index / 7)}`,
+              "--col": `${index % 7}`,
               width: cellSize,
               height: cellSize,
               backgroundColor: `rgba(${r}, ${g}, ${b}, ${opacity})`,

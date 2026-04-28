@@ -2,7 +2,7 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    
+
     margin: 10px;
     padding: 15px;
     border: 1px solid hsl(0, 0%, 80%);
@@ -16,10 +16,17 @@
     gap: 2px;
 }
 
+.weekdayLabel {
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-align: center;
+  height: 1rem;
+}
+
 @keyframes slideInFromLeft {
     0% {
         opacity: 0;
-        transform: translateX(-50%);
+        transform: translateX(-25%);
     }
     100% {
         opacity: 1;
