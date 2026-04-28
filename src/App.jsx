@@ -20,21 +20,9 @@ export default function App() {
         imageSrc="https://avatars.githubusercontent.com/u/62205605?v=4"
       />
 
-      <SubjectSummary
-        subject={{
-          name: "Computer Science",
-          sessions: workedHours,
-        }}
-      />
+      <TimeTable workedHours={workedHours} subjectName="Computer Science" />
 
-      <TimeTable
-        year={year}
-        month={month}
-        workedHours={workedHours}
-        cellSize={15}
-        subjectName="Computer Science"
-        color="#000000"
-      />
+      <SubjectSummary name="Computer Science" sessions={workedHours} />
     </main>
   );
 }
