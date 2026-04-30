@@ -12,32 +12,29 @@ function hexToRgb(hex) {
 }
 
 export default function TimeTable({
-  year = new Date().getFullYear(),
-  month = new Date().getMonth(),
+  subjectName,
+  timeFrameDays = 30,
   workedHours = [],
   color = "#000000",
   cellSize = 25,
   onlyTable = false,
-  subjectName,
 }) {
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstWeekday = new Date(year, month, 1).getDay();
+  const frameEnd = new Date(); // today
+  const frameStart = new Date(frameEnd);
+  frameStart.setDate(frameEnd.getDate() - timeFrameDays);
+  const firstWeekday = frameStart.getDay();
+  console.log("TimeTable frame:", frameStart.toDateString(), "to", frameEnd.toDateString(), "firstWeekday:", firstWeekday);
 
-  const hoursForMonth = workedHours.slice(0, daysInMonth);
-  const paddedHours = [...Array(firstWeekday).fill(null), ...hoursForMonth];
+  const adjHours = [
+    ...Array(firstWeekday).fill(null),
+    ...workedHours.slice(-timeFrameDays)
+  ];
 
-  const maxHours = Math.max(...hoursForMonth, 0);
+  const maxHours = Math.max(...adjHours, 0);
   const { r, g, b } = hexToRgb(color);
 
-  const rows = Math.ceil(paddedHours.length / 7);
-
-  const getCellOpacity = (hours) => {
-    if (!maxHours) return 0;
-    return Math.min(hours / maxHours, 1);
-  };
-
+  const rows = Math.ceil(adjHours.length / 7);
   const weekdayLabels = ["", "Mo", "", "We", "", "Fr", ""];
-
   const table = (
     <div
       className={styles.activityTable}
@@ -52,13 +49,13 @@ export default function TimeTable({
         </div>
       ))}
 
-      {paddedHours.map((hours, index) => {
+      {adjHours.map((hours, index) => {
         if (hours === null) {
           return <div key={`empty-${index}`} aria-hidden="true" />;
         }
 
         const day = index - firstWeekday + 1;
-        const opacity = getCellOpacity(hours);
+        const opacity = hours / maxHours;
 
         return (
           <div
