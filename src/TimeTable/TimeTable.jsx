@@ -19,31 +19,25 @@ export default function TimeTable({
   cellSize = 25,
   onlyTable = false,
 }) {
-  const frameEnd = new Date(); // today
-  const frameStart = new Date(frameEnd);
-  frameStart.setDate(frameEnd.getDate() - timeFrameDays);
+  const frameStart = new Date();
+  frameStart.setDate(frameStart.getDate() - (timeFrameDays - 1));
   const firstWeekday = frameStart.getDay();
-  console.log("TimeTable frame:", frameStart.toDateString(), "to", frameEnd.toDateString(), "firstWeekday:", firstWeekday);
 
   const adjHours = [
     ...Array(firstWeekday).fill(null),
-    ...workedHours.slice(-timeFrameDays)
+    ...workedHours.slice(-timeFrameDays),
   ];
 
-  const maxHours = Math.max(...adjHours, 0);
   const { r, g, b } = hexToRgb(color);
-
-  const rows = Math.ceil(adjHours.length / 7);
-  const weekdayLabels = ["", "Mo", "", "We", "", "Fr", ""];
   const table = (
     <div
       className={styles.activityTable}
       style={{
         gridTemplateColumns: `repeat(7, ${cellSize}px)`,
-        gridTemplateRows: `auto repeat(${rows}, ${cellSize}px)`,
+        gridTemplateRows: `auto repeat(${Math.ceil(adjHours.length / 7)}, ${cellSize}px)`,
       }}
     >
-      {weekdayLabels.map((label, col) => (
+      {["", "Mo", "", "We", "", "Fr", ""].map((label, col) => (
         <div key={`label-${col}`} className={styles.weekdayLabel}>
           {label}
         </div>
@@ -55,7 +49,7 @@ export default function TimeTable({
         }
 
         const day = index - firstWeekday + 1;
-        const opacity = hours / maxHours;
+        const opacity = hours / Math.max(...adjHours, 0);;
 
         return (
           <div
