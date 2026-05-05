@@ -8,7 +8,7 @@ export default function App() {
   const month = 2;
 
   const workedHours = Array.from(
-    { length: new Date(year, month + 1, 0).getDate() },
+    { length: 127 },
     () => Math.floor(Math.random() * 8),
   );
 
@@ -20,7 +20,7 @@ export default function App() {
         imageSrc="https://avatars.githubusercontent.com/u/62205605?v=4"
       />
 
-      <TimeTable workedHours={workedHours} subjectName="Computer Science" />
+      <TimeTable workedHours={workedHours} subjectName="Computer Science" timeFrameDays={45} />
 
       <SubjectSummary name="Computer Science" sessions={workedHours} />
     </main>
