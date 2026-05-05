@@ -49,8 +49,6 @@ export default function TimeTable({
         }
 
         const day = index - firstWeekday + 1;
-        const opacity = hours / Math.max(...adjHours, 0);;
-
         return (
           <div
             key={`day-${day}`}
@@ -61,7 +59,7 @@ export default function TimeTable({
               "--col": `${index % 7}`,
               width: cellSize,
               height: cellSize,
-              backgroundColor: `rgba(${r}, ${g}, ${b}, ${opacity})`,
+              backgroundColor: `rgba(${r}, ${g}, ${b}, ${hours / Math.max(...adjHours, 0)})`,
             }}
           />
         );
