@@ -71,8 +71,12 @@ export default function TimeTable({
 
   return (
     <div className={styles.activityCard}>
-      <h3 style={{ marginBottom: `15px` }}>{subjectName}</h3>
-      {table}
+      <h3>{subjectName}</h3>
+      <hr />
+      <div className={styles.tableWrapper}>
+        <p>Last {timeFrameDays} days</p>
+        {table}
+      </div>
     </div>
   );
 }
