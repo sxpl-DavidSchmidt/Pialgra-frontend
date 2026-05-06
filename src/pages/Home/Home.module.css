@@ -3,6 +3,7 @@
   padding: 2em;
   gap: 2em;
   grid-template-columns: auto 1fr;
+  background-color: var(--color-accent);
 }
 
 .subjectDisplay {

@@ -1,0 +1,77 @@
+.container {
+    background-color: white;
+    padding: 2em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.timeSpentContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.timeSpentItem {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background-color: var(--color-accent);
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.timeSpentItem h1 {
+    margin-left: 0.5em;
+}
+
+.timeTableContainer {
+    padding: 1em;
+}
+
+.timeTable {
+    padding: 1em 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25em;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.timeTableCell {
+    aspect-ratio: 1 / 1;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+    animation-fill-mode: backwards;
+    background-color: var(--color-secondary);
+    border-radius: 6.25%;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-25%);
+    }
+
+    100% {
+        opacity: var(--alpha);
+        transform: translateX(0);
+    }
+}
+
+.weekdayLabel {
+    font-weight: bold;
+    font-size: 0.75rem;
+    text-align: center;
+    height: 1rem;
+}
+
+.timeTableScale {
+    font-weight: bold;
+    font-size: 0.75rem;
+    width: 50%;
+    display: grid;
+    gap: 0.35em;
+    grid-template-columns: auto repeat(5, 1fr) auto;
+    align-items: center;
+}

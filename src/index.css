@@ -1,8 +1,9 @@
 :root {
-  --color-primary: #579E60;
+  --color-primary: #0e40ad;
   --color-primary-l1: #61A86B;
   --color-primary-d1: #488450;
-  --color-secondary: #8BBD8B;
+  --color-secondary: #155dfc;
+  --color-accent: hsl(218, 100%, 93%);
   --color-contrast: #F5A65B;
   --color-contrast-d1: #f38b2b;
   --color-text-light: #f9f4f5;
