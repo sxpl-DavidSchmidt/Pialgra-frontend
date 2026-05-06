@@ -22,11 +22,13 @@ export default function TimeTableSummary({
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
                     <h3>Total Time (30 days)</h3>
-                    <h1>40h</h1>
+                    <h1 style={{
+                        color: "var(--color-primary)"
+                    }}>40h</h1>
                 </div>
                 <div className={styles.timeSpentItem}>
                     <h3>Daily Average</h3>
-                    <h1>65m</h1>
+                    <h1 style={{color: "var(--color-contrast-secondary)"}}>65m</h1>
                 </div>
             </div>
 
