@@ -8,4 +8,7 @@
 .subjectDisplay {
   display: flex;
   flex-direction: column;
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  padding: 1em;
 }
