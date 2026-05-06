@@ -1,0 +1,13 @@
+.content {
+    display: grid;
+    padding: 2em;
+    gap: 2em;
+    grid-template-columns: auto 1fr;
+    border: 1px solid black
+}
+
+.subjectDisplay {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}

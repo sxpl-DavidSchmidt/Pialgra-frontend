@@ -1,37 +1,44 @@
-.navBar {
-  background-color: #502f4c;
+nav {
+  background-color: var(--color-primary);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.navBar ul {
+nav ul {
   display: flex;
   list-style: none;
   border-bottom: 1px solid rgb(187, 187, 187);
 }
 
-.navBar li {
+nav li {
   display: flex;
 }
 
-.navBar .homeLi {
+nav .homeLi {
   margin-right: auto;
 }
 
-.navBar a {
+nav a {
   display: flex;
-  color: #f9f4f5;
+  color: var(--color-text-light);
   text-decoration: none;
   padding: 1em 2em;
   transition: background-color 150ms ease;
 }
 
-.navBar a:hover {
-  background-color: #70587c;
+nav a:hover {
+  background-color: var(--color-primary-d1);
 }
 
 .activeLink {
-  border-bottom: 2px solid rgb(39, 39, 39);
+  border-bottom: 2px solid var(--color-dark-grey);
 }
 
 .accentLink {
-  background-color: #8789c0;
+  background-color: var(--color-contrast);
+}
+
+.accentLink:hover {
+  background-color: var(--color-contrast-d1);
 }
