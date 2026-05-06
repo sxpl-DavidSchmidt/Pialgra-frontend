@@ -1,7 +1,7 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .timer {
@@ -11,7 +11,7 @@
 }
 
 .timerSvg {
-    width: 100%;
-    height: 80px;
-    display: block;
+  width: 100%;
+  height: 80px;
+  display: block;
 }
