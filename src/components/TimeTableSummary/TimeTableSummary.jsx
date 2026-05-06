@@ -17,7 +17,7 @@ export default function TimeTableSummary({
 
     return (
         <div className={styles.container}>
-            <h1>Study activity</h1>
+            <h2>Study activity</h2>
 
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
@@ -28,7 +28,7 @@ export default function TimeTableSummary({
                 </div>
                 <div className={styles.timeSpentItem}>
                     <h3>Daily Average</h3>
-                    <h1 style={{color: "var(--color-contrast-secondary)"}}>65m</h1>
+                    <h1 style={{ color: "var(--color-contrast-secondary)" }}>65m</h1>
                 </div>
             </div>
 
@@ -57,20 +57,39 @@ export default function TimeTableSummary({
                         );
                     })}
                 </div>
-                <div className={styles.timeTableScale}>
+
+                <div className={styles.timeTableScaleContainer}>
                     <p>Less</p>
-                    {[0, 1, 2, 3, 4].map((value, index) => {
-                        return <div
-                            key={`scale-${index}`}
-                            className={styles.timeTableCell}
-                            style={{
-                                animationDelay: index * (7 / 4) * 0.1 + "s",
-                                opacity: value / 4,
-                                "--alpha": value / 4,
-                            }}
-                        />
-                    })}
+                    <div className={styles.timeTableScale}>
+                        {[1, 2, 3, 4].map((value, index) => {
+                            return <div
+                                key={`scale-${index}`}
+                                className={styles.timeTableCell}
+                                style={{
+                                    animationDelay: index * (7 / 4) * 0.1 + "s",
+                                    opacity: value / 4,
+                                    "--alpha": value / 4,
+                                }}
+                            />
+                        })}
+                    </div>
                     <p>More</p>
+                </div>
+            </div>
+
+            <div className={styles.sessionsContainer}>
+                <h3>Recent Sessions</h3>
+                <div className={styles.sessionsList}>
+                    {[["May 5", 138], ["May 4", 98]].map((value, index) => {
+                        const cDate = value[0];
+                        const cTime = value[1];
+                        return (
+                            <div className={styles.sessionsItem}>
+                                <p>{cDate}</p>
+                                <p style={{fontWeight: `bold`}}>{cTime}</p>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
