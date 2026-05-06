@@ -4,10 +4,12 @@ export default function TimerBar({
   name = null,
   primaryColor = null,
   secondaryColor = null,
+  progress = 0.75,
+  timeMinutes = 15
 }) {
   const timer = (
     <div className={styles.timer}>
-      <h2>15:00</h2>
+      <h2>{timeMinutes}:00</h2>
       <svg className={styles.timerSvg} viewBox="0 0 300 80">
         <line
           x1={40}
@@ -22,7 +24,7 @@ export default function TimerBar({
         <line
           x1={40}
           y1={40}
-          x2={180}
+          x2={260 * progress}
           y2={40}
           stroke={primaryColor === null ? "#2563eb" : primaryColor}
           stroke-width={40}
