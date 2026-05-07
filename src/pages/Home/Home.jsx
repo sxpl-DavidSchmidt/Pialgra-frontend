@@ -15,10 +15,8 @@ export default function Home() {
 
   return (
     <div className={styles.content}>
-      <TimeTableSummary workedHours={generateHours(45, 7)}/>
-      <div className={styles.sessionOverview}>
-        <Timer />
-      </div>
+      <TimeTableSummary workedHours={generateHours(45, 7)} />
+      <Timer />
     </div>
   );
 }

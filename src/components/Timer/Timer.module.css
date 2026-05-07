@@ -1,12 +1,58 @@
 .container {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  align-items: center;
   border-radius: 10px;
   padding: 20px;
   background-color: white;
   box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.15);
+}
+
+.contentWrapper {width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  }
+
+
+.clockContainer {
+  display: grid;
+  place-items: center;
+}
+
+.clockContainer svg {
+  object-fit: cover;
+  grid-area: 1 / 1;
+}
+
+.clockContainer svg path {
+  stroke-width: 10;
+}
+
+.clockText {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clockOuter {
+  color: var(--color-accent-light);
+  
+}
+
+.clockInner {
+  color: var(--color-secondary);
+  stroke-linecap: round;
+  stroke-dasharray: 0 1;
+  stroke-dashoffset: 1;
+  animation: draw 5s linear infinite;
+}
+
+@keyframes draw {
+  to {
+    stroke-dasharray: 1 0;
+  }
 }
 
 .menu {
@@ -112,7 +158,6 @@ button svg {
 }
 
 .timeSelect p {
-  font-weight: bold;
 }
 
 .timeSelect button {
