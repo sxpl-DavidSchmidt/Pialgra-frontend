@@ -17,6 +17,8 @@
   grid-template-areas:
     "subjectSele subjectSele"
     "startButton resetButton"
+    "workTimer workTimer"
+    "breakTimer breakTimer"
   ;
 }
 
@@ -65,7 +67,6 @@ button:hover {
 button svg {
   width: 1em;
   height: 1em;
-  flex-shrink: 0;
 }
 
 .startButton {
@@ -94,12 +95,11 @@ button svg {
 
 .timeSelectWrap {
   padding: 0;
-  margin-top: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  align-items: center;
   text-align: center;
-}
-
-.timeSelectWrap p {
-  padding: 0.25em;
 }
 
 .timeSelect {
@@ -107,6 +107,8 @@ button svg {
   display: grid;
   grid-template-columns: auto 1fr auto;
   place-items: center;
+  background-color: var(--color-accent);
+  border-radius: 10px;
 }
 
 .timeSelect p {

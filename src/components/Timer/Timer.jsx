@@ -6,7 +6,6 @@ import ResetIcon from "../../assets/reset.svg?react"
 export default function Timer() {
   return (
     <div className={styles.container}>
-      <div />
       <div className={styles.menu}>
         <select>
           <option>Computer Science</option>
@@ -21,8 +20,8 @@ export default function Timer() {
           <ResetIcon className={styles.resetButtonIcon} />
           <p>Reset</p>
         </button>
-
-        <div className={styles.timeSelectWrap}>
+        
+        <div className={styles.timeSelectWrap} style={{gridArea: "workTimer"}}>
           <p>Work Duration</p>
           <div className={styles.timeSelect}>
             <button>-</button>
@@ -31,7 +30,7 @@ export default function Timer() {
           </div>
         </div>
 
-        <div className={styles.timeSelectWrap}>
+        <div className={styles.timeSelectWrap} style={{gridArea: "breakTimer"}}>
           <p>Break Duration</p>
           <div className={styles.timeSelect}>
             <button>-</button>
