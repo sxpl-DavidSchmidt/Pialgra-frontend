@@ -13,3 +13,46 @@
   border-radius: 10px;
   padding: 1em;
 }
+
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  border-radius: 10px;
+  padding: 1em;
+  background-color: white;
+  box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.15);
+}
+
+.sessionsWrapper {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 2em;
+}
+
+.sessions {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+}
+
+.sessionItem, .sessionBreak {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0em 1em;
+  background-color: var(--color-secondary);
+  padding: 0.75em;
+  border-radius: 10px;
+}
+
+.sessionItem p {
+  color: white;
+}
+
+.sessionBreak {
+  background-color: var(--color-accent-light);
+}
+
+.sessionBreak p {
+  color: var(--color-accent-dark);
+}

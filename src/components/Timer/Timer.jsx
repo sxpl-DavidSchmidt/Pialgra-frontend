@@ -6,7 +6,7 @@ import ArrowIcon from "../../assets/arrow_down.svg?react"
 
 export default function Timer() {
   return (
-    <div className={styles.container}><div className={styles.contentWrapper}>
+    <div className={styles.container}>
       <div className={styles.clockContainer}>
         <div className={styles.clockText}>
           <h1>45:00</h1>
@@ -69,6 +69,6 @@ export default function Timer() {
         </div>
 
       </div>
-    </div></div>
+    </div>
   );
 }
