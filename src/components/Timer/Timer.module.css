@@ -8,3 +8,113 @@
   background-color: white;
   box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.15);
 }
+
+.menu {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "subjectSele subjectSele"
+    "startButton resetButton"
+  ;
+}
+
+.menu>* {
+  padding: 1em;
+}
+
+select {
+  grid-area: subjectSele;
+  appearance: base-select;
+  background-color: var(--color-accent-light);
+  border-radius: 10px;
+  border: none;
+  padding: 1em 2em;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+select::picker-icon {
+  color: #999999;
+  transition: 0.4s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border: none;
+  border-radius: 10px;
+  transition: transform 150ms ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button svg {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.startButton {
+  background-color: var(--color-secondary);
+}
+
+.startButton p {
+  color: white;
+}
+
+.startButtonIcon path {
+  color: #ffffff;
+}
+
+.resetButton {
+  background-color: var(--color-accent-light);
+}
+
+.resetButton p {
+  color: var(--color-accent-dark);
+}
+
+.resetButtonIcon path {
+  color: var(--color-accent-dark);
+}
+
+.timeSelectWrap {
+  padding: 0;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.timeSelectWrap p {
+  padding: 0.25em;
+}
+
+.timeSelect {
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  place-items: center;
+}
+
+.timeSelect p {
+  font-weight: bold;
+}
+
+.timeSelect button {
+  background-color: var(--color-accent-light);
+  padding: 0.75em 1em;
+  aspect-ratio: 1 / 1;
+}

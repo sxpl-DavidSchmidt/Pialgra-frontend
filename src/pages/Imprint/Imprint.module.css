@@ -23,5 +23,5 @@ h2 {
 .contactGrid {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 1em
+    gap: 0.5em 1em;
 }

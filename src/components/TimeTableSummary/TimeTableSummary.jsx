@@ -35,7 +35,7 @@ export default function TimeTableSummary({
             <div className={styles.timeTableContainer}>
                 <h3>Last 30 Days</h3>
                 <div className={styles.timeTable}>
-                    {["", "Mo", "", "We", "", "Fr", ""].map((label, index) => {
+                    {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((label, index) => {
                         return <div key={`label-${index}`} className={styles.weekdayLabel}>
                             {label}
                         </div>

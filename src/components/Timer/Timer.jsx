@@ -1,12 +1,46 @@
-import TimerBar from "../TimerBar/TimerBar";
 import styles from "./Timer.module.css";
+
+import PlayIcon from "../../assets/play.svg?react"
+import ResetIcon from "../../assets/reset.svg?react"
 
 export default function Timer() {
   return (
     <div className={styles.container}>
-      <h1>Take a break!</h1>
-      <TimerBar timeMinutes={45} primaryColor={"var(--color-contrast)"} />
-      <TimerBar timeMinutes={15} primaryColor={"var(--color-contrast-secondary)"} />
+      <div />
+      <div className={styles.menu}>
+        <select>
+          <option>Computer Science</option>
+          <option>Psychology</option>
+        </select>
+
+        <button className={styles.startButton}>
+          <PlayIcon className={styles.startButtonIcon} />
+          <p>Start</p>
+        </button>
+        <button className={styles.resetButton}>
+          <ResetIcon className={styles.resetButtonIcon} />
+          <p>Reset</p>
+        </button>
+
+        <div className={styles.timeSelectWrap}>
+          <p>Work Duration</p>
+          <div className={styles.timeSelect}>
+            <button>-</button>
+            <p>{25}m</p>
+            <button>+</button>
+          </div>
+        </div>
+
+        <div className={styles.timeSelectWrap}>
+          <p>Break Duration</p>
+          <div className={styles.timeSelect}>
+            <button>-</button>
+            <p>{5}m</p>
+            <button>+</button>
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }
