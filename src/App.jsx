@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 import Home from "./pages/Home/Home";
 import Imprint from "./pages/Imprint/Imprint";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
           <Route path="/imprint" element={<Imprint />} />
         </Routes>
       </main>
+
+      <Footer />
     </BrowserRouter>
   );
 }
