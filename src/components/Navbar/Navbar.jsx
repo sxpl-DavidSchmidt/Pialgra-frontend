@@ -5,7 +5,7 @@ export default function NavBar() {
     <nav className={styles.navBar}>
       <ul>
         <li className={styles.homeLi}>
-          <a href="#" className={styles.activeLink}>
+          <a href="/" className={styles.activeLink}>
             Home
           </a>
         </li>
