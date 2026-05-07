@@ -153,11 +153,7 @@ button svg {
   display: grid;
   grid-template-columns: auto 1fr auto;
   place-items: center;
-  background-color: var(--color-accent);
   border-radius: 10px;
-}
-
-.timeSelect p {
 }
 
 .timeSelect button {
