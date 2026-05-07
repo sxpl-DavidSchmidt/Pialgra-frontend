@@ -11,7 +11,7 @@ export default function Timer() {
         <div className={styles.clockText}>
           <h1>45:00</h1>
         </div>
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ rotate: "90deg"}}>
           <path className={styles.clockOuter}
             pathLength={1}
             fill="none"

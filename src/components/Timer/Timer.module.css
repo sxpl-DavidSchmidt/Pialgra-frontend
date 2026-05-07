@@ -50,8 +50,17 @@
 }
 
 @keyframes draw {
-  to {
+  0% {
+    stroke-dasharray: 0 1;
+  }
+
+  75% {
     stroke-dasharray: 1 0;
+    color: var(--color-secondary);
+  }
+
+  100% {
+    stroke-dasharray: 1 1;
   }
 }
 
@@ -75,24 +84,11 @@
 select {
   grid-area: subjectSele;
   appearance: base-select;
+  appearance: none;
   background-color: var(--color-accent-light);
   border-radius: 10px;
   border: none;
   padding: 1em 2em;
-}
-
-select,
-::picker(select) {
-  appearance: base-select;
-}
-
-select::picker-icon {
-  color: #999999;
-  transition: 0.4s rotate;
-}
-
-select:open::picker-icon {
-  rotate: 180deg;
 }
 
 button {
