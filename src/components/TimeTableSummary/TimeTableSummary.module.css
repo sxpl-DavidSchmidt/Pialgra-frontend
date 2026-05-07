@@ -51,13 +51,13 @@
 
 @keyframes slideInFromLeft {
     0% {
+        transform: scale(125%);
         opacity: 0;
-        transform: translateX(-25%);
     }
 
     100% {
+        transform: scale(100%);
         opacity: var(--alpha);
-        transform: translateX(0);
     }
 }
 
