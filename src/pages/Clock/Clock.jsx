@@ -10,9 +10,6 @@ function generateHours(days, maxValue) {
 }
 
 export default function Clock() {
-  const year = 2026;
-  const month = 2;
-
   return (
     <div className={styles.content}>
       <TimeTableSummary workedHours={generateHours(45, 7)} />
@@ -34,7 +31,7 @@ export default function Clock() {
           <div>
             <h2>Todays Sessions</h2>
             <div className={styles.sessions}>
-              {[["45:50", "Pychology"], ["14:02", "Break"], ["42:21", "Computer Science"]].map((value, index) => {
+              {[["45:50", "Pychology"], ["14:02", "Break"], ["42:21", "Computer Science"]].map(value => {
                 const ps = <>
                   <p>{value[0]}</p>
                   <p>{value[1]}</p>

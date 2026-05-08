@@ -1,10 +1,6 @@
 import styles from "./TimeTableSummary.module.css"
 
-export default function TimeTableSummary({
-    workedHours = [],
-    cellSize = 10,
-    color = "#000"
-}) {
+export default function TimeTableSummary({ workedHours = [] }) {
     const frameStart = new Date();
     frameStart.setDate(frameStart.getDate() - (30 - 1));
     const firstWeekday = frameStart.getDay();
@@ -80,13 +76,13 @@ export default function TimeTableSummary({
             <div className={styles.sessionsContainer}>
                 <h3>Recent Sessions</h3>
                 <div className={styles.sessionsList}>
-                    {[["May 5", 138], ["May 4", 98]].map((value, index) => {
+                    {[["May 5", 138], ["May 4", 98]].map(value => {
                         const cDate = value[0];
                         const cTime = value[1];
                         return (
                             <div className={styles.sessionsItem}>
                                 <p>{cDate}</p>
-                                <p style={{fontWeight: `bold`}}>{cTime}</p>
+                                <p style={{ fontWeight: `bold` }}>{cTime}</p>
                             </div>
                         );
                     })}
