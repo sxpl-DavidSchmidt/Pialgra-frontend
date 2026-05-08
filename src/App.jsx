@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
 
-import Home from "./pages/Home/Home";
+import Clock from "./pages/Clock/Clock";
 import Imprint from "./pages/Imprint/Imprint";
 import Footer from "./components/Footer/Footer";
 
@@ -13,7 +13,7 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/clock" element={<Clock />} />
           <Route path="/imprint" element={<Imprint />} />
         </Routes>
       </main>

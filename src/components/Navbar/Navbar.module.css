@@ -14,7 +14,7 @@ nav li {
   display: flex;
 }
 
-nav .homeLi {
+.homeLi {
   margin-right: auto;
 }
 

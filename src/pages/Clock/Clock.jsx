@@ -1,4 +1,4 @@
-import styles from "./Home.module.css";
+import styles from "./Clock.module.css";
 
 import Timer from "../../components/Timer/Timer.jsx";
 import TimeTableSummary from "../../components/TimeTableSummary/TimeTableSummary.jsx";
@@ -9,7 +9,7 @@ function generateHours(days, maxValue) {
   );
 }
 
-export default function Home() {
+export default function Clock() {
   const year = 2026;
   const month = 2;
 
