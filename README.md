@@ -1,6 +1,6 @@
 # Pialgra Frontend
 
-Pialgra is a study productivity app designed to help students study more effectively. This repository contains the frontend for the Pialgra project, built with React and JSX. Check it out at [pialgra.app](https://pialgra.app)
+Pialgra is a study productivity app designed to help students study more effectively. This repository contains the frontend for the Pialgra project, built with React and JSX. Once everything is working you can check it out at [pialgra.app](https://pialgra.app)
 
 > ⚠️ This project is still under development.
 
