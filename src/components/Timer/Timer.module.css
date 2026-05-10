@@ -32,7 +32,7 @@
 }
 
 .clockInner {
-  color: var(--color-secondary);
+  color: var(--color-primary);
   stroke-linecap: round;
   stroke-dasharray: 0 1;
   stroke-dashoffset: 1;
@@ -46,7 +46,6 @@
 
   75% {
     stroke-dasharray: 1 0;
-    color: var(--color-secondary);
   }
 
   100% {
@@ -102,7 +101,7 @@ button svg {
 }
 
 .startButton {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
 }
 
 .startButton p {

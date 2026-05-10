@@ -45,7 +45,7 @@
     aspect-ratio: 1 / 1;
     animation: 1s ease-out 0s 1 slideInFromLeft;
     animation-fill-mode: backwards;
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary);
     border-radius: 6.25%;
 }
 

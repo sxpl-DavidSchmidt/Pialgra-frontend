@@ -1,13 +1,16 @@
 import styles from "./Navbar.module.css";
+import Logo from "../../assets/logo/pialgra_logo_notext.svg"
 
 export default function NavBar() {
   return (
     <nav className={styles.navBar}>
-      <ul>
-        <li className={styles.homeLi}><a href="/" className={styles.activeLink}>Home</a></li>
-        <li><a href="/clock">Clock</a></li>
-        <li><a href="/statistics">Statistics</a></li>
-      </ul>
+      <a href="/" className={styles.homeLi} style={{ backgroundColor: "white" }}>
+        <img src={Logo} />
+        <p>Pialgra</p>
+      </a>
+      <a href="/clock">Clock</a>
+      <a href="/statistics">Statistics</a>
+      <a href="/login" className={styles.accentLink}>Login</a>
     </nav>
   );
 }

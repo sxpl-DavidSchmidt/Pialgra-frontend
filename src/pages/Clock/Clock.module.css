@@ -40,7 +40,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0em 1em;
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
   padding: 0.75em;
   border-radius: 10px;
 }
