@@ -12,6 +12,12 @@
   --color-text-dark: #2c2c2c;
 }
 
+#root {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 * {
   margin: 0;
   padding: 0;

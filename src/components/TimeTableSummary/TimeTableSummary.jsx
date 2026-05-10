@@ -72,22 +72,6 @@ export default function TimeTableSummary({ workedHours = [] }) {
                     <p>More</p>
                 </div>
             </div>
-
-            <div className={styles.sessionsContainer}>
-                <h3>Recent Sessions</h3>
-                <div className={styles.sessionsList}>
-                    {[["May 5", 138], ["May 4", 98]].map(value => {
-                        const cDate = value[0];
-                        const cTime = value[1];
-                        return (
-                            <div className={styles.sessionsItem}>
-                                <p>{cDate}</p>
-                                <p style={{ fontWeight: `bold` }}>{cTime}</p>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
         </div>
     );
 }
