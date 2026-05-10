@@ -1,8 +1,8 @@
 import styles from "./Timer.module.css";
 
-import PlayIcon from "../../assets/play.svg?react"
-import ResetIcon from "../../assets/reset.svg?react"
-import ArrowIcon from "../../assets/arrow_down.svg?react"
+import PlayIcon from "../../assets/icons/play.svg?react"
+import ResetIcon from "../../assets/icons/reset.svg?react"
+import ArrowIcon from "../../assets/icons/arrow_down.svg?react"
 
 export default function Timer() {
   return (
