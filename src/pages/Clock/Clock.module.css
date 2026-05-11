@@ -2,7 +2,7 @@
   height: 100%;
   display: grid;
   gap: 2em;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 2fr;
 }
 
 .subjectDisplay {

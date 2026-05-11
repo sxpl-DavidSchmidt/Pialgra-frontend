@@ -24,6 +24,12 @@
     border-radius: 10px;
 }
 
+.loginForm {
+    display: grid;
+    place-items: center;
+    gap: 1em;
+}
+
 .loginOption {
     display: grid;
     grid-template-columns: auto 1fr;
