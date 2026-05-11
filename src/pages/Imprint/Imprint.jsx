@@ -5,7 +5,7 @@ export default function Imprint() {
         <div className={styles.container}>
             <div className={styles.wrapper}>
                 <h1>Impressum</h1>
-                <p>Angaben gemäß § 5 DDG</p>
+                <h3>Angaben gemäß § 5 DDG</h3>
 
                 <div className={styles.personen}>
                     <p>David Schmidt</p>
