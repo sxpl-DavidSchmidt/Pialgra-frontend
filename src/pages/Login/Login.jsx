@@ -8,6 +8,7 @@ import KeyIcon from "../../assets/icons/key.svg?react"
 export default function Login() {
     return (
         <div className={styles.container}>
+            <div className={styles.wrapper}>
             <div className={styles.loginWrapper}>
                 <div className={styles.loginForm}>
                 <div className={styles.loginOption}>
@@ -32,6 +33,7 @@ export default function Login() {
                 </div>
             </div>
             <img src={Logo} />
+            </div>
         </div>
     );
 }
