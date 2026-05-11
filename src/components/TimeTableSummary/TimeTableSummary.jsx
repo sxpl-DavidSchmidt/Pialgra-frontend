@@ -1,13 +1,17 @@
 import styles from "./TimeTableSummary.module.css"
 
-export default function TimeTableSummary({ workedHours = [] }) {
+export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 }) {
     const frameStart = new Date();
-    frameStart.setDate(frameStart.getDate() - (30 - 1));
+    frameStart.setDate(frameStart.getDate() - (daysDisplayed - 1));
     const firstWeekday = frameStart.getDay();
     const adjHours = [
         ...Array(firstWeekday).fill(null),
-        ...workedHours.slice(-30),
+        ...workedHours.slice(-daysDisplayed),
     ];
+
+    const maxHours = Math.max(...adjHours);
+    const totalHours = adjHours.reduce((partialSum, a) => partialSum + a, 0);
+    const averageHours = (totalHours / daysDisplayed).toString().substring(0, 4)
 
     console.log(adjHours);
 
@@ -17,14 +21,12 @@ export default function TimeTableSummary({ workedHours = [] }) {
 
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
-                    <h3>Total Time (30 days)</h3>
-                    <h1 style={{
-                        color: "var(--color-primary)"
-                    }}>40h</h1>
+                    <h3>Total Time ({daysDisplayed} days)</h3>
+                    <h1 style={{ color: "var(--color-primary)" }}>{totalHours}h</h1>
                 </div>
                 <div className={styles.timeSpentItem}>
                     <h3>Daily Average</h3>
-                    <h1 style={{ color: "var(--color-contrast-secondary)" }}>65m</h1>
+                    <h1 style={{ color: "var(--color-contrast-secondary)" }}>{averageHours}h</h1>
                 </div>
             </div>
 
@@ -32,9 +34,7 @@ export default function TimeTableSummary({ workedHours = [] }) {
                 <h3>Last 30 Days</h3>
                 <div className={styles.timeTable}>
                     {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((label, index) => {
-                        return <div key={`label-${index}`} className={styles.weekdayLabel}>
-                            {label}
-                        </div>
+                        return <div key={`label-${index}`} className={styles.weekdayLabel}>{label}</div>
                     })}
 
                     {adjHours.map((hours, index) => {

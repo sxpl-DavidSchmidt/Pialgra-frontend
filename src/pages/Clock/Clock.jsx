@@ -12,7 +12,7 @@ function generateHours(days, maxValue) {
 export default function Clock() {
   return (
     <div className={styles.content}>
-      <TimeTableSummary workedHours={generateHours(45, 7)} />
+      <TimeTableSummary workedHours={generateHours(30, 8)} daysDisplayed={30} />
 
       <div className={styles.mainContent}>
         <div style={{ width: "50%" }}>
