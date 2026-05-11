@@ -14,10 +14,8 @@ export default function Imprint() {
 
                 <div className={styles.contact}>
                     <h2>Kontakt:</h2>
-                    <div className={styles.contactGrid}>
-                        <p>Telefon:</p><p>+49-176 72912101</p>
-                        <p>E-Mail:</p><p><a>davidschmidtp@gmail.com</a></p>
-                    </div>
+                    <p>Telefon: +49-176 72912101</p>
+                    <p>E-Mail: <a>davidschmidtp@gmail.com</a></p>
                 </div>
 
                 <div className={styles.misc}>
