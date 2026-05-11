@@ -17,11 +17,11 @@ export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 
 
     return (
         <div className={styles.container}>
-            <h2>Study activity</h2>
+            <h2>Study activity - Last {daysDisplayed} days</h2>
 
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
-                    <h3>Total Time ({daysDisplayed} days)</h3>
+                    <h3>Total Time</h3>
                     <h1 style={{ color: "var(--color-primary)" }}>{totalHours}h</h1>
                 </div>
                 <div className={styles.timeSpentItem}>
@@ -31,7 +31,7 @@ export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 
             </div>
 
             <div className={styles.timeTableContainer}>
-                <h3>Last 30 Days</h3>
+                <h3>Activity Summary</h3>
                 <div className={styles.timeTable}>
                     {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((label, index) => {
                         return <div key={`label-${index}`} className={styles.weekdayLabel}>{label}</div>
