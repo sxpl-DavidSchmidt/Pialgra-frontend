@@ -28,28 +28,28 @@
 
 .clockOuter {
   color: var(--color-accent-light);
-
 }
 
 .clockInner {
   color: var(--color-primary);
   stroke-linecap: round;
-  stroke-dasharray: 0 1;
+  stroke-dasharray: 1 0;
   stroke-dashoffset: 1;
   animation: draw 5s linear infinite;
 }
 
 @keyframes draw {
   0% {
-    stroke-dasharray: 0 1;
-  }
-
-  75% {
     stroke-dasharray: 1 0;
   }
 
-  100% {
+  75% {
     stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
   }
 }
 
@@ -62,11 +62,10 @@
     "subjectSele subjectSele"
     "startButton resetButton"
     "workTimer workTimer"
-    "breakTimer breakTimer"
-  ;
+    "breakTimer breakTimer";
 }
 
-.menu>* {
+.menu > * {
   padding: 1em;
 }
 
