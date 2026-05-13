@@ -7,7 +7,6 @@
 
 .wrapper {
     width: 50%;
-    height: 50%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     place-items: center;
