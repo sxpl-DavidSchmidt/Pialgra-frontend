@@ -26,7 +26,7 @@ export default function Login() {
               <label for="username-input">
                 <PersonIcon className={styles.loginOptionIcon} />
               </label>
-              <input type="text" placeholder="username" id="username-input" />
+              <input type="text" placeholder="Username" id="username-input" />
             </>,
             <>
               <label for="password-input">
@@ -34,7 +34,7 @@ export default function Login() {
               </label>
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 id="password-input"
               />
             </>,
