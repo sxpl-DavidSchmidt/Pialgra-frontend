@@ -1,0 +1,50 @@
+.loginWrapper {
+    height: 100%;
+    width: 100%;
+    padding: 2em;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    place-items: center;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.loginOption {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loginOption label {
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px 0 0 10px;
+    background-color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginOption label > * {
+    fill: white;
+}
+
+.loginOption input {
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 1em;
+    font: inherit;
+    border-radius: 0 10px 10px 0;
+    border: none;
+    background-color: var(--color-accent);
+}
