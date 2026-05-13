@@ -16,7 +16,6 @@
 }
 
 .wrapper img {
-    padding: 2em;
-    background-color: white;
-    border-radius: 10px;
+    width: 50%;
+    height: auto;
 }
