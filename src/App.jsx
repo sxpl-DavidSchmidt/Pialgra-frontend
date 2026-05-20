@@ -13,19 +13,19 @@ export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
-        <main style={{ padding: "2em", backgroundColor: "var(--color-accent)" }}>
-          <Routes>
-            <Route path="/" element={<Navigate to="/clock" replace />} />
-            <Route path="/imprint" element={<Imprint />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
 
-            <Route path="/clock" element={<Clock />} />
-          </Routes>
-        </main>
+      <main style={{ padding: "2em", backgroundColor: "var(--color-accent)" }}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/clock" replace />} />
+          <Route path="/imprint" element={<Imprint />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/clock" element={<Clock />} />
+        </Routes>
+      </main>
 
-        <Footer />
+      <Footer />
     </BrowserRouter>
   );
 }
