@@ -38,7 +38,7 @@ export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 
                     })}
 
                     {adjHours.map((hours, index) => {
-                        if (hours === null) return <div />
+                        if (hours === null) return <div key={`cell-${index}`} />
                         return (
                             <div
                                 key={`cell-${index}`}
