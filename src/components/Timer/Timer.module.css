@@ -6,7 +6,8 @@
 }
 
 .clockContainer {
-  display: grid;
+  position: relative;
+  display: inline-grid;
   place-items: center;
 }
 
@@ -15,16 +16,52 @@
   grid-area: 1 / 1;
 }
 
+.clockText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5em;
+  text-align: center;
+  z-index: 1;
+}
+.clockText h1 {
+  margin: 0;
+  line-height: 1;
+}
+
+
 .clockContainer svg path {
   stroke-width: 10;
 }
 
-.clockText {
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.timerNotice {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, 12px);
+  font-size: 0.95rem;
+  color: var(--color-accent-dark);
+  min-height: 1.2em;
+  opacity: 0;
+  transition: opacity 240ms ease, transform 240ms ease;
+  pointer-events: none;
+  z-index: 1;
 }
+
+.visible {
+  opacity: 1;
+  transform: translate(-50%, 8px);
+}
+
+.hidden {
+  opacity: 0;
+  transform: translate(-50%, 12px);
+}
+
+
 
 .clockOuter {
   color: var(--color-accent-light);
@@ -33,24 +70,6 @@
 .clockInner {
   color: var(--color-primary);
   stroke-linecap: round;
-  stroke-dasharray: 1 0;
-  stroke-dashoffset: 1;
-  animation: draw 5s linear infinite;
-}
-
-@keyframes draw {
-  0% {
-    stroke-dasharray: 1 0;
-  }
-
-  75% {
-    stroke-dasharray: 1 1;
-    stroke-dashoffset: 1;
-  }
-
-  100% {
-    stroke-dashoffset: 0;
-  }
 }
 
 .menu {
@@ -109,6 +128,14 @@ button svg {
 
 .startButtonIcon path {
   color: #ffffff;
+}
+
+.stopButton {
+  background-color: #d92f2f;
+}
+
+.stopButton p {
+  color: white;
 }
 
 .resetButton {
