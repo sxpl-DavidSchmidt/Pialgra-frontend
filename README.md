@@ -19,3 +19,10 @@ The frontend connects to the [Pialgra backend repository](https://github.com/sxp
 
 * **Study time tracker**
   Track study time and view statistics about your learning habits.
+
+## Preview
+
+### Clock-Page
+<p align="center">
+  <img src="docs/images/clock_preview.png" alt="Clock-Page preview" width="75%" height="auto">
+</p>
