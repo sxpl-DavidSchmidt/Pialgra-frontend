@@ -11,11 +11,11 @@ function generateHours(days, maxValue) {
 
 export default function Clock() {
   const sessions = [
-    ["45:50", "Pychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Pychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Pychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Pychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Pychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
+    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
+    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
+    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
+    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
+    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
   ];
 
   return (
