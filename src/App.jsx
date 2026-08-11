@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import ProtectedRoute from "./auth/ProtectedRoute";
+
 import Navbar from "./components/Navbar/Navbar";
 
 import Clock from "./pages/Clock/Clock";
@@ -19,7 +21,7 @@ export default function App() {
           <Route path="/imprint" element={<Imprint />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/clock" element={<Clock />} />
+          <Route path="/clock" element={<ProtectedRoute><Clock /></ProtectedRoute>} />
         </Routes>
       </main>
 

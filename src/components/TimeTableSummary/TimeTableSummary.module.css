@@ -68,20 +68,18 @@
 }
 
 .timeTableScaleContainer {
-    width: 50%;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto auto auto;
     place-items: center;
-    gap: 0.5em;
-    margin-left: auto;
+    gap: 0.25em;
 }
 
 .timeTableScale {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     place-items: center;
-    gap: 0.45em;
+    grid-template-columns: repeat(4, auto);
+    gap: 0.125em;
 }
 
 .sessionsContainer {

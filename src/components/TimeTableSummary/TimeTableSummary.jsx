@@ -13,8 +13,6 @@ export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 
     const totalHours = adjHours.reduce((partialSum, a) => partialSum + a, 0);
     const averageHours = (totalHours / daysDisplayed).toString().substring(0, 4)
 
-    console.log(adjHours);
-
     return (
         <div className={styles.container}>
             <h2>Study activity - Last {daysDisplayed} days</h2>
@@ -62,6 +60,7 @@ export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 
                                 key={`scale-${index}`}
                                 className={styles.timeTableCell}
                                 style={{
+                                    width: `15px`,
                                     animationDelay: index * (7 / 4) * 0.1 + "s",
                                     opacity: value / 4,
                                     "--alpha": value / 4,
