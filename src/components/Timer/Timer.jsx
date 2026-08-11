@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { createStudySession } from "../../api/studySessions";
+import { getMyCategories } from "../../api/categories";
+
 import styles from "./Timer.module.css";
 
 import ArrowIcon from "../../assets/icons/arrow_down.svg?react";
@@ -16,12 +19,16 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
 
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   const workDurationMs = WORK_MINUTES * MS_PER_MINUTE;
   const progress = Math.min(elapsedTime / workDurationMs, 1);
   const outerDashOffset = 1 - progress;
 
   const intervalIdRef = useRef(null);
   const startTimeRef = useRef(0);
+  const sessionStartTimeRef = useRef(null);
 
   useEffect(() => {
     if (!isRunning) {
@@ -49,19 +56,56 @@ export default function Timer() {
     };
   }, [isRunning, workDurationMs]);
 
-  const toggleRunning = () => {
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const categories = await getMyCategories();
+
+        setCategories(categories);
+
+        if (categories.length > 0) {
+          setSelectedCategory(categories[0].uuid);
+        }
+      } catch (error) {
+        console.error("Could not load categories:", error);
+      }
+    }
+
+    loadCategories();
+  }, []);
+
+  const toggleRunning = async () => {
     if (isRunning) {
+      const endTime = new Date();
+
       setIsRunning(false);
+
+      try {
+        await createStudySession(
+          selectedCategory,
+          sessionStartTimeRef.current.toISOString(),
+          endTime.toISOString()
+        );
+
+        setElapsedTime(0);
+        sessionStartTimeRef.current = null;
+      } catch (error) {
+        console.error("Could not save study session:", error);
+      }
+
       return;
     }
 
-    startTimeRef.current = Date.now() - elapsedTime;
+    sessionStartTimeRef.current = new Date();
+    startTimeRef.current = Date.now();
+
     setIsRunning(true);
   };
 
   const resetTimer = () => {
     setElapsedTime(0);
     setIsRunning(false);
+    sessionStartTimeRef.current = null;
   };
 
   const formatTime = () => {
@@ -103,9 +147,18 @@ export default function Timer() {
       </div>
 
       <div className={styles.menu}>
-        <select>
-          <option>Computer Science</option>
-          <option>Psychology</option>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          {categories.map((category) => (
+            <option
+              key={category.uuid}
+              value={category.uuid}
+            >
+              {category.name}
+            </option>
+          ))}
         </select>
 
         <button
