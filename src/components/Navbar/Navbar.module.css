@@ -1,4 +1,4 @@
-nav {
+.navBar {
   background-color: var(--color-primary);
   position: sticky;
   top: 0;
@@ -6,7 +6,7 @@ nav {
   display: flex;
 }
 
-nav a {
+.navBar a, .navBar button {
   color: var(--color-text-light);
   text-decoration: none;
   padding: 0.5em 2em;
@@ -15,7 +15,7 @@ nav a {
   transition: background-color 150ms ease;
 }
 
-nav a:hover {
+.navBar a:hover, .navBar button:hover {
   background-color: var(--color-primary-d1);
 }
 
@@ -33,10 +33,17 @@ nav a:hover {
   width: auto;
 }
 
-.accentLink {
-  background-color: var(--color-contrast);
+.welcomeMessage {
+  margin-right: auto;
+  color: var(--color-text-light);
 }
 
-.accentLink:hover {
+.navBar .accentLink {
+  font: inherit;
+  background-color: var(--color-contrast);
+  border: none;
+}
+
+.navBar .accentLink:hover {
   background-color: var(--color-contrast-d1);
 }

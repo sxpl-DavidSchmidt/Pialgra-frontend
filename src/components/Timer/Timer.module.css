@@ -98,7 +98,7 @@ select {
   padding: 1em 2em;
 }
 
-button {
+.menu button {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -109,11 +109,11 @@ button {
   transition: transform 150ms ease;
 }
 
-button:hover {
+.menu button:hover {
   transform: scale(1.05);
 }
 
-button svg {
+.menu button svg {
   width: 1em;
   height: 1em;
 }

@@ -1,16 +1,54 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
+
 import styles from "./Navbar.module.css";
-import Logo from "../../assets/logo/pialgra_logo_notext.svg"
+import Logo from "../../assets/logo/pialgra_logo_notext.svg";
 
 export default function NavBar() {
+  const { user, loading, logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
+
   return (
     <nav className={styles.navBar}>
-      <a href="/" className={styles.homeLi} style={{ backgroundColor: "white" }}>
-        <img src={Logo} />
+      <Link
+        to="/"
+        className={styles.homeLi}
+        style={{ backgroundColor: "white" }}
+      >
+        <img src={Logo} alt="Pialgra" />
         <p>Pialgra</p>
-      </a>
-      <a href="/clock">Clock</a>
-      <a href="/statistics">Statistics</a>
-      <a href="/login" className={styles.accentLink}>Login</a>
+      </Link>
+
+      <Link to="/clock">Clock</Link>
+      <Link to="/statistics">Statistics</Link>
+
+      {!loading && (
+        user ? (
+          <button
+            type="button"
+            className={styles.accentLink}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            className={styles.accentLink}
+          >
+            Login
+          </Link>
+        )
+      )}
     </nav>
   );
 }
