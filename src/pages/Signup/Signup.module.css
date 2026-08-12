@@ -12,7 +12,7 @@
     place-items: center;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.15);    
+    box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.15);
 }
 
 .wrapper img {
@@ -53,7 +53,7 @@
     align-items: center;
 }
 
-.signupOption label > * {
+.signupOption label>* {
     fill: white;
 }
 

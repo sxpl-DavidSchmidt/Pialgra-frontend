@@ -6,7 +6,8 @@
   display: flex;
 }
 
-.navBar a, .navBar button {
+.navBar a,
+.navBar button {
   color: var(--color-text-light);
   text-decoration: none;
   padding: 0.5em 2em;
@@ -15,7 +16,8 @@
   transition: background-color 150ms ease;
 }
 
-.navBar a:hover, .navBar button:hover {
+.navBar a:hover,
+.navBar button:hover {
   background-color: var(--color-primary-d1);
 }
 

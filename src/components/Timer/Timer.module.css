@@ -27,6 +27,7 @@
   text-align: center;
   z-index: 1;
 }
+
 .clockText h1 {
   margin: 0;
   line-height: 1;
@@ -84,7 +85,7 @@
     "breakTimer breakTimer";
 }
 
-.menu > * {
+.menu>* {
   padding: 1em;
 }
 
