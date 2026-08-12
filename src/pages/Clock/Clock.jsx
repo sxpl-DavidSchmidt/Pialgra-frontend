@@ -1,26 +1,60 @@
+import React, { useEffect, useRef, useState } from "react";
+
+import { useStudySessions } from "../../context/StudySessionContext.jsx";
+import { getMyCategories } from "../../api/categories";
+
 import styles from "./Clock.module.css";
 
 import Timer from "../../components/Timer/Timer.jsx";
 import TimeTableSummary from "../../components/TimeTableSummary/TimeTableSummary.jsx";
 
-function generateHours(days, maxValue) {
-  return Array.from({ length: days }, () =>
-    Math.floor(Math.random() * (maxValue + 1)),
-  );
+function parseStudySessions(studySessions, categories) {
+  return [...studySessions]
+    .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
+    .map((session) => {
+      const start = new Date(session.startTime);
+      const end = new Date(session.endTime);
+
+      const timeMinutes = (end - start) / (1000 * 60);
+      const category = categories.find((category) => category.uuid === session.category.uuid);
+
+      return [
+        timeMinutes,
+        category?.name ?? "Unknown"
+      ];
+    });
+}
+
+function formatTime(minutes) {
+  const seconds = Math.floor(minutes * 60);
+  const remainingSeconds = seconds % 3600;
+  const remainingMinutes = Math.floor(remainingSeconds / 60);
+  return `${remainingMinutes.toString().padStart(2, '0')}:${(remainingSeconds % 60).toString().padStart(2, '0')}`;
 }
 
 export default function Clock() {
-  const sessions = [
-    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-    ["45:50", "Psychology"], ["14:02", "Break"], ["42:21", "Computer Science"],
-  ];
+  const [categories, setCategories] = useState([]);
+  const { studySessions } = useStudySessions();
+
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const categories = await getMyCategories();
+        setCategories(categories);
+      } catch (error) {
+        console.error("Could not load categories:", error);
+      }
+    }
+
+    loadCategories();
+  }, []);
+
+  const sessionData = parseStudySessions(studySessions, categories);
+  console.log(studySessions);
 
   return (
     <div className={styles.content}>
-      <div style={{ display: "grid", placeItems: "center" }}><TimeTableSummary workedHours={generateHours(30, 8)} daysDisplayed={30} /></div>
+      <div style={{ display: "grid", placeItems: "center" }}><TimeTableSummary sessions={studySessions} daysDisplayed={30} /></div>
 
       <div className={styles.timerWrapper}>
         <div style={{ width: "50%" }}><Timer /></div>
@@ -29,7 +63,10 @@ export default function Clock() {
       <div className={styles.sessionsWrapper}>
         <h2>Todays Sessions</h2>
         <div className={styles.sessions}>
-          {sessions.map(value => {
+          {sessionData.map(value => {
+            const date = new Date(value[1]);
+            const today = new Date();
+            if (date.toDateString() !== today.toDateString()) return null;
             const ps = <>
               <p>{value[0]}</p>
               <p>{value[1]}</p>
@@ -40,7 +77,7 @@ export default function Clock() {
             }
             return (
               <div className={styles.sessionItem}>
-                <p>{value[0]}</p>
+                <p>{formatTime(value[0])}</p>
                 <p>{value[1]}</p>
               </div>
             );

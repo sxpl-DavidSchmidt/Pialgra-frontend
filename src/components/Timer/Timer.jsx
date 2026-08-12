@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { useStudySessions } from "../../context/StudySessionContext.jsx";
 import { createStudySession } from "../../api/studySessions";
 import { getMyCategories } from "../../api/categories";
 
@@ -16,6 +17,8 @@ const MS_PER_SECOND = 1000;
 const MS_PER_MINUTE = 60 * MS_PER_SECOND;
 
 export default function Timer() {
+  const { refreshStudySessions } = useStudySessions();
+  
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
 
@@ -86,6 +89,8 @@ export default function Timer() {
           sessionStartTimeRef.current.toISOString(),
           endTime.toISOString()
         );
+
+        await refreshStudySessions();
 
         setElapsedTime(0);
         sessionStartTimeRef.current = null;

@@ -1,6 +1,35 @@
 import styles from "./TimeTableSummary.module.css"
 
-export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 }) {
+function parseStudySessions(studySessions, daysDisplayed) {
+    if (!studySessions || studySessions.length === 0) return [];
+
+    function getSessionDurationMinutes(session) {
+        return (new Date(session.endTime) - new Date(session.startTime)) / (1000 * 60);
+    }
+
+    const minutesPerDay = new Map();
+    for (const session of studySessions) {
+        const sessionDate = new Date(session.endTime).toDateString();
+        if (!minutesPerDay.has(sessionDate)) { minutesPerDay.set(sessionDate, 0); }
+        minutesPerDay.set(sessionDate, minutesPerDay.get(sessionDate) + getSessionDurationMinutes(session));
+    }
+
+    const workedMinutes = new Array(daysDisplayed).fill(0);
+    const today = new Date();
+    for (const [date, minutes] of minutesPerDay) {
+        let daysAgo = Math.floor((today - new Date(date)) / (1000 * 60 * 60 * 24));
+        if (daysAgo > daysDisplayed || daysAgo < 0) continue;
+        else {
+            workedMinutes[daysDisplayed - 1 - daysAgo] = minutes;
+        }
+    }
+
+    return workedMinutes;
+}
+
+export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) {
+    const workedHours = parseStudySessions(sessions, daysDisplayed).map(minutes => minutes / 60);
+
     const frameStart = new Date();
     frameStart.setDate(frameStart.getDate() - (daysDisplayed - 1));
     const firstWeekday = frameStart.getDay();
@@ -11,7 +40,7 @@ export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 
 
     const maxHours = Math.max(...adjHours);
     const totalHours = adjHours.reduce((partialSum, a) => partialSum + a, 0);
-    const averageHours = (totalHours / daysDisplayed).toString().substring(0, 4)
+    const averageHours = (totalHours / daysDisplayed).toString().substring(0, 4);
 
     return (
         <div className={styles.container}>
@@ -20,7 +49,7 @@ export default function TimeTableSummary({ workedHours = [], daysDisplayed = 30 
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
                     <h3>Total Time</h3>
-                    <h1 style={{ color: "var(--color-primary)" }}>{totalHours}h</h1>
+                    <h1 style={{ color: "var(--color-primary)" }}>{totalHours.toFixed(2)}h</h1>
                 </div>
                 <div className={styles.timeSpentItem}>
                     <h3>Daily Average</h3>

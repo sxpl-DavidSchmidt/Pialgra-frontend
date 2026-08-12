@@ -1,0 +1,401 @@
+1. von alt nach neu sortieren
+2. nach datum gruppieren und summieren
+
+[
+    {
+        "uuid": "55fe153d-3d1c-4153-8ffb-23907186915e",
+        "startTime": "2026-08-11T15:17:11.163",
+        "endTime": "2026-08-11T15:17:16.461"
+    },
+    {
+        "uuid": "6122e8ef-571e-4970-afde-bb7bb37f263f",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-11T15:17:39.562",
+        "endTime": "2026-08-11T15:19:11.433"
+    },
+    {
+        "uuid": "fae6d7fc-b4cb-4b2c-97b7-17f1fa0debe3",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-11T15:40:58.496",
+        "endTime": "2026-08-11T15:40:59.692"
+    },
+    {
+        "uuid": "1ec55bed-c33a-4255-92f2-e9852faae84e",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "ba00fccd-841b-4e8b-a72e-e20b68ef6665",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "Programming"
+        },
+        "startTime": "2026-08-11T15:41:01.579",
+        "endTime": "2026-08-11T15:41:11.785"
+    },
+    {
+        "uuid": "73274727-26f8-4030-a728-bb099da55497",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "2f5c2a78-30d5-4bf4-ab63-acabae097748",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "English"
+        },
+        "startTime": "2026-08-11T15:47:25.455",
+        "endTime": "2026-08-11T15:47:32.822"
+    },
+    {
+        "uuid": "ff629016-d531-41ec-af77-33914b7ddc34",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T09:41:31.802",
+        "endTime": "2026-08-12T09:41:42.454"
+    },
+    {
+        "uuid": "f8583d3c-ec4a-435b-829b-a009e31f7ba4",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:46.264",
+        "endTime": "2026-08-12T10:01:46.719"
+    },
+    {
+        "uuid": "0060ca59-e561-408a-89d0-83ef8daf1425",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:48.185",
+        "endTime": "2026-08-12T10:01:49.278"
+    },
+    {
+        "uuid": "9d42b2f2-2996-4504-94da-a4141c43bb14",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:49.972",
+        "endTime": "2026-08-12T10:01:50.348"
+    },
+    {
+        "uuid": "8ce2ccd7-628c-4df0-b992-bb86c113420f",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:50.66",
+        "endTime": "2026-08-12T10:01:50.842"
+    },
+    {
+        "uuid": "39ba45f0-d69c-4ea2-9f70-8e4c37a45b9b",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:51",
+        "endTime": "2026-08-12T10:01:51.151"
+    },
+    {
+        "uuid": "7fa2a4dd-327b-4e68-94d5-ffb69e098817",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:51.306",
+        "endTime": "2026-08-12T10:01:51.465"
+    },
+    {
+        "uuid": "465407c9-ffdf-4169-a340-3276d6d02f87",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:51.605",
+        "endTime": "2026-08-12T10:01:51.778"
+    },
+    {
+        "uuid": "d52fe4ec-94a1-4485-9a00-eea67dc9b1c7",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:51.92",
+        "endTime": "2026-08-12T10:01:52.073"
+    },
+    {
+        "uuid": "1cf23ec0-4b5d-4134-9116-0445fc54749d",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:52.223",
+        "endTime": "2026-08-12T10:01:52.394"
+    },
+    {
+        "uuid": "3b2f6f27-1a63-4f38-a601-e187b641d003",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:01:52.605",
+        "endTime": "2026-08-12T10:01:53.125"
+    },
+    {
+        "uuid": "3401f9f6-80b4-4410-9c2c-46e09b64652d",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "ba00fccd-841b-4e8b-a72e-e20b68ef6665",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "Programming"
+        },
+        "startTime": "2026-08-12T10:02:39.994",
+        "endTime": "2026-08-12T10:02:40.119"
+    },
+    {
+        "uuid": "32c00d16-836d-4b64-bb4e-c3e8dc1b8824",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "c5ebd82a-be68-435e-aa19-512df66f3c1b",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "German"
+        },
+        "startTime": "2026-08-12T10:22:15.324",
+        "endTime": "2026-08-12T10:22:16.716"
+    },
+    {
+        "uuid": "de08bfdd-1d01-4d80-8a7b-339c214f74c6",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:22:24.085",
+        "endTime": "2026-08-12T10:22:25.579"
+    },
+    {
+        "uuid": "3a091699-10f9-4ceb-bf9f-4f1f15ecdde7",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:26:04.797",
+        "endTime": "2026-08-12T10:26:05.671"
+    },
+    {
+        "uuid": "803cf217-09ec-46aa-8a52-21cc0eef54ca",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:26:53.348",
+        "endTime": "2026-08-12T10:26:53.773"
+    },
+    {
+        "uuid": "945c6965-9070-4c73-8080-0f8dfc4b5873",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:26:54.924",
+        "endTime": "2026-08-12T10:26:55.16"
+    },
+    {
+        "uuid": "fce03b49-933c-433a-adcc-d9b1f241eaec",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "a45a6d19-63ee-4768-a502-7f91047fc482",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "test"
+        },
+        "startTime": "2026-08-12T10:26:58.775",
+        "endTime": "2026-08-12T10:26:58.948"
+    },
+    {
+        "uuid": "81e645db-f293-4d22-8877-f4353c5407b9",
+        "user": {
+            "username": "Paula",
+            "createdAt": "2026-08-11"
+        },
+        "category": {
+            "uuid": "ba00fccd-841b-4e8b-a72e-e20b68ef6665",
+            "user": {
+                "username": "Paula",
+                "createdAt": "2026-08-11"
+            },
+            "name": "Programming"
+        },
+        "startTime": "2026-08-12T10:27:01.628",
+        "endTime": "2026-08-12T10:27:01.857"
+    }
+]
