@@ -11,8 +11,8 @@ import PauseIcon from "../../assets/icons/pause.svg?react";
 import PlayIcon from "../../assets/icons/play.svg?react";
 import ResetIcon from "../../assets/icons/reset.svg?react";
 
-const WORK_MINUTES = 10;
-const BREAK_MINUTES = 15;
+const WORK_MINUTES = 25;
+const BREAK_MINUTES = 5;
 const MS_PER_SECOND = 1000;
 const MS_PER_MINUTE = 60 * MS_PER_SECOND;
 

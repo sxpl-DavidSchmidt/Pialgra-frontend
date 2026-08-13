@@ -9,14 +9,26 @@ import Timer from "../../components/Timer/Timer.jsx";
 import TimeTableSummary from "../../components/TimeTableSummary/TimeTableSummary.jsx";
 
 function parseStudySessions(studySessions, categories) {
+  const today = new Date();
+
   return [...studySessions]
+    .filter((session) => {
+      const start = new Date(session.startTime);
+      return (
+        start.getFullYear() === today.getFullYear() &&
+        start.getMonth() === today.getMonth() &&
+        start.getDate() === today.getDate()
+      );
+    })
     .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
     .map((session) => {
       const start = new Date(session.startTime);
       const end = new Date(session.endTime);
 
       const timeMinutes = (end - start) / (1000 * 60);
-      const category = categories.find((category) => category.uuid === session.category.uuid);
+      const category = categories.find(
+        (category) => category.uuid === session.category.uuid
+      );
 
       return [
         timeMinutes,
@@ -27,9 +39,8 @@ function parseStudySessions(studySessions, categories) {
 
 function formatTime(minutes) {
   const seconds = Math.floor(minutes * 60);
-  const remainingSeconds = seconds % 3600;
-  const remainingMinutes = Math.floor(remainingSeconds / 60);
-  return `${remainingMinutes.toString().padStart(2, '0')}:${(remainingSeconds % 60).toString().padStart(2, '0')}`;
+  const minutesPart = Math.floor(minutes);
+  return `${minutesPart.toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`;
 }
 
 export default function Clock() {
@@ -50,7 +61,6 @@ export default function Clock() {
   }, []);
 
   const sessionData = parseStudySessions(studySessions, categories);
-  console.log(studySessions);
 
   return (
     <div className={styles.content}>
@@ -64,17 +74,6 @@ export default function Clock() {
         <h2>Todays Sessions</h2>
         <div className={styles.sessions}>
           {sessionData.map(value => {
-            const date = new Date(value[1]);
-            const today = new Date();
-            if (date.toDateString() !== today.toDateString()) return null;
-            const ps = <>
-              <p>{value[0]}</p>
-              <p>{value[1]}</p>
-            </>
-            if (value[1] == "Break") {
-              return (<div className={styles.sessionBreak}>{ps}</div>
-              )
-            }
             return (
               <div className={styles.sessionItem}>
                 <p>{formatTime(value[0])}</p>
