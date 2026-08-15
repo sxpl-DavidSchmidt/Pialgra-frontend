@@ -49,3 +49,17 @@
 .navBar .accentLink:hover {
   background-color: var(--color-contrast-d1);
 }
+
+.navBar .profilePictureWrapper {
+  height: 100%;
+  padding: 0.5em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBar .profilePicture {
+  height: 1.5lh;
+  width: auto;
+  border-radius: 50%;
+}
