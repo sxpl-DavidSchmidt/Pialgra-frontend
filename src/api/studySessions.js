@@ -12,5 +12,5 @@ export function createStudySession(categoryUuid, startTime, endTime) {
 }
 
 export function getMyStudySessions() {
-  return apiFetch("/api/v1/users/me/study-sessions");
+    return apiFetch("/api/v1/users/me/study-sessions");
 }

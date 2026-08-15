@@ -18,7 +18,7 @@ const MS_PER_MINUTE = 60 * MS_PER_SECOND;
 
 export default function Timer() {
   const { refreshStudySessions } = useStudySessions();
-  
+
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
 
