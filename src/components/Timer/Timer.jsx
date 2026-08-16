@@ -139,15 +139,17 @@ export default function Timer() {
             stroke="currentColor"
             d="M 25, 100 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
           />
-          <path
-            className={styles.clockInner}
-            pathLength={1}
-            fill="none"
-            stroke="currentColor"
-            strokeDasharray={1}
-            strokeDashoffset={outerDashOffset}
-            d="M 25, 100 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-          />
+          {outerDashOffset != 1 ?
+            <path
+              className={styles.clockInner}
+              pathLength={1}
+              fill="none"
+              stroke="currentColor"
+              strokeDasharray={1}
+              strokeDashoffset={outerDashOffset}
+              d="M 25, 100 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+            /> : null
+          }
         </svg>
       </div>
 

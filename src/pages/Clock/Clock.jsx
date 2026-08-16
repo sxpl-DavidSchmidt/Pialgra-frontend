@@ -73,9 +73,12 @@ export default function Clock() {
       <div className={styles.sessionsWrapper}>
         <h2>Todays Sessions</h2>
         <div className={styles.sessions}>
-          {sessionData.map(value => {
+          {sessionData.map((value, index) => {
             return (
-              <div className={styles.sessionItem}>
+              <div
+                key={`session-${index}`}
+                className={styles.sessionItem}
+              >
                 <p>{formatTime(value[0])}</p>
                 <p>{value[1]}</p>
               </div>

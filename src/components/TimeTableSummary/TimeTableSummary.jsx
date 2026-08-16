@@ -65,18 +65,28 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
                     })}
 
                     {adjHours.map((hours, index) => {
-                        if (hours === null) return <div key={`cell-${index}`} />
-                        return (
+                        let cell = (hours === null || hours === 0) ?
                             <div
-                                key={`cell-${index}`}
-                                className={styles.timeTableCell}
-                                title={`${hours} hour${hours === 1 ? "" : "s"}`}
+                                className={styles.timeTableCellEmpty}
+                            /> :
+                            <div
+                                className={styles.timeTableCellContent}
                                 style={{
                                     animationDelay: (Math.floor(index / 7) + index % 7) * 0.1 + "s",
                                     opacity: hours / Math.max(...workedHours),
                                     "--alpha": hours / Math.max(...workedHours),
                                 }}
-                            />
+                            />;
+
+                        return (
+                            <div
+                                key={`cell-${index}`}
+                                className={styles.timeTableCell}
+                                title={`${hours} hour${hours === 1 ? "" : "s"}`}
+                                style={{ animationDelay: (Math.floor(index / 7) + index % 7) * 0.1 + "s" }}
+                            >
+                                {cell}
+                            </div>
                         );
                     })}
                 </div>
@@ -85,16 +95,23 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
                     <p>Less</p>
                     <div className={styles.timeTableScale}>
                         {[1, 2, 3, 4].map((value, index) => {
-                            return <div
-                                key={`scale-${index}`}
-                                className={styles.timeTableCell}
-                                style={{
-                                    width: `15px`,
-                                    animationDelay: index * (7 / 4) * 0.1 + "s",
-                                    opacity: value / 4,
-                                    "--alpha": value / 4,
-                                }}
-                            />
+                            return (
+                                <div
+                                    key={`cell-${index}`}
+                                    className={styles.timeTableCell}
+                                    style={{ animationDelay: index * (7 / 4) * 0.1 + "s", boxShadow: null }}
+                                >
+                                    <div
+                                        key={`cell-${index}`}
+                                        className={styles.timeTableCellContent}
+                                        style={{
+                                            animationDelay: index * (7 / 4) * 0.1 + "s",
+                                            opacity: value / 4,
+                                            "--alpha": value / 4,
+                                        }}
+                                    />
+                                </div>
+                            );
                         })}
                     </div>
                     <p>More</p>

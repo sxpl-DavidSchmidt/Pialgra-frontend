@@ -42,13 +42,27 @@
 .timeTableCell {
     width: 100%;
     aspect-ratio: 1 / 1;
-    animation: 1s ease-out 0s 1 slideInFromLeft;
+    animation: 1s ease-out 0s 1 animateCellContainer;
     animation-fill-mode: backwards;
-    background-color: var(--color-primary);
     border-radius: 6.25%;
+    box-shadow: 0px 0px 5px hsla(0, 0%, 0%, 0.25);
 }
 
-@keyframes slideInFromLeft {
+.timeTableCellContent, .timeTableCellEmpty {
+    width: 100%;
+    height: 100%;
+    border-radius: 6.25%;
+    background-color: var(--color-primary);
+    animation: 1s ease-out 0s 1 animateCellContent;
+    animation-fill-mode: backwards;
+}
+
+.timeTableCellEmpty {
+    opacity: 0;
+    animation: none;
+}
+
+@keyframes animateCellContainer {
     0% {
         transform: scale(125%);
         opacity: 0;
@@ -56,6 +70,16 @@
 
     100% {
         transform: scale(100%);
+        opacity: 1;
+    }
+}
+
+@keyframes animateCellContent {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
         opacity: var(--alpha);
     }
 }
@@ -79,7 +103,7 @@
     display: grid;
     place-items: center;
     grid-template-columns: repeat(4, auto);
-    gap: 0.125em;
+    gap: 1em;
 }
 
 .sessionsContainer {
