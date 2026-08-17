@@ -44,22 +44,7 @@ function formatTime(minutes) {
 }
 
 export default function Clock() {
-  const [categories, setCategories] = useState([]);
-  const { studySessions } = useStudySessions();
-
-  useEffect(() => {
-    async function loadCategories() {
-      try {
-        const categories = await getMyCategories();
-        setCategories(categories);
-      } catch (error) {
-        console.error("Could not load categories:", error);
-      }
-    }
-
-    loadCategories();
-  }, []);
-
+  const { studySessions, categories } = useStudySessions();
   const sessionData = parseStudySessions(studySessions, categories);
 
   return (

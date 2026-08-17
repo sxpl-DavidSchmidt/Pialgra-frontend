@@ -25,6 +25,7 @@
   display: grid;
   place-items: center;
   padding: 1em;
+  position: relative;
 }
 
 .sessionsWrapper {

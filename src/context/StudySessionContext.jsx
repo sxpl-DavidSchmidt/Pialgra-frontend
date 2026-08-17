@@ -6,18 +6,23 @@ import {
 } from "react";
 
 import { getMyStudySessions } from "../api/studySessions";
+import { getMyCategories } from "../api/categories";
 
 const StudySessionsContext = createContext(null);
 
 export function StudySessionsProvider({ children }) {
   const [studySessions, setStudySessions] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   async function refreshStudySessions() {
     try {
       const sessions = await getMyStudySessions();
       setStudySessions(sessions);
+
+      const categories = await getMyCategories();
+      setCategories(categories)
     } catch (error) {
-      console.error("Could not load study sessions:", error);
+      console.error("Could not load study sessions or categories:", error);
     }
   }
 
@@ -29,6 +34,7 @@ export function StudySessionsProvider({ children }) {
     <StudySessionsContext.Provider
       value={{
         studySessions,
+        categories,
         refreshStudySessions,
       }}
     >

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { useStudySessions } from "../../context/StudySessionContext.jsx";
 import { createStudySession } from "../../api/studySessions";
-import { getMyCategories } from "../../api/categories";
+import { createCategory, getMyCategories } from "../../api/categories";
 
 import styles from "./Timer.module.css";
 
@@ -13,19 +13,18 @@ import ResetIcon from "../../assets/icons/reset.svg?react";
 
 const WORK_MINUTES = 25;
 const BREAK_MINUTES = 5;
-const MS_PER_SECOND = 1000;
-const MS_PER_MINUTE = 60 * MS_PER_SECOND;
 
 export default function Timer() {
-  const { refreshStudySessions } = useStudySessions();
+  const { categories, refreshStudySessions } = useStudySessions();
 
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [newCategory, setNewCategory] = useState("");
+  const [showAdd, setShowAdd] = useState(false);
 
-  const workDurationMs = WORK_MINUTES * MS_PER_MINUTE;
+  const workDurationMs = WORK_MINUTES * 60 * 1000;
   const progress = Math.min(elapsedTime / workDurationMs, 1);
   const outerDashOffset = 1 - progress;
 
@@ -59,23 +58,30 @@ export default function Timer() {
     };
   }, [isRunning, workDurationMs]);
 
-  useEffect(() => {
-    async function loadCategories() {
-      try {
-        const categories = await getMyCategories();
+  function handleCategorySelect(e) {
+    const value = e.target.value;
 
-        setCategories(categories);
-
-        if (categories.length > 0) {
-          setSelectedCategory(categories[0].uuid);
-        }
-      } catch (error) {
-        console.error("Could not load categories:", error);
-      }
+    if (value === "__new__") {
+      setShowAdd(true);
+      return;
     }
 
-    loadCategories();
-  }, []);
+    setSelectedCategory(value);
+  }
+
+  async function handleAddCategory() {
+    const value = newCategory.trim();
+    if (!value) return;
+
+    try {
+      await createCategory(value);
+      await refreshStudySessions();
+      setNewCategory("");
+      setShowAdd(false);
+    } catch (error) {
+      console.error("Could not create category:", error);
+    }
+  }
 
   const toggleRunning = async () => {
     if (isRunning) {
@@ -84,6 +90,7 @@ export default function Timer() {
       setIsRunning(false);
 
       try {
+        console.log(selectedCategory);
         await createStudySession(
           selectedCategory,
           sessionStartTimeRef.current.toISOString(),
@@ -114,9 +121,8 @@ export default function Timer() {
   };
 
   const formatTime = () => {
-    const minutes = Math.floor(elapsedTime / MS_PER_MINUTE);
-    const seconds = Math.floor((elapsedTime % MS_PER_MINUTE) / MS_PER_SECOND);
-
+    const minutes = Math.floor(elapsedTime / (60 * 1000));
+    const seconds = Math.floor((elapsedTime % (60 * 1000)) / 1000);
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   };
 
@@ -156,7 +162,7 @@ export default function Timer() {
       <div className={styles.menu}>
         <select
           value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+          onChange={handleCategorySelect}
         >
           {categories.map((category) => (
             <option
@@ -166,7 +172,34 @@ export default function Timer() {
               {category.name}
             </option>
           ))}
+          <option value="__new__">+ Add new Category</option>
         </select>
+
+        {showAdd && (
+          <div className={styles.addOverlay}>
+            <div className={styles.addPopup}>
+              <input
+                autoFocus
+                type="text"
+                value={newCategory}
+                placeholder="New category..."
+                onChange={(e) => setNewCategory(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddCategory();
+                  if (e.key === "Escape") setShowAdd(false);
+                }}
+              />
+
+              <button type="button" onClick={handleAddCategory} className={styles.popupAddButton}>
+                Add
+              </button>
+
+              <button type="button" onClick={() => setShowAdd(false)} className={styles.popupCancelButton}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
 
         <button
           type="button"

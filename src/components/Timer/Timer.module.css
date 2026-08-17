@@ -105,10 +105,17 @@ select {
   gap: 0.5em;
   border: none;
   border-radius: 10px;
+}
+
+.menu .startButton,
+.menu .stopButton,
+.menu .resetButton {
   transition: transform 150ms ease;
 }
 
-.menu button:hover {
+.menu .startButton:hover,
+.menu .stopButton:hover,
+.menu .resetButton:hover {
   transform: scale(1.05);
 }
 
@@ -126,7 +133,7 @@ select {
 }
 
 .startButtonIcon path {
-  color: #ffffff;
+  color: white;
 }
 
 .stopButton {
@@ -170,4 +177,50 @@ select {
   background-color: var(--color-accent-light);
   padding: 0.75em 1em;
   aspect-ratio: 1 / 1;
+}
+
+.addOverlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.addPopup {
+  display: flex;
+  gap: 6px;
+
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.addPopup input {
+  min-width: 0;
+  padding: 6px 8px;
+  border: none;
+}
+
+.addPopup button {
+  padding: 1em;
+  color: white;
+}
+
+.addPopup .popupAddButton {
+  background-color: var(--color-primary);
+}
+
+.addPopup .popupCancelButton {
+  background-color: var(--color-contrast);
 }
