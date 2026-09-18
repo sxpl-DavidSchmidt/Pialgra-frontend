@@ -1,0 +1,9 @@
+{
+	email {$ACME_EMAIL}
+	default_sni {$SERVICE_DOMAIN}
+}
+
+{$SERVICE_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy frontend:8081
+}

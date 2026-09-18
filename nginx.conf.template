@@ -1,0 +1,31 @@
+# The production frontend is only reachable through the trusted Caddy container.
+map $http_x_forwarded_proto $upstream_scheme {
+    default $scheme;
+    https https;
+}
+
+server {
+    listen 8081;
+    server_name ${SERVICE_DOMAIN};
+    root /usr/share/nginx/html;
+    index index.html;
+    client_max_body_size 11m;
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+
+    location /api/ {
+        proxy_pass ${API_UPSTREAM};
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $upstream_scheme;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location = /healthz {
+        access_log off;
+        return 200 "ok\n";
+    }
+}
