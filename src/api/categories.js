@@ -12,3 +12,7 @@ export function createCategory(categoryName) {
 export function getMyCategories() {
     return apiFetch("/api/v1/users/me/categories");
 }
+
+export function deleteCategory(uuid) {
+    return apiFetch(`/api/v1/categories/${encodeURIComponent(uuid)}`, { method: "DELETE" });
+}

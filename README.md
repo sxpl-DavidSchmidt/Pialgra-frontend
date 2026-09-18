@@ -54,6 +54,11 @@ The frontend connects to the [Pialgra backend repository](https://github.com/sxp
 * **Study time tracker**
   Track study time and view statistics about your learning habits.
 
+* **Category management**
+  Select a category on the clock page and choose **Delete category**. After
+  confirmation, existing sessions are kept and shown as **Uncategorized**.
+  Category deletion is disabled while a timer session is active or awaiting save.
+
 ## Preview
 
 ### Clock-Page

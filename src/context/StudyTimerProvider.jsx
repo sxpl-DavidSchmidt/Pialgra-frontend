@@ -2,10 +2,10 @@ import { StudyTimerContext } from "./useStudyTimer";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useStudySessions } from "./useStudySessions";
 import { createStudySession } from "../api/studySessions";
-import { createCategory } from "../api/categories";
+import { createCategory, deleteCategory } from "../api/categories";
 
 export default function StudyTimerProvider({ children }) {
-  const { categories, refreshStudySessions, loading } = useStudySessions();
+  const { categories, refreshStudySessions, loading, categoryDeleted } = useStudySessions();
   const [phase, setPhase] = useState("idle");
   const [elapsedTime, setElapsedTime] = useState(0);
   const [workMinutes, setWorkMinutes] = useState(25);
@@ -14,6 +14,10 @@ export default function StudyTimerProvider({ children }) {
   const [showAdd, setShowAdd] = useState(false);
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState("");
+  const deletingCategory = useRef(false);
   const session = useRef(null);
   const saving = useRef(false);
   const addingCategory = useRef(false);
@@ -59,13 +63,43 @@ export default function StudyTimerProvider({ children }) {
   }, [isRunning, saveSession]);
 
   function handleCategorySelect(event) {
+    setDeleteTarget(null);
+    setDeleteMessage("");
     if (event.target.value === "__new__") setShowAdd(true);
     else setSelectedCategory(event.target.value);
   }
 
+  function requestCategoryDeletion() {
+    if (phase !== "idle" || loading || adding || deletingCategory.current) return;
+    setError("");
+    setDeleteMessage("");
+    setDeleteTarget(categories.find(category => category.uuid === categoryUuid) ?? null);
+  }
+
+  async function confirmCategoryDeletion() {
+    if (!deleteTarget || phase !== "idle" || deletingCategory.current) return;
+    const uuid = deleteTarget.uuid;
+    deletingCategory.current = true;
+    setDeleting(true);
+    setError("");
+    try {
+      await deleteCategory(uuid);
+      categoryDeleted(uuid);
+      setSelectedCategory("");
+      setDeleteTarget(null);
+      setDeleteMessage("Category deleted. Existing sessions are now uncategorized.");
+      await refreshStudySessions();
+    } catch (error) {
+      setError(error.message || "Could not delete category. Please try again.");
+    } finally {
+      deletingCategory.current = false;
+      setDeleting(false);
+    }
+  }
+
   async function handleAddCategory() {
     const value = newCategory.trim();
-    if (!value || addingCategory.current) return;
+    if (!value || addingCategory.current || deletingCategory.current) return;
     addingCategory.current = true;
     setAdding(true);
     setError("");
@@ -85,7 +119,7 @@ export default function StudyTimerProvider({ children }) {
 
   function toggleRunning() {
     if (phase === "running" || phase === "pending") { void saveSession(); return; }
-    if (!categoryUuid || loading || saving.current) return;
+    if (!categoryUuid || loading || saving.current || deletingCategory.current || deleteTarget) return;
     session.current = { categoryUuid, startTime: Date.now(), duration: workDurationMs };
     setError("");
     setElapsedTime(0);
@@ -104,6 +138,6 @@ export default function StudyTimerProvider({ children }) {
     const seconds = Math.floor(elapsedTime / 1000);
     return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
   }
-  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, elapsedTime, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime }}>{children}</StudyTimerContext.Provider>;
+  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, elapsedTime, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, deleteMessage, requestCategoryDeletion, confirmCategoryDeletion }}>{children}</StudyTimerContext.Provider>;
 }
 

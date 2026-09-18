@@ -78,6 +78,7 @@
   grid-template-rows: auto auto;
   grid-template-areas:
     "subjectSele subjectSele"
+    "categoryActions categoryActions"
     "startButton resetButton"
     "workTimer workTimer";
 }
@@ -211,6 +212,13 @@
 
 .menu button:disabled { opacity: 0.55; cursor: not-allowed; }
 .menu button:disabled:hover { transform: none; }
+
+.menu .categoryActions { grid-area: categoryActions; padding: 0; }
+.categoryActions p { font-size: 0.85rem; overflow-wrap: anywhere; }
+.categoryActions button { padding: 0.65rem 1rem; cursor: pointer; }
+.menu .deleteCategory { background: var(--color-accent); color: var(--color-contrast-d1); }
+.deleteConfirmation { display: grid; gap: 0.75rem; }
+.deleteConfirmation > div { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
 .addPopup input {
   min-width: 0;

@@ -6,7 +6,7 @@ import PlayIcon from "../../assets/icons/play.svg?react";
 import ResetIcon from "../../assets/icons/reset.svg?react";
 
 export default function Timer() {
-  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime } = useStudyTimer();
+  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, deleteMessage, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
   return (
     <div className={styles.container}>
       <div className={styles.clockContainer}>
@@ -44,7 +44,7 @@ export default function Timer() {
         <select
           value={categoryUuid}
           onChange={handleCategorySelect}
-          aria-label="Study category" disabled={phase !== "idle" || loading || adding}
+          aria-label="Study category" disabled={phase !== "idle" || loading || adding || deleting}
         >
           {!categories.length && <option value="">Select a category</option>}
           {categories.map((category) => (
@@ -57,6 +57,19 @@ export default function Timer() {
           ))}
           <option value="__new__">+ Add new Category</option>
         </select>
+
+        <div className={styles.categoryActions}>
+          {!deleteTarget ? <button type="button" className={styles.deleteCategory} onClick={requestCategoryDeletion}
+            disabled={!categoryUuid || phase !== "idle" || loading || adding || deleting}>Delete category</button> :
+            <div className={styles.deleteConfirmation} role="group" aria-label="Confirm category deletion">
+              <p>Delete “{deleteTarget.name}”? Existing sessions will be kept without a category.</p>
+              <div>
+                <button type="button" className={styles.deleteCategory} onClick={confirmCategoryDeletion} disabled={deleting}>{deleting ? "Deleting…" : "Delete"}</button>
+                <button type="button" onClick={() => setDeleteTarget(null)} disabled={deleting}>Cancel</button>
+              </div>
+            </div>}
+          {deleteMessage && <p role="status">{deleteMessage}</p>}
+        </div>
 
         {showAdd && (
           <div className={styles.addOverlay}>
@@ -86,7 +99,7 @@ export default function Timer() {
 
         <button
           type="button"
-          onClick={toggleRunning} disabled={phase === "saving" || !categoryUuid || loading}
+          onClick={toggleRunning} disabled={phase === "saving" || !categoryUuid || loading || deleting || Boolean(deleteTarget)}
           className={`${styles.startButton} ${isRunning ? styles.stopButton : ""}`}
         >
           {isRunning ? <PauseIcon className={styles.startButtonIcon} /> : <PlayIcon className={styles.startButtonIcon} />}

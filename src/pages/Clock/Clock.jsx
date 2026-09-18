@@ -29,7 +29,7 @@ function parseStudySessions(studySessions, categories) {
 
       return [
         timeMinutes,
-        category?.name ?? "Unknown"
+        category?.name ?? session.category?.name ?? "Uncategorized"
       ];
     });
 }
