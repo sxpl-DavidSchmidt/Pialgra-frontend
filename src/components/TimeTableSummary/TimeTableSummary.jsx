@@ -1,34 +1,8 @@
+import { studyMinutesByDay } from "./studyActivity";
 import styles from "./TimeTableSummary.module.css"
 
-function parseStudySessions(studySessions, daysDisplayed) {
-    if (!studySessions || studySessions.length === 0) return [];
-
-    function getSessionDurationMinutes(session) {
-        return (new Date(session.endTime) - new Date(session.startTime)) / (1000 * 60);
-    }
-
-    const minutesPerDay = new Map();
-    for (const session of studySessions) {
-        const sessionDate = new Date(session.endTime).toDateString();
-        if (!minutesPerDay.has(sessionDate)) { minutesPerDay.set(sessionDate, 0); }
-        minutesPerDay.set(sessionDate, minutesPerDay.get(sessionDate) + getSessionDurationMinutes(session));
-    }
-
-    const workedMinutes = new Array(daysDisplayed).fill(0);
-    const today = new Date();
-    for (const [date, minutes] of minutesPerDay) {
-        let daysAgo = Math.floor((today - new Date(date)) / (1000 * 60 * 60 * 24));
-        if (daysAgo > daysDisplayed || daysAgo < 0) continue;
-        else {
-            workedMinutes[daysDisplayed - 1 - daysAgo] = minutes;
-        }
-    }
-
-    return workedMinutes;
-}
-
 export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) {
-    const workedHours = parseStudySessions(sessions, daysDisplayed).map(minutes => minutes / 60);
+    const workedHours = studyMinutesByDay(sessions, daysDisplayed).map(minutes => minutes / 60);
 
     const frameStart = new Date();
     frameStart.setDate(frameStart.getDate() - (daysDisplayed - 1));
@@ -38,9 +12,9 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
         ...workedHours.slice(-daysDisplayed),
     ];
 
-    const maxHours = Math.max(...adjHours);
+    const maxHours = Math.max(1, ...workedHours);
     const totalHours = adjHours.reduce((partialSum, a) => partialSum + a, 0);
-    const averageHours = (totalHours / daysDisplayed).toString().substring(0, 4);
+    const averageHours = (totalHours / daysDisplayed).toFixed(2);
 
     return (
         <div className={styles.container}>
@@ -53,7 +27,7 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
                 </div>
                 <div className={styles.timeSpentItem}>
                     <h3>Daily Average</h3>
-                    <h1 style={{ color: "var(--color-contrast-secondary)" }}>{averageHours}h</h1>
+                    <h1 style={{ color: "var(--color-contrast)" }}>{averageHours}h</h1>
                 </div>
             </div>
 
@@ -73,8 +47,8 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
                                 className={styles.timeTableCellContent}
                                 style={{
                                     animationDelay: (Math.floor(index / 7) + index % 7) * 0.1 + "s",
-                                    opacity: hours / Math.max(...workedHours),
-                                    "--alpha": hours / Math.max(...workedHours),
+                                    opacity: hours / maxHours,
+                                    "--alpha": hours / maxHours,
                                 }}
                             />;
 

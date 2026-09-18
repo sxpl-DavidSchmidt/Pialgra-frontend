@@ -1,37 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../auth/AuthContext";
-import { getMyProfilePicture } from "../../api/user";
+import { useState } from "react";
+import { useAuth } from "../../auth/useAuth";
 
 import styles from "./Navbar.module.css";
 import Logo from "../../assets/logo/pialgra_logo_notext.svg";
 
 export default function NavBar() {
-  const { user, loading, logout } = useAuth();
-  const [profilePicture, setProfilePicture] = useState([]);
+  const { user, loading, logout, profilePicture } = useAuth();
   const navigate = useNavigate();
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleLogout() {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    setError("");
     try {
       await logout();
       navigate("/login");
-    } catch (error) {
-      console.error("Logout failed:", error);
+    } catch {
+      setError("Logout failed. Please try again.");
+    } finally {
+      setLoggingOut(false);
     }
   }
-
-  useEffect(() => {
-    async function fetchProfilePicture() {
-      try {
-        const profilePicture = await getMyProfilePicture();
-        setProfilePicture(profilePicture)
-      } catch (error) {
-        console.error("Could not load profile picture:", error);
-      }
-    }
-
-    fetchProfilePicture();
-  }, []);
 
   return (
     <nav className={styles.navBar}>
@@ -53,9 +45,12 @@ export default function NavBar() {
           <>
             <Link
               to="/profile"
+              aria-label="Your profile"
+              title="Your profile"
               className={styles.profilePictureWrapper}
             ><img
-                src={`data:image/png;base64,${profilePicture.imageData}`}
+                src={profilePicture}
+                alt=""
                 className={styles.profilePicture}
               />
             </Link>
@@ -63,8 +58,9 @@ export default function NavBar() {
               type="button"
               className={styles.accentLink}
               onClick={handleLogout}
+              disabled={loggingOut}
             >
-              Logout
+              {loggingOut ? "Logging out…" : "Logout"}
             </button>
           </>
         ) : (
@@ -76,6 +72,7 @@ export default function NavBar() {
           </Link>
         )
       )}
+      {error && <p role="alert" style={{ color: "white", padding: "0.5em" }}>{error}</p>}
     </nav>
   );
 }

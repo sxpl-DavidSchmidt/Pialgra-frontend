@@ -26,6 +26,6 @@ export function logout() {
     });
 }
 
-export function getCurrentUser() {
-    return apiFetch("/api/v1/users/me");
+export function getCurrentUser(options) {
+    return apiFetch("/api/v1/users/me", options);
 }

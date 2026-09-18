@@ -60,6 +60,15 @@
 
 .navBar .profilePicture {
   height: 1.5lh;
-  width: auto;
+  width: 1.5lh;
+  object-fit: cover;
   border-radius: 50%;
+}
+
+@media (max-width: 600px) {
+  .navBar { flex-wrap: wrap; }
+  .homeLi { flex-basis: 100%; grid-template-columns: auto auto; justify-content: center; }
+  .navBar a, .navBar button { padding: 0.5em 0.75em; }
+  .navBar > :not(.homeLi) { flex: 1; text-align: center; }
+  .navBar .profilePictureWrapper { height: auto; }
 }

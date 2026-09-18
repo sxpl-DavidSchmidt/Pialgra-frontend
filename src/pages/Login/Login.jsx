@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useAuth } from "../../auth/AuthContext";
+import { Navigate, useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../auth/useAuth";
 import { ApiError } from "../../api/api";
 
 import styles from "./Login.module.css";
@@ -24,6 +24,7 @@ export default function Login() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (submitting) return;
 
     setError("");
     setSubmitting(true);
@@ -56,6 +57,8 @@ export default function Login() {
               </label>
               <input
                 id="username-input"
+                aria-label="Username"
+                autoComplete="username"
                 type="text"
                 placeholder="Username"
                 value={username}
@@ -70,6 +73,8 @@ export default function Login() {
               </label>
               <input
                 id="password-input"
+                aria-label="Password"
+                autoComplete="current-password"
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -87,10 +92,11 @@ export default function Login() {
             </button>
           </form>
 
-          <p>Already have an account?{" "}<a href="/signup" style={{ color: "var(--color-primary)" }}>Sign up</a>!</p>
+          {error && <p role="alert">{error}</p>}
+          <p>Need an account?{" "}<Link to="/signup" style={{ color: "var(--color-primary)" }}>Sign up</Link>!</p>
         </div>
 
-        <img src={Logo} />
+        <img src={Logo} alt="Pialgra" />
       </div>
     </div>
   );

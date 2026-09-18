@@ -79,15 +79,16 @@
   grid-template-areas:
     "subjectSele subjectSele"
     "startButton resetButton"
-    "workTimer workTimer"
-    "breakTimer breakTimer";
+    "workTimer workTimer";
 }
 
 .menu>* {
   padding: 1em;
 }
 
-select {
+.menu select {
+  min-width: 0;
+  width: 100%;
   grid-area: subjectSele;
   appearance: base-select;
   appearance: none;
@@ -197,6 +198,8 @@ select {
 
 .addPopup {
   display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
   gap: 6px;
 
   padding: 12px;
@@ -205,6 +208,9 @@ select {
 
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
+
+.menu button:disabled { opacity: 0.55; cursor: not-allowed; }
+.menu button:disabled:hover { transform: none; }
 
 .addPopup input {
   min-width: 0;

@@ -5,6 +5,13 @@
     place-items: center;
 }
 
+@media (max-width: 650px) {
+    .container .wrapper { grid-template-columns: minmax(0, 1fr); width: 100%; }
+    .wrapper > img { display: none; }
+    .wrapper .loginWrapper { padding: 1.25em; }
+    .loginForm { width: 100%; }
+}
+
 .wrapper {
     min-width: 50%;
     min-height: 25%;

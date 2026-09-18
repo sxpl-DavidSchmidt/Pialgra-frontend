@@ -1,4 +1,5 @@
 import styles from "./Footer.module.css"
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     return (
@@ -9,8 +10,8 @@ export default function Footer() {
 
             <div className={styles.topic}>
                 <h4>Legal</h4>
-                <a href="/imprint">Impressum</a>
-                <a>Datenschutzerklärung</a>
+                <Link to="/imprint">Impressum</Link>
+                <span>Datenschutzerklärung</span>
             </div>
         </div>
 

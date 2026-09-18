@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { register } from "../../api/auth";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 import { ApiError } from "../../api/api";
 
 import styles from "./Signup.module.css";
@@ -31,11 +31,16 @@ export default function Signup() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (submitting) return;
 
     setError("");
 
     if (password !== passwordConfirmation) {
       setError("Passwords do not match");
+      return;
+    }
+    if (new TextEncoder().encode(password).length > 72) {
+      setError("Password is too long. Use at most 72 UTF-8 bytes.");
       return;
     }
 
@@ -78,6 +83,10 @@ export default function Signup() {
               </label>
               <input
                 id="username-input"
+                aria-label="Username"
+                autoComplete="username"
+                minLength={3}
+                maxLength={32}
                 type="text"
                 placeholder="Username"
                 value={username}
@@ -92,6 +101,10 @@ export default function Signup() {
               </label>
               <input
                 id="password-input"
+                aria-label="Password"
+                autoComplete="new-password"
+                minLength={8}
+                maxLength={72}
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -106,6 +119,8 @@ export default function Signup() {
               </label>
               <input
                 id="password-confirmation-input"
+                aria-label="Confirm password"
+                autoComplete="new-password"
                 type="password"
                 placeholder="Confirm Password"
                 value={passwordConfirmation}
@@ -123,10 +138,11 @@ export default function Signup() {
             </button>
           </form>
 
-          <p>Already have an account?{" "}<a href="/login" style={{ color: "var(--color-primary)" }}>Log in</a>!</p>
+          {error && <p role="alert">{error}</p>}
+          <p>Already have an account?{" "}<Link to="/login" style={{ color: "var(--color-primary)" }}>Log in</Link>!</p>
         </div>
 
-        <img src={Logo} />
+        <img src={Logo} alt="Pialgra" />
       </div>
     </div>
   );

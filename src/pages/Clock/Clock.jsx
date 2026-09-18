@@ -1,7 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
 
-import { useStudySessions } from "../../context/StudySessionContext.jsx";
-import { getMyCategories } from "../../api/categories";
+import { useStudySessions } from "../../context/useStudySessions";
 
 import styles from "./Clock.module.css";
 
@@ -10,24 +8,23 @@ import TimeTableSummary from "../../components/TimeTableSummary/TimeTableSummary
 
 function parseStudySessions(studySessions, categories) {
   const today = new Date();
+  const dayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+  const dayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime();
 
   return [...studySessions]
     .filter((session) => {
-      const start = new Date(session.startTime);
-      return (
-        start.getFullYear() === today.getFullYear() &&
-        start.getMonth() === today.getMonth() &&
-        start.getDate() === today.getDate()
-      );
+      const start = new Date(session.startTime).getTime();
+      const end = new Date(session.endTime).getTime();
+      return Number.isFinite(start) && Number.isFinite(end) && end > start && start < dayEnd && end > dayStart;
     })
     .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
     .map((session) => {
       const start = new Date(session.startTime);
       const end = new Date(session.endTime);
 
-      const timeMinutes = (end - start) / (1000 * 60);
+      const timeMinutes = (Math.min(end.getTime(), dayEnd) - Math.max(start.getTime(), dayStart)) / (1000 * 60);
       const category = categories.find(
-        (category) => category.uuid === session.category.uuid
+        (category) => category.uuid === session.category?.uuid
       );
 
       return [
@@ -44,15 +41,16 @@ function formatTime(minutes) {
 }
 
 export default function Clock() {
-  const { studySessions, categories } = useStudySessions();
+  const { studySessions, categories, error, loading, refreshStudySessions } = useStudySessions();
   const sessionData = parseStudySessions(studySessions, categories);
 
   return (
     <div className={styles.content}>
+      {error && <div role="alert">{error} <button onClick={refreshStudySessions} disabled={loading}>Retry</button></div>}
       <div style={{ display: "grid", placeItems: "center" }}><TimeTableSummary sessions={studySessions} daysDisplayed={30} /></div>
 
       <div className={styles.timerWrapper}>
-        <div style={{ width: "50%" }}><Timer /></div>
+        <div style={{ width: "min(100%, 360px)" }}><Timer /></div>
       </div>
 
       <div className={styles.sessionsWrapper}>

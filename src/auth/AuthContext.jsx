@@ -1,6 +1,4 @@
 import {
-  createContext,
-  useContext,
   useEffect,
   useState,
 } from "react";
@@ -12,28 +10,64 @@ import {
 } from "../api/auth";
 
 import { ApiError } from "../api/api";
+import { getMyProfilePicture, uploadMyProfilePicture, removeMyProfilePicture } from "../api/user";
+import defaultProfilePicture from "../assets/default_profile_picture.png";
 
-const AuthContext = createContext(null);
+import { AuthContext } from "./useAuth";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [picture, setPicture] = useState(null);
 
   useEffect(() => {
-    getCurrentUser()
+    if (!user) return;
+    let cancelled = false;
+    getMyProfilePicture()
+      .then((image) => {
+        if (!cancelled) setPicture({ user, image });
+      })
+      .catch(() => {
+        if (!cancelled) setPicture({ user, error: "Could not load your profile picture. Please refresh to try again." });
+      });
+    return () => { cancelled = true; };
+  }, [user]);
+
+  async function updateProfilePicture(file) {
+    const image = file ? await uploadMyProfilePicture(file) : await removeMyProfilePicture();
+    setPicture({ user, image });
+  }
+
+  const currentPicture = picture?.user === user ? picture : null;
+  const profilePicture = currentPicture?.image?.imageData
+    ? `data:image/png;base64,${currentPicture.image.imageData}`
+    : defaultProfilePicture;
+
+  useEffect(() => {
+    let cancelled = false;
+    const expire = () => setUser(null);
+    const controller = new AbortController();
+    window.addEventListener("auth-expired", expire);
+    getCurrentUser({ signal: controller.signal })
       .then((user) => {
-        setUser(user);
+        if (!cancelled) setUser(user);
       })
       .catch((error) => {
+        if (cancelled) return;
         if (error instanceof ApiError && error.status === 401) {
-          setUser(null);
+          if (!cancelled) setUser(null);
         } else {
           console.error(error);
         }
       })
       .finally(() => {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       });
+    return () => {
+      cancelled = true;
+      controller.abort();
+      window.removeEventListener("auth-expired", expire);
+    };
   }, []);
 
   async function login(username, password) {
@@ -45,7 +79,11 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
-    await logoutRequest();
+    try {
+      await logoutRequest();
+    } catch (error) {
+      if (!(error instanceof ApiError) || error.status !== 401) throw error;
+    }
 
     setUser(null);
   }
@@ -57,13 +95,13 @@ export function AuthProvider({ children }) {
         loading,
         login,
         logout,
+        profilePicture,
+        pictureLoading: Boolean(user && !currentPicture),
+        pictureError: currentPicture?.error,
+        updateProfilePicture,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
 }
