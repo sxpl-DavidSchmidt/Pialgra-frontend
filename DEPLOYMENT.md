@@ -54,8 +54,30 @@ Only add an AAAA record when the server has working public IPv6 and its firewall
 allows these ports; a stale AAAA record can break access and certificate issuance.
 For initial setup, use direct/DNS-only records if your provider offers an HTTP proxy.
 
-This file configures exactly one hostname. `www.pialgra.app` is not automatically
-added; use `SERVICE_DOMAIN=www.pialgra.app` if that is the hostname you want instead.
+By default, only `SERVICE_DOMAIN` is accepted. To serve additional domains or an IP,
+set these optional variables in `.env.production`:
+
+```dotenv
+SERVICE_DOMAIN=pialgra.app
+SERVICE_DOMAINS="pialgra.app www.pialgra.app 100.114.158.125"
+TLS_DEFAULT_SERVER_NAME=100.114.158.125
+CORS_ALLOWED_ORIGINS=https://pialgra.app,https://www.pialgra.app,https://100.114.158.125
+```
+
+`SERVICE_DOMAINS` is space-separated and must include the primary domain. Use bare
+hostnames/IPs, without schemes or paths. CORS origins are comma-separated HTTPS
+URLs. Caddy checks the allowed hosts; nginx forwards the original host to the API.
+Each hostname has its own login cookies. Point each public domain's DNS at the server.
+
+IP clients usually omit TLS SNI, so `TLS_DEFAULT_SERVER_NAME` selects their
+certificate. Set it to the IP you intend to use; it must appear in `SERVICE_DOMAINS`.
+This configuration supports one IP certificate fallback alongside multiple domains.
+Private IP certificates require trusting Caddy's local root CA on client devices.
+The address `100.114.158.125` is in shared CGNAT space, often used by Tailscale:
+it requires a route to that network and is not a public Internet address.
+
+Apply changes with `docker compose --env-file .env.production -f compose.production.yaml up -d`.
+When changing the primary domain, update these optional lists too if you set them.
 
 ## 2. Set the environment
 

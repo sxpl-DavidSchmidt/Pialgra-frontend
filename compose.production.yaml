@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     environment:
       SERVICE_DOMAIN: ${SERVICE_DOMAIN:?Set SERVICE_DOMAIN in .env.production}
+      SERVICE_DOMAINS: ${SERVICE_DOMAINS:-${SERVICE_DOMAIN}}
+      TLS_DEFAULT_SERVER_NAME: ${TLS_DEFAULT_SERVER_NAME:-${SERVICE_DOMAIN}}
       ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env.production}
     ports:
       - "80:80"
@@ -49,7 +51,7 @@ services:
     restart: unless-stopped
     environment:
       DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env.production}
-      CORS_ALLOWED_ORIGINS: https://${SERVICE_DOMAIN:?Set SERVICE_DOMAIN in .env.production}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-https://${SERVICE_DOMAIN:?Set SERVICE_DOMAIN in .env.production}}
       SESSION_COOKIE_SECURE: "true"
       SERVER_FORWARD_HEADERS_STRATEGY: native
     healthcheck:
