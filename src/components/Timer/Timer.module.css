@@ -33,7 +33,6 @@
   line-height: 1;
 }
 
-
 .clockContainer svg path {
   stroke-width: 10;
 }
@@ -140,15 +139,12 @@
   border-radius: 10px;
 }
 
-.menu .startButton,
-.menu .stopButton,
-.menu .resetButton {
+.menu button {
+  transition: background-color 150ms ease;
   transition: transform 150ms ease;
 }
 
-.menu .startButton:hover,
-.menu .stopButton:hover,
-.menu .resetButton:hover {
+.menu button:hover {
   transform: scale(1.05);
 }
 
