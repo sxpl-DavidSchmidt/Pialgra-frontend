@@ -61,6 +61,7 @@ export default function Clock() {
               <div
                 key={`session-${index}`}
                 className={styles.sessionItem}
+                style={{ backgroundColor: categories.find(category => category.name === value[1])?.color ?? "var(--color-gray-200)" }}
               >
                 <p>{formatTime(value[0])}</p>
                 <p>{value[1]}</p>
