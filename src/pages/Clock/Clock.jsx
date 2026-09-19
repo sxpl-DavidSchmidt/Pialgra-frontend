@@ -29,7 +29,8 @@ function parseStudySessions(studySessions, categories) {
 
       return [
         timeMinutes,
-        category?.name ?? session.category?.name ?? "Uncategorized"
+        category?.name ?? session.category?.name ?? "Uncategorized",
+        category?.color || session.category?.color || "var(--color-primary)"
       ];
     });
 }
@@ -61,7 +62,7 @@ export default function Clock() {
               <div
                 key={`session-${index}`}
                 className={styles.sessionItem}
-                style={{ backgroundColor: categories.find(category => category.name === value[1])?.color ?? "var(--color-gray-200)" }}
+                style={{ backgroundColor: value[2] }}
               >
                 <p>{formatTime(value[0])}</p>
                 <p>{value[1]}</p>
