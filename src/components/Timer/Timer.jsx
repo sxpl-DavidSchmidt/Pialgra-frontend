@@ -1,7 +1,9 @@
 import { useStudyTimer } from "../../context/useStudyTimer";
 import styles from "./Timer.module.css";
 
+import { CATEGORY_COLORS } from "./categoryColors";
 import CategoryPopup from "./CategoryPopup";
+import AddIcon from "../../assets/icons/add.svg?react";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
 import ArrowIcon from "../../assets/icons/arrow_down.svg?react";
 import PauseIcon from "../../assets/icons/pause.svg?react";
@@ -9,7 +11,7 @@ import PlayIcon from "../../assets/icons/play.svg?react";
 import ResetIcon from "../../assets/icons/reset.svg?react";
 
 export default function Timer() {
-  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, deleteMessage, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
+  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
   return (
     <div className={styles.container}>
       <div className={styles.clockContainer}>
@@ -59,8 +61,13 @@ export default function Timer() {
                 {category.name}
               </option>
             ))}
-            <option value="__new__">Add new Category</option>
           </select>
+
+          <button type="button" className={styles.addCategory} onClick={() => setShowAdd(true)}
+            aria-label="Add category" title="Add category" aria-haspopup="dialog"
+            disabled={phase !== "idle" || loading || adding || deleting}>
+              <AddIcon className={styles.addCategoryIcon} aria-hidden="true" />
+          </button>
 
           <button type="button" className={styles.deleteCategory} onClick={requestCategoryDeletion}
             aria-label="Delete category" title="Delete category" aria-haspopup="dialog"
@@ -91,6 +98,22 @@ export default function Timer() {
                   placeholder="New category..." aria-label="New category name" maxLength={100} disabled={adding}
                   onChange={(e) => setNewCategory(e.target.value)}
                 />
+
+                <fieldset className={styles.categoryColors} disabled={adding}>
+                  <legend>Category color</legend>
+                  <div className={styles.colorChoices}>
+                    {CATEGORY_COLORS.map(color => (
+                      <label key={color.value} className={styles.colorChoice}>
+                        <input type="radio" name="categoryColor" value={color.value}
+                          checked={newCategoryColor === color.value}
+                          onChange={() => setNewCategoryColor(color.value)} />
+                        <span className={styles.colorSwatch} style={{ backgroundColor: color.value }} aria-hidden="true">
+                        </span>
+                        <span>{color.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
 
                 <button type="submit" disabled={adding || !newCategory.trim()} className={styles.popupAddButton}>
                   Add

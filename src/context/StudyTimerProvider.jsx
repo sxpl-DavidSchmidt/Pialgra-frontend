@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useStudySessions } from "./useStudySessions";
 import { createStudySession } from "../api/studySessions";
 import { createCategory, deleteCategory } from "../api/categories";
+import { CATEGORY_COLORS } from "../components/Timer/categoryColors";
 import { watchStudyTimer } from "./timerScheduler";
 
 export default function StudyTimerProvider({ children }) {
@@ -12,6 +13,7 @@ export default function StudyTimerProvider({ children }) {
   const [workMinutes, setWorkMinutes] = useState(5);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [newCategory, setNewCategory] = useState("");
+  const [newCategoryColor, setNewCategoryColor] = useState(CATEGORY_COLORS[0].value);
   const [showAdd, setShowAdd] = useState(false);
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState("");
@@ -64,8 +66,7 @@ export default function StudyTimerProvider({ children }) {
   function handleCategorySelect(event) {
     setDeleteTarget(null);
     setDeleteMessage("");
-    if (event.target.value === "__new__") setShowAdd(true);
-    else setSelectedCategory(event.target.value);
+    setSelectedCategory(event.target.value);
   }
 
   function requestCategoryDeletion() {
@@ -103,9 +104,10 @@ export default function StudyTimerProvider({ children }) {
     setAdding(true);
     setError("");
     try {
-      const category = await createCategory(value);
+      const category = await createCategory(value, newCategoryColor);
       setSelectedCategory(category.uuid);
       setNewCategory("");
+      setNewCategoryColor(CATEGORY_COLORS[0].value);
       setShowAdd(false);
       await refreshStudySessions();
     } catch (error) {
@@ -137,6 +139,6 @@ export default function StudyTimerProvider({ children }) {
     const seconds = Math.floor(elapsedTime / 1000);
     return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
   }
-  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, elapsedTime, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, deleteMessage, requestCategoryDeletion, confirmCategoryDeletion }}>{children}</StudyTimerContext.Provider>;
+  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, elapsedTime, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, deleteMessage, requestCategoryDeletion, confirmCategoryDeletion }}>{children}</StudyTimerContext.Provider>;
 }
 

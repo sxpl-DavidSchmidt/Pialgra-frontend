@@ -1,10 +1,11 @@
 import { apiFetch } from "./api";
 
-export function createCategory(categoryName) {
+export function createCategory(categoryName, color) {
     return apiFetch("/api/v1/categories", {
         method: "POST",
         body: JSON.stringify({
-            name: categoryName
+            name: categoryName,
+            color
         }),
     });
 }
