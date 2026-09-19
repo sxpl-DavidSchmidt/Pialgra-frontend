@@ -1,5 +1,8 @@
 import { useStudyTimer } from "../../context/useStudyTimer";
 import styles from "./Timer.module.css";
+
+import CategoryPopup from "./CategoryPopup";
+import DeleteIcon from "../../assets/icons/delete.svg?react";
 import ArrowIcon from "../../assets/icons/arrow_down.svg?react";
 import PauseIcon from "../../assets/icons/pause.svg?react";
 import PlayIcon from "../../assets/icons/play.svg?react";
@@ -41,61 +44,66 @@ export default function Timer() {
       </div>
 
       <div className={styles.menu}>
-        <select
-          value={categoryUuid}
-          onChange={handleCategorySelect}
-          aria-label="Study category" disabled={phase !== "idle" || loading || adding || deleting}
-        >
-          {!categories.length && <option value="">Select a category</option>}
-          {categories.map((category) => (
-            <option
-              key={category.uuid}
-              value={category.uuid}
-            >
-              {category.name}
-            </option>
-          ))}
-          <option value="__new__">+ Add new Category</option>
-        </select>
+        <div className={styles.categorySelectWrap}>
+          <select
+            value={categoryUuid}
+            onChange={handleCategorySelect}
+            aria-label="Study category" disabled={phase !== "idle" || loading || adding || deleting}
+          >
+            {!categories.length && <option value="">Select a category</option>}
+            {categories.map((category) => (
+              <option
+                key={category.uuid}
+                value={category.uuid}
+              >
+                {category.name}
+              </option>
+            ))}
+            <option value="__new__">Add new Category</option>
+          </select>
 
-        <div className={styles.categoryActions}>
-          {!deleteTarget ? <button type="button" className={styles.deleteCategory} onClick={requestCategoryDeletion}
-            disabled={!categoryUuid || phase !== "idle" || loading || adding || deleting}>Delete category</button> :
-            <div className={styles.deleteConfirmation} role="group" aria-label="Confirm category deletion">
-              <p>Delete “{deleteTarget.name}”? Existing sessions will be kept without a category.</p>
-              <div>
-                <button type="button" className={styles.deleteCategory} onClick={confirmCategoryDeletion} disabled={deleting}>{deleting ? "Deleting…" : "Delete"}</button>
-                <button type="button" onClick={() => setDeleteTarget(null)} disabled={deleting}>Cancel</button>
+          <button type="button" className={styles.deleteCategory} onClick={requestCategoryDeletion}
+            aria-label="Delete category" title="Delete category" aria-haspopup="dialog"
+            disabled={!categoryUuid || phase !== "idle" || loading || adding || deleting}>
+            <DeleteIcon className={styles.deleteCategoryIcon} aria-hidden="true" />
+          </button>
+
+          {deleteTarget && (
+            <CategoryPopup title="Delete category?" busy={deleting} onCancel={() => setDeleteTarget(null)}>
+              <p>Delete "{deleteTarget.name}"? Existing sessions will be kept without a category.</p>
+              {error && <p role="alert">{error}</p>}
+              <div className={styles.popupActions}>
+                <button autoFocus type="button" className={styles.popupCancelButton} onClick={() => setDeleteTarget(null)} disabled={deleting}>Cancel</button>
+                <button type="button" className={styles.popupDeleteButton} onClick={confirmCategoryDeletion} disabled={deleting}>
+                  {deleting ? "Deleting…" : "Delete"}
+                </button>
               </div>
-            </div>}
-          {deleteMessage && <p role="status">{deleteMessage}</p>}
+            </CategoryPopup>
+          )}
+
+          {showAdd && (
+            <CategoryPopup title="Add category" busy={adding} onCancel={() => setShowAdd(false)}>
+              <form onSubmit={event => { event.preventDefault(); void handleAddCategory(); }}>
+                <input
+                  autoFocus
+                  type="text"
+                  value={newCategory}
+                  placeholder="New category..." aria-label="New category name" maxLength={100} disabled={adding}
+                  onChange={(e) => setNewCategory(e.target.value)}
+                />
+
+                <button type="submit" disabled={adding || !newCategory.trim()} className={styles.popupAddButton}>
+                  Add
+                </button>
+
+                <button type="button" onClick={() => setShowAdd(false)} disabled={adding} className={styles.popupCancelButton}>
+                  Cancel
+                </button>
+                {error && <p role="alert">{error}</p>}
+              </form>
+            </CategoryPopup>
+          )}
         </div>
-
-        {showAdd && (
-          <div className={styles.addOverlay}>
-            <div className={styles.addPopup}>
-              <input
-                autoFocus
-                type="text"
-                value={newCategory}
-                placeholder="New category..." aria-label="New category name" maxLength={100} disabled={adding}
-                onChange={(e) => setNewCategory(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleAddCategory();
-                  if (e.key === "Escape") setShowAdd(false);
-                }}
-              />
-
-              <button type="button" onClick={handleAddCategory} disabled={adding || !newCategory.trim()} className={styles.popupAddButton}>
-                Add
-              </button>
-
-              <button type="button" onClick={() => setShowAdd(false)} disabled={adding} className={styles.popupCancelButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
 
         <button
           type="button"
@@ -123,8 +131,6 @@ export default function Timer() {
             </button>
           </div>
         </div>
-
-        {error && <p role="alert" style={{ gridColumn: "1 / -1" }}>{error}</p>}
       </div>
     </div>
   );

@@ -3,12 +3,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useStudySessions } from "./useStudySessions";
 import { createStudySession } from "../api/studySessions";
 import { createCategory, deleteCategory } from "../api/categories";
+import { watchStudyTimer } from "./timerScheduler";
 
 export default function StudyTimerProvider({ children }) {
   const { categories, refreshStudySessions, loading, categoryDeleted } = useStudySessions();
   const [phase, setPhase] = useState("idle");
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [workMinutes, setWorkMinutes] = useState(25);
+  const [workMinutes, setWorkMinutes] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [newCategory, setNewCategory] = useState("");
   const [showAdd, setShowAdd] = useState(false);
@@ -50,16 +51,14 @@ export default function StudyTimerProvider({ children }) {
 
   useEffect(() => {
     if (!isRunning) return;
-    const tick = () => {
-      const current = session.current;
-      if (!current) return;
-      const elapsed = Date.now() - current.startTime;
-      if (elapsed >= current.duration) {
-        void saveSession();
-      } else setElapsedTime(elapsed);
-    };
-    const interval = window.setInterval(tick, 250);
-    return () => window.clearInterval(interval);
+    const current = session.current;
+    if (!current) return;
+    return watchStudyTimer({
+      startTime: current.startTime,
+      duration: current.duration,
+      onElapsed: setElapsedTime,
+      onComplete: () => { void saveSession(); },
+    });
   }, [isRunning, saveSession]);
 
   function handleCategorySelect(event) {

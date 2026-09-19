@@ -77,26 +77,45 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   grid-template-areas:
-    "subjectSele subjectSele"
-    "categoryActions categoryActions"
+    "categorySelect categorySelect"
     "startButton resetButton"
     "workTimer workTimer";
 }
 
-.menu>* {
+.menu button {
+  cursor: pointer;
+}
+
+.menu button > p {
   padding: 1em;
 }
 
-.menu select {
+.menu .categorySelectWrap {
+  width: 100%;
+  grid-area: categorySelect;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5em;
+  place-items: center;
+}
+
+.categorySelectWrap select {
   min-width: 0;
   width: 100%;
-  grid-area: subjectSele;
   appearance: base-select;
   appearance: none;
   background-color: var(--color-accent-light);
   border-radius: 10px;
   border: none;
   padding: 1em 2em;
+}
+
+.categorySelectWrap .deleteCategory {
+  background: var(--color-accent-light);
+}
+
+.categorySelectWrap .deleteCategoryIcon {
+  fill: #d92f2f;
 }
 
 .menu button {
@@ -122,8 +141,66 @@
 }
 
 .menu button svg {
-  width: 1em;
-  height: 1em;
+  height: 1lh;
+  width: auto;
+}
+
+.categoryPopup {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(26rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  box-sizing: border-box;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 10px;
+  color: inherit;
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  overflow-wrap: anywhere;
+}
+
+.categoryPopup::backdrop {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.categoryPopup h2 { margin: 0 0 1rem; font-size: 1.2rem; }
+.categoryPopup p { margin: 0 0 1rem; }
+.categoryPopup form { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.categoryPopup form input { width: 100%; box-sizing: border-box; }
+.popupActions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.75rem; }
+.categoryMessage { grid-column: 1 / -1; font-size: 0.85rem; }
+.categorySelectWrap .deleteCategory { padding: 1em; }
+.categoryPopup .popupDeleteButton { background: #d92f2f; }
+
+.menu button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.menu button:disabled:hover {
+  transform: none;
+}
+
+.categoryPopup input {
+  min-width: 0;
+  padding: 6px 8px;
+  border: none;
+}
+
+.categoryPopup button {
+  padding: 1em;
+  color: white;
+}
+
+.categoryPopup .popupAddButton {
+  background-color: var(--color-primary);
+}
+
+.categoryPopup .popupCancelButton {
+  background-color: var(--color-contrast);
 }
 
 .startButton {
@@ -136,6 +213,7 @@
 
 .startButtonIcon path {
   color: white;
+  fill: white;
 }
 
 .stopButton {
@@ -144,6 +222,7 @@
 
 .stopButton p {
   color: white;
+  fill: white;
 }
 
 .resetButton {
@@ -156,6 +235,7 @@
 
 .resetButtonIcon path {
   color: var(--color-accent-dark);
+  fill: var(--color-accent-dark);
 }
 
 .timeSelectWrap {
@@ -179,62 +259,4 @@
   background-color: var(--color-accent-light);
   padding: 0.75em 1em;
   aspect-ratio: 1 / 1;
-}
-
-.addOverlay {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-
-  border-radius: 10px;
-  z-index: 10;
-}
-
-.addPopup {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 100%;
-  gap: 6px;
-
-  padding: 12px;
-  background: white;
-  border-radius: 6px;
-
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-}
-
-.menu button:disabled { opacity: 0.55; cursor: not-allowed; }
-.menu button:disabled:hover { transform: none; }
-
-.menu .categoryActions { grid-area: categoryActions; padding: 0; }
-.categoryActions p { font-size: 0.85rem; overflow-wrap: anywhere; }
-.categoryActions button { padding: 0.65rem 1rem; cursor: pointer; }
-.menu .deleteCategory { background: var(--color-accent); color: var(--color-contrast-d1); }
-.deleteConfirmation { display: grid; gap: 0.75rem; }
-.deleteConfirmation > div { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-.addPopup input {
-  min-width: 0;
-  padding: 6px 8px;
-  border: none;
-}
-
-.addPopup button {
-  padding: 1em;
-  color: white;
-}
-
-.addPopup .popupAddButton {
-  background-color: var(--color-primary);
-}
-
-.addPopup .popupCancelButton {
-  background-color: var(--color-contrast);
 }

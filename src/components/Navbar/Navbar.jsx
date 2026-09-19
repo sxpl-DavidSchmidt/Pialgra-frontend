@@ -38,7 +38,7 @@ export default function NavBar() {
 
       <Link to="/clock">Clock</Link>
 
-      <Link to="/statistics">Statistics</Link>
+      <Link to="/sessions">Sessions</Link>
 
       {!loading && (
         user ? (
