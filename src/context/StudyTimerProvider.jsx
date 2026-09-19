@@ -9,7 +9,7 @@ export default function StudyTimerProvider({ children }) {
   const { categories, refreshStudySessions, loading, categoryDeleted } = useStudySessions();
   const [phase, setPhase] = useState("idle");
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [workMinutes, setWorkMinutes] = useState(1);
+  const [workMinutes, setWorkMinutes] = useState(5);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [newCategory, setNewCategory] = useState("");
   const [showAdd, setShowAdd] = useState(false);
