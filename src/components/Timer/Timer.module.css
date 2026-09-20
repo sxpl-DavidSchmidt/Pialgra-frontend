@@ -153,32 +153,6 @@
   width: auto;
 }
 
-.categoryPopup {
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  width: min(26rem, calc(100vw - 2rem));
-  max-height: calc(100dvh - 2rem);
-  box-sizing: border-box;
-  padding: 1.5rem;
-  border: none;
-  border-radius: 10px;
-  color: inherit;
-  background: white;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  overflow-wrap: anywhere;
-}
-
-.categoryPopup::backdrop {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(4px);
-}
-
-.categoryPopup h2 {
-  margin: 0 0 1rem;
-  font-size: 1.2rem;
-}
-
 .categoryPopup p {
   margin: 0 0 1rem;
 }

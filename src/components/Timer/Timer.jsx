@@ -2,7 +2,7 @@ import { useStudyTimer } from "../../context/useStudyTimer";
 import styles from "./Timer.module.css";
 
 import { CATEGORY_COLORS } from "./categoryColors";
-import CategoryPopup from "./CategoryPopup";
+import Popup from "../Popup/Popup";
 import AddIcon from "../../assets/icons/add.svg?react";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
 import ArrowIcon from "../../assets/icons/arrow_down.svg?react";
@@ -76,7 +76,7 @@ export default function Timer() {
           </button>
 
           {deleteTarget && (
-            <CategoryPopup title="Delete category?" busy={deleting} onCancel={() => setDeleteTarget(null)}>
+            <Popup className={styles.categoryPopup} title="Delete category?" busy={deleting} onCancel={() => setDeleteTarget(null)}>
               <p>Delete "{deleteTarget.name}"? Existing sessions will be kept without a category.</p>
               {error && <p role="alert">{error}</p>}
               <div className={styles.popupActions}>
@@ -85,11 +85,11 @@ export default function Timer() {
                   {deleting ? "Deleting…" : "Delete"}
                 </button>
               </div>
-            </CategoryPopup>
+            </Popup>
           )}
 
           {showAdd && (
-            <CategoryPopup title="Add category" busy={adding} onCancel={() => setShowAdd(false)}>
+            <Popup className={styles.categoryPopup} title="Add category" busy={adding} onCancel={() => setShowAdd(false)}>
               <form onSubmit={event => { event.preventDefault(); void handleAddCategory(); }}>
                 <input
                   autoFocus
@@ -124,7 +124,7 @@ export default function Timer() {
                 </button>
                 {error && <p role="alert">{error}</p>}
               </form>
-            </CategoryPopup>
+            </Popup>
           )}
         </div>
 

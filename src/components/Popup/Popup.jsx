@@ -1,7 +1,8 @@
 import { useEffect, useId, useRef } from "react";
-import styles from "./Timer.module.css";
+import styles from "./Popup.module.css";
 
-export default function CategoryPopup({ title, busy, onCancel, children }) {
+// Mount to open; onCancel should unmount the popup. Callers own its content.
+export default function Popup({ title, busy = false, onCancel, className = "", children }) {
   const dialogRef = useRef(null);
   const titleId = useId();
 
@@ -16,9 +17,9 @@ export default function CategoryPopup({ title, busy, onCancel, children }) {
   }, []);
 
   return (
-    <dialog ref={dialogRef} className={styles.categoryPopup} aria-labelledby={titleId} aria-busy={busy}
+    <dialog ref={dialogRef} className={`${styles.popup} ${className}`} aria-labelledby={titleId} aria-busy={busy}
       onCancel={event => { event.preventDefault(); if (!busy) onCancel(); }}>
-      <h2 id={titleId}>{title}</h2>
+      <center><h2 id={titleId}>{title}</h2></center>
       {children}
     </dialog>
   );

@@ -1,0 +1,103 @@
+.session {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: stretch;
+
+    padding: 0;
+    gap: 0;
+
+    min-height: 48px;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    margin: 10px;
+    color: white;
+}
+
+.session time,
+.session p {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 0.75em;
+}
+
+.session p {
+    overflow-wrap: anywhere;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.75em;
+    padding: 0.75em;
+
+    background: var(--color-accent-dark);
+    border-left: none;
+}
+
+.actions button {
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.actions button svg {
+    width: auto;
+    height: 1lh;
+    fill: white;
+}
+
+.actions .deleteIcon {
+    fill: #ff5b5b;
+}
+
+.popupForm,
+.popupForm label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.popupForm input,
+.popupForm select {
+    width: 100%;
+    min-width: 0;
+    padding: 0.5rem;
+    border: 1px solid var(--color-accent-light);
+    border-radius: 6px;
+}
+
+.popupActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.popupActions button {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--color-accent-light);
+}
+
+.popupActions .saveButton {
+    background: var(--color-primary);
+    color: white;
+}
+
+.popupActions .deleteButton {
+    background: #d92f2f;
+    color: white;
+}
+
+.popupActions button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
