@@ -120,3 +120,50 @@
     display: flex;
     justify-content: space-between;
 }
+
+.timeTableCellContent, .timeTableCellEmpty {
+    display: block;
+}
+
+.dayButton {
+    position: relative;
+    padding: 0;
+    border: 0;
+    background: white;
+    cursor: pointer;
+    font: inherit;
+    animation: none;
+}
+
+.dayButton > span {
+    animation: none;
+}
+
+.dayNumber {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #171717;
+    font-weight: 600;
+    text-shadow: 0 0 3px white, 0 0 6px white;
+}
+
+.dayButton:hover {
+    outline: 2px solid var(--color-primary);
+}
+
+.dayButton.selectedDay {
+    outline: 3px solid var(--color-contrast);
+    outline-offset: 1px;
+}
+
+.selectedDay .dayNumber {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.dayButton:focus-visible {
+    outline: 3px solid #171717;
+    outline-offset: 2px;
+}

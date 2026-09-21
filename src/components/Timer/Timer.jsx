@@ -5,7 +5,7 @@ import { CATEGORY_COLORS } from "./categoryColors";
 import Popup from "../Popup/Popup";
 import AddIcon from "../../assets/icons/add.svg?react";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
-import ArrowIcon from "../../assets/icons/arrow_down.svg?react";
+import ArrowIcon from "../../assets/icons/arrow_up.svg?react";
 import PauseIcon from "../../assets/icons/pause.svg?react";
 import PlayIcon from "../../assets/icons/play.svg?react";
 import ResetIcon from "../../assets/icons/reset.svg?react";
@@ -146,11 +146,11 @@ export default function Timer() {
           <p>Work Duration</p>
           <div className={styles.timeSelect}>
             <button type="button" aria-label="Decrease work duration" disabled={phase !== "idle" || workMinutes <= 5} onClick={() => setWorkMinutes(value => value - 5)}>
-              <ArrowIcon style={{ rotate: "90deg" }} />
+              <ArrowIcon style={{ rotate: "-90deg" }} />
             </button>
             <p>{workMinutes}m</p>
             <button type="button" aria-label="Increase work duration" disabled={phase !== "idle" || workMinutes >= 120} onClick={() => setWorkMinutes(value => value + 5)}>
-              <ArrowIcon style={{ rotate: "-90deg" }} />
+              <ArrowIcon style={{ rotate: "90deg" }} />
             </button>
           </div>
         </div>

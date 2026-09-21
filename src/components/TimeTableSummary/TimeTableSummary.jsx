@@ -1,19 +1,11 @@
+import StudyActivityCalendar from "./StudyActivityCalendar";
 import { studyMinutesByDay } from "./studyActivity";
 import styles from "./TimeTableSummary.module.css"
 
 export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) {
     const workedHours = studyMinutesByDay(sessions, daysDisplayed).map(minutes => minutes / 60);
 
-    const frameStart = new Date();
-    frameStart.setDate(frameStart.getDate() - (daysDisplayed - 1));
-    const firstWeekday = frameStart.getDay();
-    const adjHours = [
-        ...Array(firstWeekday).fill(null),
-        ...workedHours.slice(-daysDisplayed),
-    ];
-
-    const maxHours = Math.max(1, ...workedHours);
-    const totalHours = adjHours.reduce((partialSum, a) => partialSum + a, 0);
+    const totalHours = workedHours.reduce((sum, hours) => sum + hours, 0);
     const averageHours = (totalHours / daysDisplayed).toFixed(2);
 
     return (
@@ -33,37 +25,7 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
 
             <div className={styles.timeTableContainer}>
                 <h3>Activity Summary</h3>
-                <div className={styles.timeTable}>
-                    {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((label, index) => {
-                        return <div key={`label-${index}`} className={styles.weekdayLabel}>{label}</div>
-                    })}
-
-                    {adjHours.map((hours, index) => {
-                        let cell = (hours === null || hours === 0) ?
-                            <div
-                                className={styles.timeTableCellEmpty}
-                            /> :
-                            <div
-                                className={styles.timeTableCellContent}
-                                style={{
-                                    animationDelay: (Math.floor(index / 7) + index % 7) * 0.1 + "s",
-                                    opacity: hours / maxHours,
-                                    "--alpha": hours / maxHours,
-                                }}
-                            />;
-
-                        return (
-                            <div
-                                key={`cell-${index}`}
-                                className={styles.timeTableCell}
-                                title={`${hours} hour${hours === 1 ? "" : "s"}`}
-                                style={{ animationDelay: (Math.floor(index / 7) + index % 7) * 0.1 + "s" }}
-                            >
-                                {cell}
-                            </div>
-                        );
-                    })}
-                </div>
+                <StudyActivityCalendar sessions={sessions} daysDisplayed={daysDisplayed} />
 
                 <div className={styles.timeTableScaleContainer}>
                     <p>Less</p>
