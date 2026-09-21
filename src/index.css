@@ -9,7 +9,33 @@
   --color-accent-dark: #272932;
   --color-accent-light: #e5e7eb;
   --color-text-light: #f9f4f5;
-  --color-text-dark: #2c2c2c;
+
+  --color-surface: white;
+  --color-on-action: white;
+  --color-border-inverse: white;
+  --color-danger: #d92f2f;
+  --color-danger-light: #ff5b5b;
+  --color-backdrop: rgba(255, 255, 255, 0.35);
+  --color-scrim: rgb(0 0 0 / 0.3);
+
+  --shadow-card: 0px 0px 10px hsla(0, 0%, 0%, 0.15);
+  --shadow-cell: 0px 0px 5px hsla(0, 0%, 0%, 0.25);
+  --shadow-popup: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-circle: 50%;
+
+  --font-family-base: Poppins, Arial, Helvetica, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.85rem;
+  --font-size-label: 0.9rem;
+  --font-weight-semibold: 600;
+
+  --duration-fast: 150ms;
+  --duration-normal: 240ms;
+  --opacity-disabled: 0.55;
+  --control-height: 50px;
 }
 
 #root {
@@ -22,7 +48,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-base);
   color: var(--color-accent-dark);
 }
 

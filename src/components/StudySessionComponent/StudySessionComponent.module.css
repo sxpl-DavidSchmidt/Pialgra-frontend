@@ -8,18 +8,18 @@
 
     min-height: 48px;
 
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     overflow: hidden;
 
     margin: 10px;
-    color: white;
+    color: var(--color-on-action);
 }
 
 .session time,
 .session p {
     display: flex;
     align-items: center;
-    color: white;
+    color: var(--color-on-action);
     padding: 0.75em;
 }
 
@@ -50,11 +50,11 @@
 .actions button svg {
     width: auto;
     height: 1lh;
-    fill: white;
+    fill: var(--color-on-action);
 }
 
 .actions .deleteIcon {
-    fill: #ff5b5b;
+    fill: var(--color-danger-light);
 }
 
 .popupForm,
@@ -70,7 +70,7 @@
     min-width: 0;
     padding: 0.5rem;
     border: 1px solid var(--color-accent-light);
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
 }
 
 .popupActions {
@@ -82,22 +82,22 @@
 .popupActions button {
     padding: 0.75rem 1rem;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     background: var(--color-accent-light);
 }
 
 .popupActions .saveButton {
     background: var(--color-primary);
-    color: white;
+    color: var(--color-on-action);
 }
 
 .popupActions .deleteButton {
-    background: #d92f2f;
-    color: white;
+    background: var(--color-danger);
+    color: var(--color-on-action);
 }
 
 .popupActions button:disabled {
-    opacity: 0.55;
+    opacity: var(--opacity-disabled);
     cursor: not-allowed;
 }

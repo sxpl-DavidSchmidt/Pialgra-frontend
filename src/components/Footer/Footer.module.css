@@ -7,7 +7,7 @@
 }
 
 .container * {
-    color: white;
+    color: var(--color-on-action);
 }
 
 .container a {

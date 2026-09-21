@@ -19,7 +19,6 @@ export default function StudyTimerProvider({ children }) {
   const [error, setError] = useState("");
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [deleting, setDeleting] = useState(false);
-  const [deleteMessage, setDeleteMessage] = useState("");
   const deletingCategory = useRef(false);
   const session = useRef(null);
   const saving = useRef(false);
@@ -65,14 +64,12 @@ export default function StudyTimerProvider({ children }) {
 
   function handleCategorySelect(event) {
     setDeleteTarget(null);
-    setDeleteMessage("");
     setSelectedCategory(event.target.value);
   }
 
   function requestCategoryDeletion(targetUuid = categoryUuid) {
     if (phase !== "idle" || loading || adding || deletingCategory.current) return;
     setError("");
-    setDeleteMessage("");
     setDeleteTarget(categories.find(category => category.uuid === targetUuid) ?? null);
   }
 
@@ -87,7 +84,6 @@ export default function StudyTimerProvider({ children }) {
       categoryDeleted(uuid);
       setSelectedCategory("");
       setDeleteTarget(null);
-      setDeleteMessage("Category deleted. Existing sessions are now uncategorized.");
       await refreshStudySessions();
     } catch (error) {
       setError(error.message || "Could not delete category. Please try again.");
@@ -139,6 +135,6 @@ export default function StudyTimerProvider({ children }) {
     const seconds = Math.floor(elapsedTime / 1000);
     return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
   }
-  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, elapsedTime, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, deleteMessage, requestCategoryDeletion, confirmCategoryDeletion }}>{children}</StudyTimerContext.Provider>;
+  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion }}>{children}</StudyTimerContext.Provider>;
 }
 

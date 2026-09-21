@@ -13,9 +13,9 @@
     display: grid;
     place-items: center;
     gap: 1em;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.15);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
     padding: 1em;
 }
 
@@ -45,10 +45,9 @@
     gap: 1em;
 }
 
-.monthNavigation button,
-.todayButton {
+.monthNavigation button {
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     display: grid;
     place-content: center;
     padding: 0.5em;

@@ -5,22 +5,22 @@
     align-items: center;
     gap: 0.75em;
     padding: 0.75em;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     background: var(--color-accent);
 }
 
 .category p { overflow-wrap: anywhere; }
-.swatch { width: 1.25em; height: 1.25em; border-radius: 50%; }
+.swatch { width: 1.25em; height: 1.25em; border-radius: var(--radius-circle); }
 .category button { border: none; background: transparent; cursor: pointer; display: grid; place-items: center; }
 .category button svg { width: 1.25em; height: 1.25em; }
 .form, .form > label { display: flex; flex-direction: column; gap: 0.75em; }
-.form input[type="text"] { width: 100%; min-width: 0; padding: 0.5em; border: 1px solid var(--color-accent-light); border-radius: 6px; }
+.form input[type="text"] { width: 100%; min-width: 0; padding: 0.5em; border: 1px solid var(--color-accent-light); border-radius: var(--radius-sm); }
 .actions { display: flex; justify-content: flex-end; gap: 0.75em; }
-.actions button { padding: 0.75em 1em; border: none; border-radius: 10px; cursor: pointer; background: var(--color-accent-light); }
-.actions .saveButton { background: var(--color-primary); color: white; }
-.actions button:disabled { opacity: 0.55; cursor: not-allowed; }
+.actions button { padding: 0.75em 1em; border: none; border-radius: var(--radius-md); cursor: pointer; background: var(--color-accent-light); }
+.actions .saveButton { background: var(--color-primary); color: var(--color-on-action); }
+.actions button:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
 
 .categoryActions { display: flex; gap: 0.75em; }
-.deleteIcon { fill: #d92f2f; }
-.category button:disabled { opacity: 0.55; cursor: not-allowed; }
-.actions .deleteButton { background: #d92f2f; color: white; }
+.deleteIcon { fill: var(--color-danger); }
+.category button:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
+.actions .deleteButton { background: var(--color-danger); color: var(--color-on-action); }

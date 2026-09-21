@@ -13,7 +13,7 @@
   padding: 0.5em 2em;
   background-color: var(--color-primary);
   align-content: center;
-  transition: background-color 150ms ease;
+  transition: background-color var(--duration-fast) ease;
 }
 
 .navBar a:hover,
@@ -35,10 +35,6 @@
   width: auto;
 }
 
-.welcomeMessage {
-  margin-right: auto;
-  color: var(--color-text-light);
-}
 
 .navBar .accentLink {
   font: inherit;
@@ -62,7 +58,7 @@
   height: 1.5lh;
   width: 1.5lh;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
 }
 
 @media (max-width: 600px) {

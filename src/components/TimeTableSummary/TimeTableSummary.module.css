@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--color-accent);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     gap: 0.25em;
     padding: 0.75em;
 }
@@ -35,8 +35,8 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0.45em;
-    background-color: white;
-    border-radius: 10px;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
 }
 
 .timeTableCell {
@@ -45,7 +45,7 @@
     animation: 1s ease-out 0s 1 animateCellContainer;
     animation-fill-mode: backwards;
     border-radius: 6.25%;
-    box-shadow: 0px 0px 5px hsla(0, 0%, 0%, 0.25);
+    box-shadow: var(--shadow-cell);
 }
 
 .timeTableCellContent, .timeTableCellEmpty {
@@ -86,7 +86,7 @@
 
 .weekdayLabel {
     font-weight: bold;
-    font-size: 0.75rem;
+    font-size: var(--font-size-xs);
     text-align: center;
     height: 1rem;
 }
@@ -106,20 +106,8 @@
     gap: 1em;
 }
 
-.sessionsContainer {
-    padding: 1em;
-}
 
-.sessionsList {
-    display: grid;
-    gap: 0.5em;
-    padding: 1em;
-}
 
-.sessionsItem {
-    display: flex;
-    justify-content: space-between;
-}
 
 .timeTableCellContent, .timeTableCellEmpty {
     display: block;
@@ -129,7 +117,7 @@
     position: relative;
     padding: 0;
     border: 0;
-    background: white;
+    background: var(--color-surface);
     cursor: pointer;
     font: inherit;
     animation: none;

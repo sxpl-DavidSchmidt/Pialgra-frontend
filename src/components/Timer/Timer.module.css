@@ -46,7 +46,7 @@
   color: var(--color-accent-dark);
   min-height: 1.2em;
   opacity: 0;
-  transition: opacity 240ms ease, transform 240ms ease;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
   pointer-events: none;
   z-index: 1;
 }
@@ -105,10 +105,9 @@
 .categorySelectWrap select {
   min-width: 0;
   width: 100%;
-  appearance: base-select;
   appearance: none;
   background-color: var(--color-accent-light);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   border: none;
 }
 
@@ -118,7 +117,6 @@
 
 .categorySelectWrap .addCategoryIcon {
   fill: var(--color-accent-dark);
-  ;
 }
 
 .categorySelectWrap .deleteCategory {
@@ -126,7 +124,7 @@
 }
 
 .categorySelectWrap .deleteCategoryIcon {
-  fill: #d92f2f;
+  fill: var(--color-danger);
 }
 
 .menu button {
@@ -136,12 +134,11 @@
   justify-content: center;
   gap: 0.5em;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .menu button {
-  transition: background-color 150ms ease;
-  transition: transform 150ms ease;
+  transition: transform var(--duration-fast) ease;
 }
 
 .menu button:hover {
@@ -175,17 +172,13 @@
   gap: 0.75rem;
 }
 
-.categoryMessage {
-  grid-column: 1 / -1;
-  font-size: 0.85rem;
-}
 
 .categoryPopup .popupDeleteButton {
-  background: #d92f2f;
+  background: var(--color-danger);
 }
 
 .menu button:disabled {
-  opacity: 0.55;
+  opacity: var(--opacity-disabled);
   cursor: not-allowed;
 }
 
@@ -201,7 +194,7 @@
 
 .categoryPopup button {
   padding: 1em;
-  color: white;
+  color: var(--color-on-action);
 }
 
 .categoryPopup .popupAddButton {
@@ -217,21 +210,21 @@
 }
 
 .startButton p {
-  color: white;
+  color: var(--color-on-action);
 }
 
 .startButtonIcon path {
-  color: white;
-  fill: white;
+  color: var(--color-on-action);
+  fill: var(--color-on-action);
 }
 
 .stopButton {
-  background-color: #d92f2f;
+  background-color: var(--color-danger);
 }
 
 .stopButton p {
-  color: white;
-  fill: white;
+  color: var(--color-on-action);
+  fill: var(--color-on-action);
 }
 
 .resetButton {
@@ -261,7 +254,7 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   place-items: center;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .timeSelect button {
@@ -279,7 +272,7 @@
 
 .categoryColors legend {
   margin-bottom: 0.75rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size-label);
 }
 
 .colorChoices {
@@ -295,7 +288,7 @@
   align-items: center;
   gap: 0.35rem;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
 }
 
 .colorChoice input[type="radio"] {
@@ -311,11 +304,11 @@
   place-items: center;
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: 50%;
-  color: white;
+  border-radius: var(--radius-circle);
+  color: var(--color-on-action);
   font-size: 1.25rem;
-  font-weight: 600;
-  border: 3px solid white;
+  font-weight: var(--font-weight-semibold);
+  border: 3px solid var(--color-border-inverse);
 }
 
 .colorChoice input:checked+.colorSwatch {
@@ -328,6 +321,6 @@
 }
 
 .categoryColors:disabled .colorChoice {
-  opacity: 0.55;
+  opacity: var(--opacity-disabled);
   cursor: not-allowed;
 }
