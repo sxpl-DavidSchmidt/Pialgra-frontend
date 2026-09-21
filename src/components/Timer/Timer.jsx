@@ -49,8 +49,7 @@ export default function Timer() {
         <div className={styles.categorySelectWrap}>
           <select
             value={categoryUuid}
-            onChange={handleCategorySelect}
-            aria-label="Study category" disabled={phase !== "idle" || loading || adding || deleting}
+            onChange={handleCategorySelect} disabled={phase !== "idle" || loading || adding || deleting}
           >
             {!categories.length && <option value="">Select a category</option>}
             {categories.map((category) => (
@@ -63,22 +62,20 @@ export default function Timer() {
             ))}
           </select>
 
-          <button type="button" className={styles.addCategory} onClick={() => setShowAdd(true)}
-            aria-label="Add category" title="Add category" aria-haspopup="dialog"
+          <button type="button" className={styles.addCategory} onClick={() => setShowAdd(true)} title="Add category"
             disabled={phase !== "idle" || loading || adding || deleting}>
-              <AddIcon className={styles.addCategoryIcon} aria-hidden="true" />
+              <AddIcon className={styles.addCategoryIcon} />
           </button>
 
-          <button type="button" className={styles.deleteCategory} onClick={requestCategoryDeletion}
-            aria-label="Delete category" title="Delete category" aria-haspopup="dialog"
+          <button type="button" className={styles.deleteCategory} onClick={requestCategoryDeletion} title="Delete category"
             disabled={!categoryUuid || phase !== "idle" || loading || adding || deleting}>
-            <DeleteIcon className={styles.deleteCategoryIcon} aria-hidden="true" />
+            <DeleteIcon className={styles.deleteCategoryIcon} />
           </button>
 
           {deleteTarget && (
             <Popup className={styles.categoryPopup} title="Delete category?" busy={deleting} onCancel={() => setDeleteTarget(null)}>
               <p>Delete "{deleteTarget.name}"? Existing sessions will be kept without a category.</p>
-              {error && <p role="alert">{error}</p>}
+              {error && <p>{error}</p>}
               <div className={styles.popupActions}>
                 <button autoFocus type="button" className={styles.popupCancelButton} onClick={() => setDeleteTarget(null)} disabled={deleting}>Cancel</button>
                 <button type="button" className={styles.popupDeleteButton} onClick={confirmCategoryDeletion} disabled={deleting}>
@@ -95,7 +92,7 @@ export default function Timer() {
                   autoFocus
                   type="text"
                   value={newCategory}
-                  placeholder="New category..." aria-label="New category name" maxLength={100} disabled={adding}
+                  placeholder="New category..." maxLength={100} disabled={adding}
                   onChange={(e) => setNewCategory(e.target.value)}
                 />
 
@@ -107,7 +104,7 @@ export default function Timer() {
                         <input type="radio" name="categoryColor" value={color.value}
                           checked={newCategoryColor === color.value}
                           onChange={() => setNewCategoryColor(color.value)} />
-                        <span className={styles.colorSwatch} style={{ backgroundColor: color.value }} aria-hidden="true">
+                        <span className={styles.colorSwatch} style={{ backgroundColor: color.value }}>
                         </span>
                         <span>{color.name}</span>
                       </label>
@@ -122,7 +119,7 @@ export default function Timer() {
                 <button type="button" onClick={() => setShowAdd(false)} disabled={adding} className={styles.popupCancelButton}>
                   Cancel
                 </button>
-                {error && <p role="alert">{error}</p>}
+                {error && <p>{error}</p>}
               </form>
             </Popup>
           )}
@@ -145,11 +142,11 @@ export default function Timer() {
         <div className={styles.timeSelectWrap} style={{ gridArea: "workTimer" }}>
           <p>Work Duration</p>
           <div className={styles.timeSelect}>
-            <button type="button" aria-label="Decrease work duration" disabled={phase !== "idle" || workMinutes <= 5} onClick={() => setWorkMinutes(value => value - 5)}>
+            <button type="button" disabled={phase !== "idle" || workMinutes <= 5} onClick={() => setWorkMinutes(value => value - 5)}>
               <ArrowIcon style={{ rotate: "-90deg" }} />
             </button>
             <p>{workMinutes}m</p>
-            <button type="button" aria-label="Increase work duration" disabled={phase !== "idle" || workMinutes >= 120} onClick={() => setWorkMinutes(value => value + 5)}>
+            <button type="button" disabled={phase !== "idle" || workMinutes >= 120} onClick={() => setWorkMinutes(value => value + 5)}>
               <ArrowIcon style={{ rotate: "90deg" }} />
             </button>
           </div>

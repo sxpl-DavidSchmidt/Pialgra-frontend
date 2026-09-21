@@ -57,7 +57,6 @@ export default function Login() {
               </label>
               <input
                 id="username-input"
-                aria-label="Username"
                 autoComplete="username"
                 type="text"
                 placeholder="Username"
@@ -73,7 +72,6 @@ export default function Login() {
               </label>
               <input
                 id="password-input"
-                aria-label="Password"
                 autoComplete="current-password"
                 type="password"
                 placeholder="Password"
@@ -92,7 +90,7 @@ export default function Login() {
             </button>
           </form>
 
-          {error && <p role="alert">{error}</p>}
+          {error && <p>{error}</p>}
           <p>Need an account?{" "}<Link to="/signup" style={{ color: "var(--color-primary)" }}>Sign up</Link>!</p>
         </div>
 

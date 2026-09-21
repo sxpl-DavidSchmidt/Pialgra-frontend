@@ -13,7 +13,7 @@ export default function StudyActivityCalendar({
             {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(label => (
                 <div key={label} className={styles.weekdayLabel}>{label}</div>
             ))}
-            {Array.from({ length: firstDay.getDay() }, (_, index) => <div key={`padding-${index}`} aria-hidden="true" />)}
+            {Array.from({ length: firstDay.getDay() }, (_, index) => <div key={`padding-${index}`} />)}
             {hoursByDay.map((hours, index) => {
                 const day = new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + index);
                 const selected = selectedDay?.toDateString() === day.toDateString();
@@ -27,8 +27,7 @@ export default function StudyActivityCalendar({
                 return onSelectDay ? (
                     <button key={day.toDateString()} type="button"
                         className={`${styles.timeTableCell} ${styles.dayButton} ${selected ? styles.selectedDay : ""}`}
-                        title={label} aria-label={label} aria-pressed={selected}
-                        aria-current={day.toDateString() === new Date().toDateString() ? "date" : undefined}
+                        title={label}
                         onClick={() => onSelectDay(day)}>
                         {content}
                     </button>

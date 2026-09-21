@@ -113,25 +113,25 @@ export default function Profile() {
   }
 
   return (
-    <section className={styles.container} aria-labelledby="profile-title">
-      <div className={styles.card} aria-busy={saving || preparing || pictureLoading}>
+    <section className={styles.container}>
+      <div className={styles.card}>
         <h1 id="profile-title">Your profile</h1>
         <p className={styles.username}>{user.username}</p>
         <img className={styles.picture} src={preview || profilePicture} alt={preview ? "New profile picture preview" : "Your profile picture"} />
         <form className={styles.form} onSubmit={(event) => { event.preventDefault(); savePicture(); }}>
           <label htmlFor="profile-picture">Profile picture</label>
           <p id="picture-help" className={styles.hint}>Choose a PNG or JPG up to 10 MB. Larger or non-square images can be cropped and resized before saving.</p>
-          <input ref={input} id="profile-picture" type="file" accept="image/png,image/jpeg" aria-describedby="picture-help" onChange={selectPicture} disabled={saving || preparing || pictureLoading} />
+          <input ref={input} id="profile-picture" type="file" accept="image/png,image/jpeg" onChange={selectPicture} disabled={saving || preparing || pictureLoading} />
           {source && <ImageCropper key={source.url} source={source} disabled={preparing || saving} onApply={applyFrame} onCancel={cancelFrame} />}
           <div className={styles.actions}>
             <button className={styles.save} type="submit" disabled={!file || source || preparing || saving || pictureLoading}>{saving ? "Saving…" : "Save picture"}</button>
             <button className={styles.remove} type="button" onClick={() => savePicture(true)} disabled={preparing || saving || pictureLoading}>Remove picture</button>
           </div>
         </form>
-        {pictureLoading && <p role="status">Loading picture…</p>}
-        {preparing && <p role="status">Preparing picture…</p>}
-        {(error || pictureError) && <p className={styles.error} role="alert">{error || pictureError}</p>}
-        {message && <p className={styles.success} role="status">{message}</p>}
+        {pictureLoading && <p>Loading picture…</p>}
+        {preparing && <p>Preparing picture…</p>}
+        {(error || pictureError) && <p className={styles.error}>{error || pictureError}</p>}
+        {message && <p className={styles.success}>{message}</p>}
       </div>
     </section>
   );

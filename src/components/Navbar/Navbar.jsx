@@ -45,7 +45,6 @@ export default function NavBar() {
           <>
             <Link
               to="/profile"
-              aria-label="Your profile"
               title="Your profile"
               className={styles.profilePictureWrapper}
             ><img
@@ -72,7 +71,7 @@ export default function NavBar() {
           </Link>
         )
       )}
-      {error && <p role="alert" style={{ color: "white", padding: "0.5em" }}>{error}</p>}
+      {error && <p style={{ color: "white", padding: "0.5em" }}>{error}</p>}
     </nav>
   );
 }

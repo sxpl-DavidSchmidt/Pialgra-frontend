@@ -83,7 +83,6 @@ export default function Signup() {
               </label>
               <input
                 id="username-input"
-                aria-label="Username"
                 autoComplete="username"
                 minLength={3}
                 maxLength={32}
@@ -101,7 +100,6 @@ export default function Signup() {
               </label>
               <input
                 id="password-input"
-                aria-label="Password"
                 autoComplete="new-password"
                 minLength={8}
                 maxLength={72}
@@ -119,7 +117,6 @@ export default function Signup() {
               </label>
               <input
                 id="password-confirmation-input"
-                aria-label="Confirm password"
                 autoComplete="new-password"
                 type="password"
                 placeholder="Confirm Password"
@@ -138,7 +135,7 @@ export default function Signup() {
             </button>
           </form>
 
-          {error && <p role="alert">{error}</p>}
+          {error && <p>{error}</p>}
           <p>Already have an account?{" "}<Link to="/login" style={{ color: "var(--color-primary)" }}>Log in</Link>!</p>
         </div>
 

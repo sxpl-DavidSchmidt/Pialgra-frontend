@@ -26,8 +26,8 @@ export default function StudySessionComponent({ session }) {
             <time>{formatTime(durationMinutes)}</time>
             <p>{session.category?.name || "Uncategorized"}</p>
             <div className={styles.actions}>
-                <button type="button" aria-label="Edit study session" aria-haspopup="dialog" onClick={() => setPopup("edit")}><SettingsIcon aria-hidden="true" /></button>
-                <button type="button" aria-label="Delete study session" aria-haspopup="dialog" onClick={() => setPopup("delete")}><DeleteIcon className={styles.deleteIcon} aria-hidden="true" /></button>
+                <button type="button" onClick={() => setPopup("edit")}><SettingsIcon /></button>
+                <button type="button" onClick={() => setPopup("delete")}><DeleteIcon className={styles.deleteIcon} /></button>
             </div>
         </div>
         {popup && <SessionPopup session={session} mode={popup} onCancel={() => setPopup(null)} />}
@@ -106,7 +106,7 @@ function SessionPopup({ session, mode, onCancel }) {
                             onChange={event => setDuration(event.target.value)} disabled={busy} />
                     </label>
                 </>}
-                {error && <p role="alert">{error}</p>}
+                {error && <p>{error}</p>}
                 <div className={styles.popupActions}>
                     <button autoFocus={deleting} type="button" onClick={onCancel} disabled={busy}>Cancel</button>
                     <button type="submit" className={deleting ? styles.deleteButton : styles.saveButton} disabled={busy}>

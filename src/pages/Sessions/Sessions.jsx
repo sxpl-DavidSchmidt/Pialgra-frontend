@@ -59,7 +59,7 @@ export default function Sessions() {
                 <div className={styles.sessionsPanel}>
                     <center><h2>Your Sessions</h2></center>
                     <center><p>{selectedDay.toLocaleDateString(undefined, { dateStyle: "full" })}</p></center>
-                    <div className={styles.sessionsList} tabIndex={0} role="region">
+                    <div className={styles.sessionsList} tabIndex={0}>
                         {visibleSessions.length === 0 && <p className={styles.emptyState}>No sessions for this day.</p>}
                         {visibleSessions.map((value) => {
                             return (
