@@ -35,11 +35,6 @@ export default function Sessions() {
                         <button type="button" onClick={() => changeMonth(-1)}><ArrowIcon className={styles.arrowIcon} style={{ transform: "rotate(-90deg)" }} /></button>
                         <div className={styles.monthLabel}>
                             <h3>{visibleMonth.toLocaleDateString(undefined, { month: "long", year: "numeric" })}</h3>
-                            <button type="button" className={styles.todayButton} onClick={() => {
-                                const today = new Date();
-                                setSelectedDay(today);
-                                setVisibleMonth(new Date(today.getFullYear(), today.getMonth(), 1));
-                            }}>Today</button>
                         </div>
                         <button type="button" onClick={() => changeMonth(1)}><ArrowIcon className={styles.arrowIcon} style={{ transform: "rotate(90deg)" }} /></button>
                     </div>

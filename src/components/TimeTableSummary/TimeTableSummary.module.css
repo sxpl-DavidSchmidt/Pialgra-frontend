@@ -144,13 +144,11 @@
     inset: 0;
     display: grid;
     place-items: center;
-    color: #171717;
-    font-weight: 600;
-    text-shadow: 0 0 3px white, 0 0 6px white;
+    color: var(--color-accent-dark);
 }
 
 .dayButton:hover {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--color-accent-dark);
 }
 
 .dayButton.selectedDay {
@@ -164,6 +162,6 @@
 }
 
 .dayButton:focus-visible {
-    outline: 3px solid #171717;
+    outline: 3px solid var(--color-accent-dark);
     outline-offset: 2px;
 }
