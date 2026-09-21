@@ -4,6 +4,7 @@ import { sessionsOnDay } from "../../components/TimeTableSummary/studyActivity";
 import { useStudySessions } from "../../context/useStudySessions";
 
 import styles from "./Sessions.module.css";
+import CategoryComponent from "../../components/CategoryComponent/CategoryComponent.jsx";
 import SessionComponent from "../../components/StudySessionComponent/StudySessionComponent.jsx";
 
 import ArrowIcon from "../../assets/icons/arrow_up.svg?react";
@@ -23,14 +24,8 @@ export default function Sessions() {
         <div className={styles.content}>
             <div className={styles.categoryWrapper}>
                 <h2>Your Categories</h2>
-                <div>
-                    {categories.map((value, index) => {
-                        return (
-                            <div key={index} className={styles.category}>
-                                {value.name}
-                            </div>
-                        );
-                    })}
+                <div className={styles.categoryList}>
+                    {categories.map(category => <CategoryComponent key={category.uuid} category={category} />)}
                 </div>
             </div>
             <div className={styles.sessionWrapper}>

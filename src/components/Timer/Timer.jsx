@@ -67,7 +67,7 @@ export default function Timer() {
               <AddIcon className={styles.addCategoryIcon} />
           </button>
 
-          <button type="button" className={styles.deleteCategory} onClick={requestCategoryDeletion} title="Delete category"
+          <button type="button" className={styles.deleteCategory} onClick={() => requestCategoryDeletion()} title="Delete category"
             disabled={!categoryUuid || phase !== "idle" || loading || adding || deleting}>
             <DeleteIcon className={styles.deleteCategoryIcon} />
           </button>

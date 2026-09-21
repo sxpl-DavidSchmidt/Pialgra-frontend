@@ -20,7 +20,9 @@
 }
 
 .categoryWrapper {
-    justify-items: center;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: start;
 }
 
 .sessionWrapper {
@@ -81,8 +83,15 @@
     margin-top: 1em;
 }
 
-.sessionsList > div {
+.sessionsList>div {
     width: 100%;
     margin: 0;
     flex-shrink: 0;
+}
+
+.categoryList {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    gap: 0.75em;
 }

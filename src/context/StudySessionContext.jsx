@@ -25,6 +25,17 @@ function StudySessionStore({ user, children }) {
     setData(previous => ({ ...previous, studySessions: previous.studySessions.filter(item => item.uuid !== uuid) }));
   }, []);
 
+  const categoryUpdated = useCallback(category => {
+    request.current += 1;
+    setLoading(false);
+    setData(previous => ({
+      ...previous,
+      categories: previous.categories.map(item => item.uuid === category.uuid ? category : item),
+      studySessions: previous.studySessions.map(session => session.category?.uuid === category.uuid
+        ? { ...session, category } : session),
+    }));
+  }, []);
+
   const categoryDeleted = useCallback((uuid) => {
     request.current += 1;
     setData(previous => ({
@@ -63,7 +74,7 @@ function StudySessionStore({ user, children }) {
     return () => { request.current += 1; };
   }, [user]);
 
-  return <StudySessionsContext.Provider value={{ ...data, loading, error, refreshStudySessions, categoryDeleted, sessionUpdated, sessionDeleted }}><StudyTimerProvider>{children}</StudyTimerProvider></StudySessionsContext.Provider>;
+  return <StudySessionsContext.Provider value={{ ...data, loading, error, refreshStudySessions, categoryUpdated, categoryDeleted, sessionUpdated, sessionDeleted }}><StudyTimerProvider>{children}</StudyTimerProvider></StudySessionsContext.Provider>;
 }
 
 export function StudySessionsProvider({ children }) {

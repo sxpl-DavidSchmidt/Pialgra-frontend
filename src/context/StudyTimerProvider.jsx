@@ -69,11 +69,11 @@ export default function StudyTimerProvider({ children }) {
     setSelectedCategory(event.target.value);
   }
 
-  function requestCategoryDeletion() {
+  function requestCategoryDeletion(targetUuid = categoryUuid) {
     if (phase !== "idle" || loading || adding || deletingCategory.current) return;
     setError("");
     setDeleteMessage("");
-    setDeleteTarget(categories.find(category => category.uuid === categoryUuid) ?? null);
+    setDeleteTarget(categories.find(category => category.uuid === targetUuid) ?? null);
   }
 
   async function confirmCategoryDeletion() {

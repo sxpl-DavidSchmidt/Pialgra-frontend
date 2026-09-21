@@ -13,7 +13,7 @@ function formatTime(minutes) {
     return `${minutesPart.toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`;
 }
 
-export default function StudySessionComponent({ session }) {
+export default function StudySessionComponent({ session, displayedMinutes }) {
     const [popup, setPopup] = useState(null);
     const durationMinutes = (new Date(session.endTime) - new Date(session.startTime)) / 60000;
 
@@ -23,7 +23,7 @@ export default function StudySessionComponent({ session }) {
             className={styles.session}
             style={{ backgroundColor: session["category"]?.color || "var(--color-primary)" }}
         >
-            <time>{formatTime(durationMinutes)}</time>
+            <time>{formatTime(displayedMinutes ?? durationMinutes)}</time>
             <p>{session.category?.name || "Uncategorized"}</p>
             <div className={styles.actions}>
                 <button type="button" onClick={() => setPopup("edit")}><SettingsIcon /></button>
