@@ -19,11 +19,6 @@
   backdrop-filter: blur(4px);
 }
 
-.popup h2 {
-  margin: 0 0 1rem;
-  font-size: 1.2rem;
-}
-
 .popup[open] {
   animation: popupEnter var(--duration-normal) cubic-bezier(0.22, 1, 0.36, 1) both;
 }

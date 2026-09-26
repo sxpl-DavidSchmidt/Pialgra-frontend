@@ -64,7 +64,7 @@ export default function Timer() {
 
           <button type="button" className={styles.addCategory} onClick={() => setShowAdd(true)} title="Add category"
             disabled={phase !== "idle" || loading || adding || deleting}>
-              <AddIcon className={styles.addCategoryIcon} />
+            <AddIcon className={styles.addCategoryIcon} />
           </button>
 
           <button type="button" className={styles.deleteCategory} onClick={() => requestCategoryDeletion()} title="Delete category"
@@ -73,9 +73,8 @@ export default function Timer() {
           </button>
 
           {deleteTarget && (
-            <Popup className={styles.categoryPopup} title="Delete category?" busy={deleting} onCancel={() => setDeleteTarget(null)}>
+            <Popup className={styles.deleteCategoryPopup} title="Delete category?" busy={deleting} onCancel={() => setDeleteTarget(null)}>
               <p>Delete "{deleteTarget.name}"? Existing sessions will be kept without a category.</p>
-              {error && <p>{error}</p>}
               <div className={styles.popupActions}>
                 <button autoFocus type="button" className={styles.popupCancelButton} onClick={() => setDeleteTarget(null)} disabled={deleting}>Cancel</button>
                 <button type="button" className={styles.popupDeleteButton} onClick={confirmCategoryDeletion} disabled={deleting}>
@@ -86,7 +85,7 @@ export default function Timer() {
           )}
 
           {showAdd && (
-            <Popup className={styles.categoryPopup} title="Add category" busy={adding} onCancel={() => setShowAdd(false)}>
+            <Popup className={styles.addCategoryPopup} title="Add category" busy={adding} onCancel={() => setShowAdd(false)}>
               <form onSubmit={event => { event.preventDefault(); void handleAddCategory(); }}>
                 <input
                   autoFocus
@@ -119,7 +118,6 @@ export default function Timer() {
                 <button type="button" onClick={() => setShowAdd(false)} disabled={adding} className={styles.popupCancelButton}>
                   Cancel
                 </button>
-                {error && <p>{error}</p>}
               </form>
             </Popup>
           )}

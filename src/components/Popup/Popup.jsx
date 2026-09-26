@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import styles from "./Popup.module.css";
 
-// Mount to open; onCancel should unmount the popup. Callers own its content.
 export default function Popup({ title, busy = false, onCancel, className = "", children }) {
   const dialogRef = useRef(null);
 
@@ -16,9 +15,12 @@ export default function Popup({ title, busy = false, onCancel, className = "", c
   }, []);
 
   return (
-    <dialog ref={dialogRef} className={`${styles.popup} ${className}`}
-      onCancel={event => { event.preventDefault(); if (!busy) onCancel(); }}>
-      <center><h2>{title}</h2></center>
+    <dialog
+      ref={dialogRef}
+      className={`${styles.popup} ${className}`}
+      onCancel={event => { event.preventDefault(); if (!busy) onCancel(); }}
+    >
+      <h2>{title}</h2>
       {children}
     </dialog>
   );
