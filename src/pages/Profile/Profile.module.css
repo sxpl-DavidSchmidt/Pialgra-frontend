@@ -4,6 +4,24 @@
   min-height: 100%;
 }
 
+.accountActions {
+  margin-top: 2rem;
+}
+
+.deleteAccount {
+  background: #a12626;
+  color: white;
+}
+
+.deleteAccount:hover:not(:disabled) {
+  background: #801e1e;
+}
+
+.actions :focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
 .card {
   width: min(100%, 480px);
   padding: clamp(1.25rem, 4vw, 2.5rem);
@@ -34,9 +52,21 @@
   text-align: left;
 }
 
-.form label { font-weight: var(--font-weight-semibold); }
-.hint { font-size: var(--font-size-sm); }
-.form input { width: 100%; min-width: 0; font: inherit; font-size: var(--font-size-sm); }
+.form label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.hint {
+  font-size: var(--font-size-sm);
+}
+
+.form input {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-size: var(--font-size-sm);
+}
+
 .form input::file-selector-button {
   border: 0;
   border-radius: var(--radius-sm);
@@ -47,26 +77,69 @@
   cursor: pointer;
 }
 
-.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.deleteAccountPopup {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
 .actions button {
-  flex: 1 1 150px;
-  min-height: 48px;
-  border: 0;
+  flex: 1 1;
+  border: none;
   border-radius: var(--radius-md);
   padding: 0.75rem;
   font: inherit;
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
 }
-.save { background: var(--color-contrast); color: var(--color-on-action); }
-.save:hover:not(:disabled) { background: var(--color-contrast-d1); }
-.remove { background: var(--color-accent); color: var(--color-primary); }
-.remove:hover:not(:disabled) { background: var(--color-accent-light); }
-.actions button:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
-.form :focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
-.error, .success { margin-top: 1rem; font-size: var(--font-size-label); }
-.error { color: var(--color-contrast-d1); }
-.success { color: var(--color-primary); }
+
+.save {
+  background: var(--color-contrast);
+  color: var(--color-on-action);
+}
+
+.save:hover:not(:disabled) {
+  background: var(--color-contrast-d1);
+}
+
+.remove {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.remove:hover:not(:disabled) {
+  background: var(--color-accent-light);
+}
+
+.actions button:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.form :focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.error,
+.success {
+  margin-top: 1rem;
+  font-size: var(--font-size-label);
+}
+
+.error {
+  color: var(--color-contrast-d1);
+}
+
+.success {
+  color: var(--color-primary);
+}
 
 .cropper {
   display: grid;
@@ -76,9 +149,20 @@
   border-radius: var(--radius-md);
   padding: 1rem;
 }
-.cropper legend { padding: 0 0.4rem; font-weight: var(--font-weight-semibold); }
-.cropper label { font-size: var(--font-size-sm); }
-.cropper input { accent-color: var(--color-primary); }
+
+.cropper legend {
+  padding: 0 0.4rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.cropper label {
+  font-size: var(--font-size-sm);
+}
+
+.cropper input {
+  accent-color: var(--color-primary);
+}
+
 .cropFrame {
   position: relative;
   width: 100%;
@@ -90,8 +174,17 @@
   cursor: grab;
   user-select: none;
 }
-.cropFrame:active { cursor: grabbing; }
-.cropFrame img { position: absolute; max-width: none; pointer-events: none; }
+
+.cropFrame:active {
+  cursor: grabbing;
+}
+
+.cropFrame img {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+}
+
 .circleGuide {
   position: absolute;
   inset: 0;

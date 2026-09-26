@@ -2,9 +2,29 @@ import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../auth/useAuth";
 import styles from "./Profile.module.css";
 import ImageCropper from "./ImageCropper";
+import Popup from "../../components/Popup/Popup";
 
 export default function Profile() {
-  const { user, profilePicture, pictureLoading, pictureError, updateProfilePicture } = useAuth();
+  const { user, profilePicture, pictureLoading, pictureError, updateProfilePicture, deleteAccount } = useAuth();
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+  const deletePending = useRef(false);
+
+  async function confirmDeletion() {
+    if (deletePending.current) return;
+    deletePending.current = true;
+    setDeleting(true);
+    setDeleteError("");
+    try {
+      await deleteAccount();
+    } catch {
+      setDeleteError("Could not delete your account. Please try again.");
+    } finally {
+      deletePending.current = false;
+      setDeleting(false);
+    }
+  }
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -132,6 +152,24 @@ export default function Profile() {
         {preparing && <p>Preparing picture…</p>}
         {(error || pictureError) && <p className={styles.error}>{error || pictureError}</p>}
         {message && <p className={styles.success}>{message}</p>}
+
+        <div className={`${styles.actions} ${styles.accountActions}`}>
+          <button type="button" className={styles.deleteAccount} disabled={saving || preparing} onClick={() => { setDeleteError(""); setShowDelete(true); }}>
+            Delete account
+          </button>
+        </div>
+        {showDelete && (
+          <Popup className={styles.deleteAccountPopup} title="Delete account?" busy={deleting} onCancel={() => setShowDelete(false)}>
+            <p>Are you sure? Your account, profile picture, categories, and history will be permanently deleted. This cannot be undone.</p>
+            {deleteError && <p role="alert" className={styles.error}>{deleteError}</p>}
+            <div className={styles.actions}>
+              <button autoFocus type="button" className={styles.remove} disabled={deleting} onClick={() => setShowDelete(false)}>Cancel</button>
+              <button type="button" className={styles.deleteAccount} disabled={deleting} onClick={confirmDeletion}>
+                {deleting ? "Deleting…" : "Delete account"}
+              </button>
+            </div>
+          </Popup>
+        )}
       </div>
     </section>
   );

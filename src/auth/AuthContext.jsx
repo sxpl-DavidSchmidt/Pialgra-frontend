@@ -10,7 +10,7 @@ import {
 } from "../api/auth";
 
 import { ApiError } from "../api/api";
-import { getMyProfilePicture, uploadMyProfilePicture, removeMyProfilePicture } from "../api/user";
+import { getMyProfilePicture, uploadMyProfilePicture, removeMyProfilePicture, deleteMyAccount } from "../api/user";
 import defaultProfilePicture from "../assets/default_profile_picture.png";
 
 import { AuthContext } from "./useAuth";
@@ -78,6 +78,12 @@ export function AuthProvider({ children }) {
     setUser(user);
   }
 
+  async function deleteAccount() {
+    await deleteMyAccount();
+    setPicture(null);
+    setUser(null);
+  }
+
   async function logout() {
     try {
       await logoutRequest();
@@ -95,6 +101,7 @@ export function AuthProvider({ children }) {
         loading,
         login,
         logout,
+        deleteAccount,
         profilePicture,
         pictureLoading: Boolean(user && !currentPicture),
         pictureError: currentPicture?.error,
