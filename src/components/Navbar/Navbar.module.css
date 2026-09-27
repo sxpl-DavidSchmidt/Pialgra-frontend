@@ -46,19 +46,10 @@
   background-color: var(--color-contrast-d1);
 }
 
-.navBar .profilePictureWrapper {
-  height: 100%;
-  padding: 0.5em 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.navBar .profilePicture {
-  height: 1.5lh;
-  width: 1.5lh;
-  object-fit: cover;
-  border-radius: var(--radius-circle);
+.navBar .username {
+  min-width: 0;
+  max-width: 20ch;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 600px) {
@@ -66,5 +57,4 @@
   .homeLi { flex-basis: 100%; grid-template-columns: auto auto; justify-content: center; }
   .navBar a, .navBar button { padding: 0.5em 0.75em; }
   .navBar > :not(.homeLi) { flex: 1; text-align: center; }
-  .navBar .profilePictureWrapper { height: auto; }
 }

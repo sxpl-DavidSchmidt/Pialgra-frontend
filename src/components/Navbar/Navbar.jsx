@@ -6,7 +6,7 @@ import styles from "./Navbar.module.css";
 import Logo from "../../assets/logo/pialgra_logo_notext.svg";
 
 export default function NavBar() {
-  const { user, loading, logout, profilePicture } = useAuth();
+  const { user, loading, logout } = useAuth();
   const navigate = useNavigate();
   const [loggingOut, setLoggingOut] = useState(false);
   const [error, setError] = useState("");
@@ -46,12 +46,9 @@ export default function NavBar() {
             <Link
               to="/profile"
               title="Your profile"
-              className={styles.profilePictureWrapper}
-            ><img
-                src={profilePicture}
-                alt=""
-                className={styles.profilePicture}
-              />
+              className={styles.username}
+            >
+              {user.username}
             </Link>
             <button
               type="button"
@@ -71,7 +68,7 @@ export default function NavBar() {
           </Link>
         )
       )}
-      {error && <p style={{ color: "white", padding: "0.5em" }}>{error}</p>}
+      {error && <p style={{ color: "white" }}>{error}</p>}
     </nav>
   );
 }
