@@ -1,11 +1,12 @@
 import { apiFetch } from "./api";
 
-export function login(username, password) {
+export function login(username, password, rememberMe = false) {
     return apiFetch("/api/auth/login", {
         method: "POST",
         body: JSON.stringify({
             username,
             password,
+            rememberMe,
         }),
     });
 }

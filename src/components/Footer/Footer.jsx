@@ -11,7 +11,7 @@ export default function Footer() {
             <div className={styles.topic}>
                 <h4>Legal</h4>
                 <Link to="/imprint">Impressum</Link>
-                <span>Datenschutzerklärung</span>
+                <Link to="/privacy">Datenschutz: Anmeldung und Cookies</Link>
             </div>
         </div>
 

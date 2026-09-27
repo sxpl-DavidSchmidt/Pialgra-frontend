@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 import Clock from "./pages/Clock/Clock";
 import Imprint from "./pages/Imprint/Imprint";
+import Privacy from "./pages/Privacy/Privacy";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
@@ -21,6 +22,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/clock" replace />} />
           <Route path="/imprint" element={<Imprint />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/clock" element={<ProtectedRoute><Clock /></ProtectedRoute>} />

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 import { ApiError } from "../../api/api";
+import { REMEMBER_ME_LABEL } from "../../auth/rememberMeNotice";
 
 import styles from "./Login.module.css";
 
@@ -15,6 +16,7 @@ export default function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -30,7 +32,7 @@ export default function Login() {
     setSubmitting(true);
 
     try {
-      await login(username, password);
+      await login(username, password, rememberMe);
       navigate("/");
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) {
@@ -88,10 +90,26 @@ export default function Login() {
             >
               {submitting ? "Logging in..." : "Login"}
             </button>
+
+            <div className={styles.rememberMe}>
+              <label className={styles.rememberMeLabel} htmlFor="remember-me">
+                <input
+                  id="remember-me"
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(event) => setRememberMe(event.target.checked)}
+                  disabled={submitting}
+                />
+                <span>{REMEMBER_ME_LABEL}</span>
+              </label>
+            </div>
           </form>
 
           {error && <p>{error}</p>}
-          <p>Need an account?{" "}<Link to="/signup" style={{ color: "var(--color-primary)" }}>Sign up</Link>!</p>
+          <div className={styles.signupLink}>
+            <p>Need an account?{" "}<Link to="/signup" style={{ color: "var(--color-primary)" }}>Sign up</Link>!</p>
+            <Link to="/privacy#anmeldung">Privacy information</Link>
+          </div>
         </div>
 
         <img src={Logo} alt="Pialgra" />

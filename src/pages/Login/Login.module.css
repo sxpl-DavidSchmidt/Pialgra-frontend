@@ -88,3 +88,24 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.rememberMe {
+    width: 100%;
+}
+
+.rememberMeLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    cursor: pointer;
+}
+
+.rememberMeLabel input {
+    accent-color: var(--color-primary);
+}
+
+.signupLink {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1em;
+}

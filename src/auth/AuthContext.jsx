@@ -70,8 +70,8 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
-  async function login(username, password) {
-    await loginRequest(username, password);
+  async function login(username, password, rememberMe = false) {
+    await loginRequest(username, password, rememberMe);
 
     const user = await getCurrentUser();
 
