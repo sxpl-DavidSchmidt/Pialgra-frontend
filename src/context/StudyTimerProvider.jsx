@@ -12,6 +12,15 @@ export default function StudyTimerProvider({ children }) {
   const [phase, setPhase] = useState("idle");
   const [elapsedTime, setElapsedTime] = useState(0);
   const [workMinutes, setWorkMinutes] = useState(5);
+  const [volume, setVolume] = useState(() => {
+    try {
+      const stored = localStorage.getItem("sessionEndVolume");
+      const value = stored === null ? 50 : Number(stored);
+      return Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : 50;
+    } catch {
+      return 50;
+    }
+  });
   const [selectedCategory, setSelectedCategory] = useState("");
   const [newCategory, setNewCategory] = useState("");
   const [newCategoryColor, setNewCategoryColor] = useState(CATEGORY_COLORS[0].value);
@@ -63,6 +72,14 @@ export default function StudyTimerProvider({ children }) {
   }, []);
 
   useEffect(() => {
+    if (sessionEndAudio.current) sessionEndAudio.current.volume = volume / 100;
+    try {
+      localStorage.setItem("sessionEndVolume", String(volume));
+    } catch {
+    }
+  }, [volume]);
+
+  useEffect(() => {
     if (!isRunning) return;
     const current = session.current;
     if (!current) return;
@@ -74,8 +91,7 @@ export default function StudyTimerProvider({ children }) {
         const audio = sessionEndAudio.current;
         if (audio) {
           audio.currentTime = 0;
-          // Playback may be blocked by browser settings; still save the session.
-          void audio.play().catch(() => {});
+          void audio.play().catch(() => { });
         }
         void saveSession();
       },
@@ -143,18 +159,10 @@ export default function StudyTimerProvider({ children }) {
     setPhase("running");
   }
 
-  function resetTimer() {
-    if (saving.current) return;
-    session.current = null;
-    setElapsedTime(0);
-    setPhase("idle");
-    setError("");
-  }
-
   function formatTime() {
     const seconds = Math.floor(elapsedTime / 1000);
     return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
   }
-  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion }}>{children}</StudyTimerContext.Provider>;
+  return <StudyTimerContext.Provider value={{ categories, loading, phase, isRunning, workMinutes, setWorkMinutes, volume, setVolume, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion }}>{children}</StudyTimerContext.Provider>;
 }
 

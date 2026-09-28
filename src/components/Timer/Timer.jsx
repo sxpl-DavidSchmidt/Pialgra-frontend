@@ -8,10 +8,11 @@ import DeleteIcon from "../../assets/icons/delete.svg?react";
 import ArrowIcon from "../../assets/icons/arrow_up.svg?react";
 import PauseIcon from "../../assets/icons/pause.svg?react";
 import PlayIcon from "../../assets/icons/play.svg?react";
-import ResetIcon from "../../assets/icons/reset.svg?react";
+import VolumeUpIcon from "../../assets/icons/volumeUp.svg?react";
+import VolumeDownIcon from "../../assets/icons/volumeDown.svg?react";
 
 export default function Timer() {
-  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, error, handleCategorySelect, handleAddCategory, toggleRunning, resetTimer, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
+  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, volume, setVolume, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, handleCategorySelect, handleAddCategory, toggleRunning, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
   return (
     <div className={styles.container}>
       <div className={styles.clockContainer}>
@@ -132,10 +133,13 @@ export default function Timer() {
           <p>{phase === "saving" ? "Saving…" : phase === "pending" ? "Retry save" : isRunning ? "Stop" : "Start"}</p>
         </button>
 
-        <button type="button" onClick={resetTimer} disabled={phase === "saving"} className={styles.resetButton}>
-          <ResetIcon className={styles.resetButtonIcon} />
-          <p>Reset</p>
-        </button>
+        {isRunning && (
+          <label className={styles.volumeControl}>
+            <VolumeDownIcon onClick/>
+            <input type="range" min="0" max="100" step="1" value={volume} onChange={event => setVolume(Number(event.target.value))} />
+            <VolumeUpIcon />
+          </label>
+        )}
 
         <div className={styles.timeSelectWrap} style={{ gridArea: "workTimer" }}>
           <p>Work Duration</p>
