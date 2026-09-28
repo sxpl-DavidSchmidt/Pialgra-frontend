@@ -1,20 +1,18 @@
 .container {
+    display: grid;
+    place-items: center;
+    background-color: var(--color-accent-dark);
+}
+
+.wrapper {
+    width: 75%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: var(--color-accent-dark);
     padding: 1em;
 }
 
-.container * {
+.wrapper a {
     color: var(--color-on-action);
-}
-
-.container a {
     text-decoration: none;
-}
-
-.topic {
-    display: flex;
-    flex-direction: column;
 }

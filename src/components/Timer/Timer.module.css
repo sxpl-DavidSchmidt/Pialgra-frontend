@@ -137,14 +137,6 @@
   border-radius: var(--radius-md);
 }
 
-.menu button {
-  transition: transform var(--duration-fast) ease;
-}
-
-.menu button:hover {
-  transform: scale(1.05);
-}
-
 .menu button svg {
   height: 1lh;
   width: auto;
@@ -211,7 +203,16 @@
 .startButton {
   grid-area: startButton;
   grid-column: 1 / -1;
+  width: 100%;
+  justify-self: start;
+  z-index: 1;
   background-color: var(--color-primary);
+}
+
+.menu .startButton {
+  transition: width var(--duration-normal) ease,
+    background-color var(--duration-normal) ease,
+    transform var(--duration-fast) ease;
 }
 
 .startButton p {
@@ -224,7 +225,7 @@
 }
 
 .stopButton {
-  grid-column: 1;
+  width: calc(50% - 0.5em);
   background-color: var(--color-danger);
 }
 
@@ -233,8 +234,19 @@
   fill: var(--color-on-action);
 }
 
-.volumeControl {
+.volumeSlot {
   grid-area: volumeControl;
+  min-width: 0;
+  display: grid;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.volumeControl {
+  min-width: 0;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform var(--duration-normal) ease, visibility 0s linear var(--duration-normal);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -244,6 +256,13 @@
   border-radius: var(--radius-md);
   background-color: var(--color-accent-light);
   color: var(--color-accent-dark);
+  padding: 0em 0.75em;
+}
+
+.volumeVisible {
+  transform: translateX(0);
+  visibility: visible;
+  transition-delay: 0s;
 }
 
 .volumeControl svg {
@@ -253,8 +272,6 @@
 
 .volumeControl input {
   width: 100%;
-  min-width: 0;
-  margin: 0;
   accent-color: var(--color-primary);
   cursor: pointer;
 }

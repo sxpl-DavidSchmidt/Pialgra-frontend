@@ -133,13 +133,15 @@ export default function Timer() {
           <p>{phase === "saving" ? "Saving…" : phase === "pending" ? "Retry save" : isRunning ? "Stop" : "Start"}</p>
         </button>
 
-        {isRunning && (
-          <label className={styles.volumeControl}>
-            <VolumeDownIcon onClick/>
-            <input type="range" min="0" max="100" step="1" value={volume} onChange={event => setVolume(Number(event.target.value))} />
+        <div className={styles.volumeSlot} inert={!isRunning} aria-hidden={!isRunning}>
+          <label className={`${styles.volumeControl} ${isRunning ? styles.volumeVisible : ""}`}>
+            <VolumeDownIcon />
+            <input type="range" min="0" max="100" step="1" value={volume}
+              aria-label="Session end sound volume" disabled={!isRunning}
+              onChange={event => setVolume(Number(event.target.value))} />
             <VolumeUpIcon />
           </label>
-        )}
+        </div>
 
         <div className={styles.timeSelectWrap} style={{ gridArea: "workTimer" }}>
           <p>Work Duration</p>
