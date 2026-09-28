@@ -5,6 +5,7 @@ import { createStudySession } from "../api/studySessions";
 import { createCategory, deleteCategory } from "../api/categories";
 import { CATEGORY_COLORS } from "../components/Timer/categoryColors";
 import { watchStudyTimer } from "./timerScheduler";
+import sessionEndSound from "../assets/sounds/session_end.mp3";
 
 export default function StudyTimerProvider({ children }) {
   const { categories, refreshStudySessions, loading, categoryDeleted } = useStudySessions();
@@ -23,6 +24,7 @@ export default function StudyTimerProvider({ children }) {
   const session = useRef(null);
   const saving = useRef(false);
   const addingCategory = useRef(false);
+  const sessionEndAudio = useRef(null);
   const isRunning = phase === "running";
   const workDurationMs = workMinutes * 60 * 1000;
   const categoryUuid = categories.some(category => category.uuid === selectedCategory) ? selectedCategory : categories[0]?.uuid || "";
@@ -51,6 +53,16 @@ export default function StudyTimerProvider({ children }) {
   }, [refreshStudySessions]);
 
   useEffect(() => {
+    const audio = new Audio(sessionEndSound);
+    audio.preload = "auto";
+    sessionEndAudio.current = audio;
+    return () => {
+      audio.pause();
+      sessionEndAudio.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isRunning) return;
     const current = session.current;
     if (!current) return;
@@ -58,7 +70,15 @@ export default function StudyTimerProvider({ children }) {
       startTime: current.startTime,
       duration: current.duration,
       onElapsed: setElapsedTime,
-      onComplete: () => { void saveSession(); },
+      onComplete: () => {
+        const audio = sessionEndAudio.current;
+        if (audio) {
+          audio.currentTime = 0;
+          // Playback may be blocked by browser settings; still save the session.
+          void audio.play().catch(() => {});
+        }
+        void saveSession();
+      },
     });
   }, [isRunning, saveSession]);
 
