@@ -21,7 +21,7 @@ export default function Clock() {
       <TimeTableSummary sessions={studySessions} daysDisplayed={30} />
 
       <div className={styles.timerWrapper}>
-        <div style={{ width: "min(100%, 360px)" }}><Timer /></div>
+        <div><Timer /></div>
       </div>
 
       <div className={styles.sessionsWrapper}>

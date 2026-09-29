@@ -25,29 +25,32 @@
 }
 
 .sessionsWrapper {
-  width: 100%;
-  height: 100%;
-  min-height: 12rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   gap: 2em;
+  align-self: stretch;
+  width: 100%;
+  contain: size;
 }
+
+
+.sessionsPanel {
+  grid-area: "sesh";
+  width: 100%;
+
+}
+
 
 .sessions {
-  padding: 1em;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  overflow-y: auto;
-  max-height: 36rem;
+  gap: 0.5em;
 }
 
-.sessions > div {
+.sessions>div {
   width: 100%;
   margin: 0;
   flex-shrink: 0;
-}
-
-@media (max-width: 1100px) {
-  .content { grid-template-columns: minmax(0, 1fr); }
 }
