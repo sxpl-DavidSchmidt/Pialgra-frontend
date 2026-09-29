@@ -1,11 +1,89 @@
 .container {
   display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1em;
   place-items: center;
   min-height: 100%;
 }
 
-.accountActions {
-  margin-top: 2rem;
+.card,
+.sessions {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1em;
+}
+
+.sessions {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "head head"
+    "cal sesh";
+  gap: 1em;
+  place-items: center;
+}
+
+.sessions>h1 {
+  grid-area: "head";
+}
+
+.daySelectionWrapper {
+  grid-area: "cal";
+  width: 75%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 1em;
+}
+
+.monthNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.monthNavigation button {
+  border: none;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-content: center;
+  padding: 0.5em;
+  background: var(--color-accent-light);
+  cursor: pointer;
+}
+
+.sessionsPanel {
+  grid-area: "sesh";
+  width: 100%;
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  contain: size;
+}
+
+.sessionsList {
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.sessionsList>div {
+  width: 100%;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .deleteAccount {
@@ -20,20 +98,6 @@
 .actions :focus-visible {
   outline: 3px solid var(--color-primary);
   outline-offset: 3px;
-}
-
-.card {
-  width: min(100%, 480px);
-  padding: clamp(1.25rem, 4vw, 2.5rem);
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  text-align: center;
-}
-
-.username {
-  margin: 0.25rem 0 1.5rem;
-  overflow-wrap: anywhere;
 }
 
 .deleteAccountPopup {
@@ -81,3 +145,23 @@
   color: var(--color-contrast-d1);
 }
 
+.categoryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.addCategory {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+}
+
+.addCategory svg {
+  height: 1lh;
+  width: auto;
+  fill: var(--color-accent-dark);
+}

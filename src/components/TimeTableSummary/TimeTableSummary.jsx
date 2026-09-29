@@ -15,15 +15,19 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
 
     return (
         <div className={styles.container}>
-            <h2>Study activity - Minutes - Last {daysDisplayed} days</h2>
+            <h2>Study activity - Last {daysDisplayed} days</h2>
 
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
-                    <h3>Total Time</h3>
+                    <div>
+                        <h3>Total Time</h3>
+                        <p>in minutes</p>
+                    </div>
                     <h1 style={{ color: "var(--color-primary)" }}>{formatTime(totalMinutes)}</h1>
                 </div>
                 <div className={styles.timeSpentItem}>
                     <h3>Daily Average</h3>
+                    <p>in minutes</p>
                     <h1 style={{ color: "var(--color-contrast)" }}>{formatTime(averageMinutes)}</h1>
                 </div>
             </div>

@@ -38,8 +38,6 @@ export default function NavBar() {
 
       <Link to="/clock">Clock</Link>
 
-      <Link to="/sessions">Sessions</Link>
-
       {!loading && (
         user ? (
           <>

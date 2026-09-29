@@ -19,18 +19,18 @@ export default function StudySessionComponent({ session, displayedMinutes }) {
 
     return (
         <>
-        <div
-            className={styles.session}
-            style={{ backgroundColor: session["category"]?.color || "var(--color-primary)" }}
-        >
-            <time>{formatTime(displayedMinutes ?? durationMinutes)}</time>
-            <p>{session.category?.name || "Uncategorized"}</p>
-            <div className={styles.actions}>
-                <button type="button" onClick={() => setPopup("edit")}><SettingsIcon /></button>
-                <button type="button" onClick={() => setPopup("delete")}><DeleteIcon className={styles.deleteIcon} /></button>
+            <div
+                className={styles.session}
+                style={{ backgroundColor: session["category"]?.color || "var(--color-primary)" }}
+            >
+                <time>{formatTime(displayedMinutes ?? durationMinutes)}</time>
+                <p>{session.category?.name || "Uncategorized"}</p>
+                <div className={styles.actions}>
+                    <button type="button" onClick={() => setPopup("edit")}><SettingsIcon /></button>
+                    <button type="button" onClick={() => setPopup("delete")}><DeleteIcon className={styles.deleteIcon} /></button>
+                </div>
             </div>
-        </div>
-        {popup && <SessionPopup session={session} mode={popup} onCancel={() => setPopup(null)} />}
+            {popup && <SessionPopup session={session} mode={popup} onCancel={() => setPopup(null)} />}
         </>
     );
 }

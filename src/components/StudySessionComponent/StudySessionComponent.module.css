@@ -2,16 +2,9 @@
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: stretch;
-
-    padding: 0;
     gap: 0;
-
-    min-height: 48px;
-
     border-radius: var(--radius-md);
     overflow: hidden;
-
-    margin: 10px;
     color: var(--color-on-action);
 }
 

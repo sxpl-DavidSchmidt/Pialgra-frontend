@@ -1,7 +1,7 @@
 import { useStudyTimer } from "../../context/useStudyTimer";
 import styles from "./Timer.module.css";
 
-import { CATEGORY_COLORS } from "./categoryColors";
+import AddCategoryPopup from "./AddCategoryPopup";
 import Popup from "../Popup/Popup";
 import AddIcon from "../../assets/icons/add.svg?react";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
@@ -12,7 +12,7 @@ import VolumeUpIcon from "../../assets/icons/volumeUp.svg?react";
 import VolumeDownIcon from "../../assets/icons/volumeDown.svg?react";
 
 export default function Timer() {
-  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, volume, setVolume, categoryUuid, outerDashOffset, newCategory, setNewCategory, newCategoryColor, setNewCategoryColor, showAdd, setShowAdd, adding, handleCategorySelect, handleAddCategory, toggleRunning, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
+  const { categories, loading, phase, isRunning, workMinutes, setWorkMinutes, volume, setVolume, categoryUuid, outerDashOffset, setShowAdd, adding, handleCategorySelect, toggleRunning, formatTime, deleteTarget, setDeleteTarget, deleting, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
   return (
     <div className={styles.container}>
       <div className={styles.clockContainer}>
@@ -85,43 +85,7 @@ export default function Timer() {
             </Popup>
           )}
 
-          {showAdd && (
-            <Popup className={styles.addCategoryPopup} title="Add category" busy={adding} onCancel={() => setShowAdd(false)}>
-              <form onSubmit={event => { event.preventDefault(); void handleAddCategory(); }}>
-                <input
-                  autoFocus
-                  type="text"
-                  value={newCategory}
-                  placeholder="New category..." maxLength={100} disabled={adding}
-                  onChange={(e) => setNewCategory(e.target.value)}
-                />
-
-                <fieldset className={styles.categoryColors} disabled={adding}>
-                  <legend>Category color</legend>
-                  <div className={styles.colorChoices}>
-                    {CATEGORY_COLORS.map(color => (
-                      <label key={color.value} className={styles.colorChoice}>
-                        <input type="radio" name="categoryColor" value={color.value}
-                          checked={newCategoryColor === color.value}
-                          onChange={() => setNewCategoryColor(color.value)} />
-                        <span className={styles.colorSwatch} style={{ backgroundColor: color.value }}>
-                        </span>
-                        <span>{color.name}</span>
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-
-                <button type="submit" disabled={adding || !newCategory.trim()} className={styles.popupAddButton}>
-                  Add
-                </button>
-
-                <button type="button" onClick={() => setShowAdd(false)} disabled={adding} className={styles.popupCancelButton}>
-                  Cancel
-                </button>
-              </form>
-            </Popup>
-          )}
+          <AddCategoryPopup />
         </div>
 
         <button
