@@ -10,9 +10,9 @@ import styles from "./CategoryComponent.module.css";
 import colorStyles from "../Timer/Timer.module.css";
 
 export default function CategoryComponent({ category }) {
-    const { phase, loading, adding, deleting, deleteTarget, setDeleteTarget, error,
-        requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
+    const { phase, loading, adding, deleting, deleteTarget, setDeleteTarget, error, requestCategoryDeletion, confirmCategoryDeletion } = useStudyTimer();
     const [editing, setEditing] = useState(false);
+
     return <>
         <div className={styles.category}>
             <span className={styles.swatch} style={{ backgroundColor: category.color || "var(--color-primary)" }} />
@@ -73,14 +73,14 @@ function CategoryPopup({ category, onCancel }) {
             <fieldset className={colorStyles.categoryColors} disabled={busy}>
                 <legend>Category color</legend>
                 <div className={colorStyles.colorChoices}>
-                {CATEGORY_COLORS.map(option => (
-                    <label key={option.value} className={colorStyles.colorChoice}>
-                        <input type="radio" name="categoryColor" value={option.value} checked={color === option.value}
-                            onChange={() => setColor(option.value)} />
-                        <span className={colorStyles.colorSwatch} style={{ backgroundColor: option.value }} />
-                        <span>{option.name}</span>
-                    </label>
-                ))}
+                    {CATEGORY_COLORS.map(option => (
+                        <label key={option.value} className={colorStyles.colorChoice}>
+                            <input type="radio" name="categoryColor" value={option.value} checked={color === option.value}
+                                onChange={() => setColor(option.value)} />
+                            <span className={colorStyles.colorSwatch} style={{ backgroundColor: option.value }} />
+                            <span>{option.name}</span>
+                        </label>
+                    ))}
                 </div>
             </fieldset>
             {error && <p>{error}</p>}
