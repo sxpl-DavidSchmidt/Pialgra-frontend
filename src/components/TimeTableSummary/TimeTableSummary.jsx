@@ -15,24 +15,12 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
 
     return (
         <div className={styles.container}>
-            <h2>Study activity - Last {daysDisplayed} days</h2>
-
-            <div className={styles.timeSpentContainer}>
-                <div className={styles.timeSpentItem}>
-                    <div>
-                        <h3>Total Time</h3>
-                        <p>in minutes</p>
-                    </div>
-                    <h1 style={{ color: "var(--color-primary)" }}>{formatTime(totalMinutes)}</h1>
-                </div>
-                <div className={styles.timeSpentItem}>
-                    <h3>Daily Average</h3>
-                    <p>in minutes</p>
-                    <h1 style={{ color: "var(--color-contrast)" }}>{formatTime(averageMinutes)}</h1>
-                </div>
+            <div>
+                <h1>Study activity</h1>
+                <h2>Last {daysDisplayed} days</h2>
             </div>
 
-            <div className={styles.timeTableContainer}>
+            <div>
                 <h3>Activity Summary</h3>
                 <StudyActivityCalendar sessions={sessions} daysDisplayed={daysDisplayed} />
 
@@ -60,6 +48,21 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
                         })}
                     </div>
                     <p>More</p>
+                </div>
+            </div>
+
+            <div className={styles.timeSpentContainer}>
+                <div className={styles.timeSpentItem}>
+                    <div>
+                        <h3>Total Time</h3>
+                        <p>in minutes</p>
+                    </div>
+                    <h1 style={{ color: "var(--color-primary)" }}>{formatTime(totalMinutes)}</h1>
+                </div>
+                <div className={styles.timeSpentItem}>
+                    <h3>Daily Average</h3>
+                    <p>in minutes</p>
+                    <h1 style={{ color: "var(--color-contrast)" }}>{formatTime(averageMinutes)}</h1>
                 </div>
             </div>
         </div>

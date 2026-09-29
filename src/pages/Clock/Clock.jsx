@@ -18,7 +18,7 @@ export default function Clock() {
   return (
     <div className={styles.content}>
       {error && <div>{error} <button onClick={refreshStudySessions} disabled={loading}>Retry</button></div>}
-      <div style={{ display: "grid", placeItems: "center" }}><TimeTableSummary sessions={studySessions} daysDisplayed={30} /></div>
+      <TimeTableSummary sessions={studySessions} daysDisplayed={30} />
 
       <div className={styles.timerWrapper}>
         <div style={{ width: "min(100%, 360px)" }}><Timer /></div>

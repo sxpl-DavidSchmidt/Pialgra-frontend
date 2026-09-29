@@ -1,8 +1,8 @@
 .container {
-    display: grid;
-    place-items: center;
-    grid-template-rows: auto auto auto;
-    gap: 1em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .timeSpentContainer {
@@ -21,12 +21,9 @@
     padding: 0.75em;
 }
 
-.timeTableContainer {
-    width: 100%;
-    padding: 1em;
-}
-
 .timeTable {
+    width: 75%;
+    place-self: center;
     padding: 1em 0;
     display: grid;
     grid-template-columns: repeat(7, 1fr);

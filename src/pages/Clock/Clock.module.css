@@ -2,7 +2,7 @@
   height: 100%;
   display: grid;
   gap: 2em;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 4fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 3fr);
   place-items: center;
 }
 
