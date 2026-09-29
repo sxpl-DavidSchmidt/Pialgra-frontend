@@ -1,24 +1,28 @@
 .container {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
 }
 
 .timeSpentContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 .timeSpentItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center start;
     background-color: var(--color-accent);
     border-radius: var(--radius-md);
-    gap: 0.25em;
-    padding: 0.75em;
+    padding: 0.25em;
+}
+
+.timeSpentItem > h2 {
+    place-self: center;
+    color: var(--color-contrast);
 }
 
 .timeTable {

@@ -11,19 +11,19 @@ function formatTime(minutesIn) {
 export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) {
     const workedMinutes = studyMinutesByDay(sessions, daysDisplayed)
     const totalMinutes = workedMinutes.reduce((sum, minutes) => sum + minutes, 0);
-    const averageMinutes = (totalMinutes / daysDisplayed).toFixed(2);
+    const activeDays = workedMinutes.filter(minutes => minutes > 0).length;
+    const averageMinutes = activeDays > 0 ? totalMinutes / activeDays : 0;
+    const todayMinutes = workedMinutes.at(-1) ?? 0;
 
     return (
         <div className={styles.container}>
             <div>
                 <h1>Study activity</h1>
-                <h2>Last {daysDisplayed} days</h2>
+                <h3>Last {daysDisplayed} days</h3>
             </div>
 
             <div>
-                <h3>Activity Summary</h3>
                 <StudyActivityCalendar sessions={sessions} daysDisplayed={daysDisplayed} />
-
                 <div className={styles.timeTableScaleContainer}>
                     <p>Less</p>
                     <div className={styles.timeTableScale}>
@@ -53,16 +53,13 @@ export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) 
 
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
-                    <div>
-                        <h3>Total Time</h3>
-                        <p>in minutes</p>
-                    </div>
-                    <h1 style={{ color: "var(--color-primary)" }}>{formatTime(totalMinutes)}</h1>
+                    <h4>Daily Average</h4>
+                    <h2>{formatTime(averageMinutes)} min</h2>
                 </div>
+
                 <div className={styles.timeSpentItem}>
-                    <h3>Daily Average</h3>
-                    <p>in minutes</p>
-                    <h1 style={{ color: "var(--color-contrast)" }}>{formatTime(averageMinutes)}</h1>
+                    <h4>Time Today</h4>
+                    <h2>{formatTime(todayMinutes)} min</h2>
                 </div>
             </div>
         </div>

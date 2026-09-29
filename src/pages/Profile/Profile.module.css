@@ -26,7 +26,7 @@
 .sessions {
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 2fr;
   grid-template-areas:
     "head head"
     "cal sesh";
@@ -43,7 +43,10 @@
   width: 75%;
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 1em;
+}
+
+.daySelectionWrapper > * {
+  width: 100%;
 }
 
 .monthNavigation {
