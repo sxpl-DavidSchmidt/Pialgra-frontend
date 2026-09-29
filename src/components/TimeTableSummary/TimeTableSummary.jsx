@@ -2,24 +2,29 @@ import StudyActivityCalendar from "./StudyActivityCalendar";
 import { studyMinutesByDay } from "./studyActivity";
 import styles from "./TimeTableSummary.module.css"
 
-export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) {
-    const workedHours = studyMinutesByDay(sessions, daysDisplayed).map(minutes => minutes / 60);
+function formatTime(minutesIn) {
+    const minutes = Math.floor(minutesIn);
+    const seconds = Math.floor((minutesIn % 1) * 60);
+    return `${minutes}:${seconds}`;
+}
 
-    const totalHours = workedHours.reduce((sum, hours) => sum + hours, 0);
-    const averageHours = (totalHours / daysDisplayed).toFixed(2);
+export default function TimeTableSummary({ sessions = [], daysDisplayed = 30 }) {
+    const workedMinutes = studyMinutesByDay(sessions, daysDisplayed)
+    const totalMinutes = workedMinutes.reduce((sum, minutes) => sum + minutes, 0);
+    const averageMinutes = (totalMinutes / daysDisplayed).toFixed(2);
 
     return (
         <div className={styles.container}>
-            <h2>Study activity - Last {daysDisplayed} days</h2>
+            <h2>Study activity - Minutes - Last {daysDisplayed} days</h2>
 
             <div className={styles.timeSpentContainer}>
                 <div className={styles.timeSpentItem}>
                     <h3>Total Time</h3>
-                    <h1 style={{ color: "var(--color-primary)" }}>{totalHours.toFixed(2)}h</h1>
+                    <h1 style={{ color: "var(--color-primary)" }}>{formatTime(totalMinutes)}</h1>
                 </div>
                 <div className={styles.timeSpentItem}>
                     <h3>Daily Average</h3>
-                    <h1 style={{ color: "var(--color-contrast)" }}>{averageHours}h</h1>
+                    <h1 style={{ color: "var(--color-contrast)" }}>{formatTime(averageMinutes)}</h1>
                 </div>
             </div>
 

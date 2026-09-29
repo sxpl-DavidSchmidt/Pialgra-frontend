@@ -62,7 +62,7 @@ function SessionPopup({ session, mode, onCancel }) {
             }
             const [hours, minutes, seconds] = duration.split(":").map(Number);
             const durationSeconds = hours * 3600 + minutes * 60 + seconds;
-            // Preserve subsecond precision when only the category is changed.
+
             end = duration === sessionDuration(session)
                 ? new Date(session.endTime)
                 : new Date(new Date(session.startTime).getTime() + durationSeconds * 1000);
