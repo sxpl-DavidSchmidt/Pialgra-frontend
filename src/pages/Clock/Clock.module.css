@@ -17,11 +17,14 @@
 }
 
 
-.timerWrapper {
+.timerContainer {
   display: grid;
   place-items: center;
-  padding: 1em;
   position: relative;
+}
+
+.timerWrapper {
+  width: 75%;
 }
 
 .sessionsWrapper {

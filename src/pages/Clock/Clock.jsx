@@ -20,8 +20,8 @@ export default function Clock() {
       {error && <div>{error} <button onClick={refreshStudySessions} disabled={loading}>Retry</button></div>}
       <TimeTableSummary sessions={studySessions} daysDisplayed={30} />
 
-      <div className={styles.timerWrapper}>
-        <div><Timer /></div>
+      <div className={styles.timerContainer}>
+        <div className={styles.timerWrapper}><Timer /></div>
       </div>
 
       <div className={styles.sessionsWrapper}>
